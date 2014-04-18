@@ -5,7 +5,7 @@ var constructor = function() {
 
     userDAInstance.registration = function(data, sendData) {
 
-        var preparedStatement = 'INSERT INTO sparkUsers(Username, UserEmail, UserPassword) VALUES ($1, $2, $3) RETURNING UserId';
+        var preparedStatement = 'INSERT INTO sparkUsers( UserEmail, UserPassword) VALUES ($1, $2, $3) RETURNING UserId';
         var inserts = [ data.username, data.email, data.password ];
 
         // for local dev change to process.env.DATABASE_URL
