@@ -1,10 +1,10 @@
-include loginSingupButtonsMixin
 include loginModalMixin
 include singupModalMixin
+include avatarOrSignupMixin
 extends layout
 
 block navBarContent
-    +loginSingupButtonsMixin()
+    +avatarOrSignupMixin(true)
 
 block mainContent
     +loginModal()

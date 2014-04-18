@@ -1,0 +1,8 @@
+include loginSingupButtonsMixin
+include userAvatarMixin
+
+mixin avatarOrSignupMixin(loggedIn)
+    if (loggedIn)
+        +userAvatarMixin(null)
+    else
+        +loginSingupButtonsMixin()
