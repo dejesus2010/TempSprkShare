@@ -6,10 +6,17 @@ var constructor = function() {
 
         var data = req.body;
 
+        console.log(data);
+
         userDA.registration(data, function(err, rowsData){
             console.log(err);
-            if(err.code = 23505) {
-                res.send('That username is already taken');
+            if(err) {
+                if(err.code === 23505){
+                    res.send('there a an account for ' + req.body.email + ' already.');
+                }
+                else {
+                    res.send('There was problem creating your account. Please try again.');
+                }
             } else {
                 res.send(rowsData);
             }
