@@ -14,8 +14,8 @@ html
         main
             // NAVBAR
             .navbar.navbar-inverse.navbar-fixed-top(role= 'navigation')
-                .navbar-inner
-                    .container
+                .container
+                    .navbar-inner
                         // LOGO
                         .navbar-header
                             button.navbar-toggle(type= 'button', data-toggle= 'collapse', data-target= '.navbar-collapse')
@@ -33,20 +33,21 @@ html
                                     li
                                         a(href= '#{key}') #{val}
 
-                        // BLOCK FOR ADDING CONTENT TO THE NAVBAR
-                        block navBarContent
+                            .nav.navbar-nav.navbar-right
+                                // BLOCK FOR ADDING CONTENT TO THE NAVBAR ON THE RIGHT
+                                block navBarContent
 
             // BLOCK FOR CONTENT OF THE PAGE
             block mainContent
 
-          div.navbar.navbar-default.navbar-fixed-bottom
-              div.container
-                  p.navbar-text
-                      &copy;Sprkshar 2014
-        block footer
+            div.navbar.navbar-default.navbar-fixed-bottom
+                .container
+                    p.navbar-text
+                        &copy;Sprkshar 2014
+                    block footer
 
         script(src='/lib/jquery/jquery.js')
-        script(src='/lib/javascripts/knockout-3.1.0.js', type="text/javascript")
+        script(src='/lib/knockout/knockout-3.1.0.js', type="text/javascript")
         script(src='/lib/bootstrap/js/bootstrap.min.js')
         // BLOCK FOR ADDING SCRIPTS AT THE END OF THE BODY
         // NOTE: is better to include scripts here for rendering performance reasons

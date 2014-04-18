@@ -1,6 +1,3 @@
 mixin userAvatarMixin(user)
-    ul(class= 'nav pull-right')
-        li(class= 'active')
-            // TODO: Create user-page for user to navigate to.
-            a(href= 'userpage')
-                img(src= '/images/default_avatar.png', height= '35', width= '40')
+    button.dropdown-toggle.btn.btn-default(data-toggle='dropdown')
+        img(src= '/images/default_avatar.png', height= '35', width= '40')

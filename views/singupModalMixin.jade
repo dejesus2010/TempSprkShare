@@ -1,30 +1,30 @@
 mixin signupModel()
     div(class= 'modal fade', id= 'sign_up_modal', tabindex= '-1', role= 'dialog', aria-labelledby= 'myModalLabel', aria-hidden= 'true')
-    div(class= 'modal-dialog')
-        div(class= 'modal-content')
-            div(class= 'modal-header')
-                button(type= 'button', class= 'close', data-dismiss= 'modal', aria-hidden= 'true')&times
-                h4(class= 'modal-title') Become a SprkUser!
-            div(class= 'modal-body')
-                form(class= 'form-horizontal', role= 'form', method= 'POST', action= '/auth/register')
+        div(class= 'modal-dialog')
+            div(class= 'modal-content')
+                div(class= 'modal-header')
+                    button(type= 'button', class= 'close', data-dismiss= 'modal', aria-hidden= 'true')&times
+                    h4(class= 'modal-title') Become a SprkUser!
+                div(class= 'modal-body')
+                    form(class= 'form-horizontal', role= 'form', method= 'POST', action= '/auth/register')
 
-                    div(class= 'form-group')
-                        label(for= 'email', class= 'col-sm-2 control-label') Email:
-                        div(class= 'col-sm-10')
-                            input(type= 'email', class= 'form-control', id= 'email', name= 'email', placeholder= 'you@awesome.com')
+                        div(class= 'form-group')
+                            label(for= 'email', class= 'col-sm-2 control-label') Email:
+                            div(class= 'col-sm-10')
+                                input(type= 'email', class= 'form-control', id= 'email', name= 'email', placeholder= 'you@awesome.com')
 
-                    div(class= 'form-group')
-                        label(for= 'password', class= 'col-sm-2 control-label') Password:
-                        div(class= 'col-sm-10')
-                            input(type= 'password', class= 'form-control', id= 'password', name= 'password', placeholder= '********')
+                        div(class= 'form-group')
+                            label(for= 'password', class= 'col-sm-2 control-label') Password:
+                            div(class= 'col-sm-10')
+                                input(type= 'password', class= 'form-control', id= 'password', name= 'password', placeholder= '********')
 
-                    div(class= 'form-group')
-                        label(for= 'password_again', class= 'col-sm-2 control-label') Verify Password:
-                        div(class= 'col-sm-10')
-                            input(type= 'password', class= 'form-control', id= 'password_again', name= 'password_again', placeholder= 'Enter Again')
+                        div(class= 'form-group')
+                            label(for= 'password_again', class= 'col-sm-2 control-label') Verify Password:
+                            div(class= 'col-sm-10')
+                                input(type= 'password', class= 'form-control', id= 'password_again', name= 'password_again', placeholder= 'Enter Again')
 
-                    div(id= 'match_or_not')
+                        div(id= 'match_or_not')
 
-                    div(class= 'modal-footer')
-                        button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-                        button(type= 'submit', class= 'btn btn-primary') Sign-Up
+                        div(class= 'modal-footer')
+                            button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
+                            button(type= 'submit', class= 'btn btn-primary') Sign-Up

@@ -1,8 +1,6 @@
-mixin loginModal
+mixin loginSingupButtonsMixin()
     // MODAL BUTTONS - Login | Sign-Up
     // Padding between logo and buttons
-    &nbsp;&nbsp;&nbsp;
-    a(data-toggle= 'modal', href= '#login_modal', class= 'btn btn-primary front_button separation') LogIn
-    // Padding between buttons
-    &nbsp;&nbsp;&nbsp;
-    a(data-toggle= 'modal', href= '#sign_up_modal', class= 'btn btn-primary front_button') Sign-Up
+    .btn-group
+        a.btn.btn-primary.fron_button(data-toggle= 'modal', href= '#login_modal') LogIn
+        a.btn.btn-primary.fron_button(data-togsgle= 'modal', href= '#sign_up_modal') Sign-Up

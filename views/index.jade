@@ -1,5 +1,11 @@
+include loginSingupButtonsMixin
+include loginModalMixin
+include singupModalMixin
 extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+block navBarContent
+    +loginSingupButtonsMixin()
+
+block mainContent
+    +loginModal()
+    +signupModel()
