@@ -77,14 +77,14 @@ html
           h4(class= 'modal-title') LogIn
 
             div(class= 'modal-body')
-              form(class= 'form-horizontal' role= 'form')
+              form(class= 'form-horizontal', role= 'form', method="POST", action="/auth/register")
                 div(class= 'form-group')
                   label(for= 'email_log', class= 'control-label') Email:
-                  input(type= 'email', class= 'form-control', id= 'email_log', placeholder= 'email@domain')
+                  input(type= 'email', class= 'form-control', id= 'email_log', placeholder= 'you@awesome.com', name="email")
 
                 div(class= 'form-group')
                   label(for= 'password_log', class= 'control-label') Password:
-                  input(type= 'password', class= 'form-control', id= 'password_log', placeholder= '********')
+                  input(type= 'password', class= 'form-control', id= 'password_log', placeholder= '********', name="password")
 
                 div(class= 'form-group')
                   div(class= 'col-sm-10')
@@ -96,8 +96,7 @@ html
 
               div(class= 'modal-footer')
                 button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-                // TODO: Anon function to query_answer('log') 'onclick'
-                button(type= 'button', class= 'btn btn-primary', onclick= '') LogIn
+                button(type= 'submit', class= 'btn btn-primary') LogIn
   // END LOGIN MODAL
 
   // BEGIN SIGN-UP MODAL
@@ -108,12 +107,12 @@ html
           button(type= 'button', class= 'close', data-dismiss= 'modal', aria-hidden= 'true')&times
           h4(class= 'modal-title') Become a SprkUser!
         div(class= 'modal-body')
-          form(class= 'form-horizontal', role= 'form', method= 'post', action= '')
+          form(class= 'form-horizontal', role= 'form', method= 'POST', action= '/auth/register')
             
             div(class= 'form-group')
               label(for= 'email', class= 'col-sm-2 control-label') Email:
               div(class= 'col-sm-10')
-                input(type= 'email', class= 'form-control', id= 'email', name= 'email', placeholder= 'email@domain')
+                input(type= 'email', class= 'form-control', id= 'email', name= 'email', placeholder= 'you@awesome.com')
             
             div(class= 'form-group')
               label(for= 'password', class= 'col-sm-2 control-label') Password:
@@ -129,6 +128,5 @@ html
 
             div(class= 'modal-footer')
               button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-              // TODO: Anon function to query_answer('sign') 'onclick'
-              button(type= 'button', class= 'btn btn-primary', onclick= '') Sign-Up
+              button(type= 'submit', class= 'btn btn-primary') Sign-Up
   // END SIGN-UP MODAL

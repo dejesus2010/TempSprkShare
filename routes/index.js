@@ -19,8 +19,8 @@ module.exports = function(app, passport){
     	console.log(userController);
     });
 
-    app.post('/auth/login', authController.login);
     app.post('/auth/register', authController.registration);
+    app.post('/auth/login', authController.login);
     app.post('/auth/user', userController.posts);
 };
 
