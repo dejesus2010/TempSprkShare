@@ -1,0 +1,2 @@
+INSERT INTO posts VALUES (1, 1, 'Saving the World One Step At a Time',  'We will literally save the world by stepping over all cracks. Stepping on less cracks mean less moms breaking their backs', 1, 1, false, current_date ),
+(2, 2, 'Creating a Sherlock Holmes Movie Based in year 3022', 'Sherlock Holmes is a classic of all classics, but the series has never seen a rendition of how the mad genius solves crimes where crimes are seen hours before they occur...', 2, 2, false, current_date );
