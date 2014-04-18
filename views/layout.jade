@@ -77,7 +77,7 @@ html
           h4(class= 'modal-title') LogIn
 
             div(class= 'modal-body')
-              form(class= 'form-horizontal', role= 'form', method="POST", action="/auth/register")
+              form(class= 'form-horizontal', role= 'form', method="POST", action="/auth/login")
                 div(class= 'form-group')
                   label(for= 'email_log', class= 'control-label') Email:
                   input(type= 'email', class= 'form-control', id= 'email_log', placeholder= 'you@awesome.com', name="email")
@@ -91,12 +91,12 @@ html
                     div(class= 'checkbox')
                       label Remember Me
                         input(type= 'checkbox', value= 'Remember Me')
+                button(type= 'submit', class= 'btn btn-primary') LogIn
 
                 div(id= 'error')
 
               div(class= 'modal-footer')
                 button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-                button(type= 'submit', class= 'btn btn-primary') LogIn
   // END LOGIN MODAL
 
   // BEGIN SIGN-UP MODAL

@@ -24,20 +24,25 @@ var constructor = function() {
         });
     };
 
-    userDAInstance.login = function(req, res) {
+    userDAInstance.login = function(data, sendData) {
+        // TODO: Add this.userID to query.
+        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1 AND userpassword = $2';
+        var inserts = [data.email, data.password];
 
-        var preparedStatement = 'SELECT * FROM sparkUsers';
-        var inserts = [];
-
-        // for local dev change to process.env.DATABASE_URL
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
 
-                if(err)
+                console.log(result.rows);
+
+                if (err) {
                     sendData(err)
-                else
+                }
+                else if (result.rows.length === 0) {
+                    sendData( { code: 19 } )
+                } else {
                     sendData(err, result.rows);
+                }
             });
         });
     };
@@ -47,7 +52,7 @@ var constructor = function() {
         var preparedStatement = 'SELECT * FROM posts, sparkUsers WHERE postUserId = userId';
         var inserts = [];
 
-        pg.connect(precoess.env.DATABASE_URL, function(err, client, done) {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
 
