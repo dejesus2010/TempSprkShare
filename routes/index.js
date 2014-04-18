@@ -1,4 +1,4 @@
-module.exports = function(app, passport){
+module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
     	userController = require('./controllers/userController');
@@ -19,9 +19,13 @@ module.exports = function(app, passport){
     	console.log(userController);
     });
 
-    app.post('/auth/register', authController.registration);
-    app.post('/auth/login', authController.login);
     app.post('/auth/user', userController.posts);
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // Registration and Login for API requests
+    // -----------------------------------------------------------------------------------------------------------------
+    app.post('/api/auth/register', authController.registration);
+    app.post('/api/auth/login', authController.login);
 };
 
 // TODO: Get user's name and attach to title.

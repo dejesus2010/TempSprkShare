@@ -1,133 +1,53 @@
 doctype html
 html
-  head 
-    // INIT
-    link(rel= 'stylesheet', href= '/stylesheets/style.css')
-    meta(charset= 'UTF-8')
-    meta(name ='viewport', content= 'width=device-width, initial-scale=1')
-    script(src= 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-    script(src= '/bootstrap/js/bootstrap.min.js')
-    link(rel= 'stylesheet', href= '/bootstrap/css/bootstrap.min.css')
-    link(rel= 'stylesheet', type= 'text/css', href= '/bootstrap/css/styles.css')
-    script(src='javascripts/knockout-3.1.0.js', type="text/javascript")
-    block scripts
+    head
+        meta(charset= 'UTF-8')
+        meta(name ='viewport', content= 'width=device-width, initial-scale=1')
+        title= title
+        link(rel= 'stylesheet', href= '/stylesheets/style.css')
+        link(rel= 'stylesheet', href= '/lib/bootstrap/css/bootstrap.min.css')
 
-    title= title
+        // BLOCK FOR ADDING SCRIPTS OR LINKS IN THE HEAD
+        block head
 
-    block style
+    body
+        main
+            // NAVBAR
+            .navbar.navbar-inverse.navbar-fixed-top(role= 'navigation')
+                .navbar-inner
+                    .container
+                        // LOGO
+                        .navbar-header
+                            button.navbar-toggle(type= 'button', data-toggle= 'collapse', data-target= '.navbar-collapse')
+                              span.icon-bar
+                              span.icon-bar
+                              span.icon-bar
+                            a(href= '/')
+                              img(src= '/images/SprkShareLogo1.png')
 
-  // END INIT
+                        // NAV BUTTONS
+                        .navbar-collapse.collapse
+                            ul.nav.navbar-nav
+                                - var obj = { '/': 'Home', '/post': 'Post' }
+                                each val, key in obj
+                                    li
+                                        a(href= '#{key}') #{val}
 
-  body
-    // NAVBAR
-    main.navbar.navbar-inverse.navbar-fixed-top(role= 'navigation')
-      .navbar-inner
-        .container
-          .navbar-header
-            // LOGO
-            button.navbar-toggle(type= 'button', data-toggle= 'collapse', data-target= '.navbar-collapse')
-              span.icon-bar
-              span.icon-bar
-              span.icon-bar
-            a(href= '/')
-              img(src= '/images/SprkShareLogo1.png')
-            block header
-            // END LOGO
+                        // BLOCK FOR ADDING CONTENT TO THE NAVBAR
+                        block navBarContent
 
-            // MODAL BUTTONS - Login | Sign-Up
-            // Padding between logo and buttons
-            &nbsp;&nbsp;&nbsp;
-            a(data-toggle= 'modal', href= '#login_modal', class= 'btn btn-primary front_button separation') LogIn
-            // Padding between buttons
-            &nbsp;&nbsp;&nbsp;
-            a(data-toggle= 'modal', href= '#sign_up_modal', class= 'btn btn-primary front_button') Sign-Up
+            // BLOCK FOR CONTENT OF THE PAGE
+            block mainContent
 
-          // OTHER NAVBAR BUTTONS
-          .navbar-collapse.collapse
-            ul.nav.navbar-nav
-              - var obj = { '/': 'Home', 'post': 'Post' }
-                - each val, key in obj
-                  - if (id == key)
-                    li.active
-                      a(href= '#{key}') #{val}
-                  - else
-                    li
-                      a(href= '#{key}') #{val}
-            // USER AVATAR PHOTO
-            ul(class= 'nav pull-right')
-              li(class= 'active')
-                // TODO: Create user-page for user to navigate to.
-                a(href= 'userpage')
-                    img(src= '/images/default_avatar.png', height= '35', width= '40')
-    block mainContent
-    // END NAVBAR
+          div.navbar.navbar-default.navbar-fixed-bottom
+              div.container
+                  p.navbar-text
+                      &copy;Sprkshar 2014
+        block footer
 
-
-    block footer
-        div.navbar.navbar-default.navbar-fixed-bottom
-            div.container
-                p.navbar-text
-                    @Sprkshar 2014
-
-  // BEGIN LOGIN MODAL
-  div(class= 'modal fade' id= 'login_modal', tabindex='-1', role= 'dialog' aria-labelledby= 'myModalLabel', aria-hidden= 'true')
-    div(class= 'modal-dialog')
-      div(class= 'modal-content')
-        div(class= 'modal-header')
-          button(type= 'button', class= 'close', data-dismiss= 'modal', aria-hidden= 'true') &times
-          h4(class= 'modal-title') LogIn
-
-            div(class= 'modal-body')
-              form(class= 'form-horizontal', role= 'form', method="POST", action="/auth/login")
-                div(class= 'form-group')
-                  label(for= 'email_log', class= 'control-label') Email:
-                  input(type= 'email', class= 'form-control', id= 'email_log', placeholder= 'you@awesome.com', name="email")
-
-                div(class= 'form-group')
-                  label(for= 'password_log', class= 'control-label') Password:
-                  input(type= 'password', class= 'form-control', id= 'password_log', placeholder= '********', name="password")
-
-                div(class= 'form-group')
-                  div(class= 'col-sm-10')
-                    div(class= 'checkbox')
-                      label Remember Me
-                        input(type= 'checkbox', value= 'Remember Me')
-                button(type= 'submit', class= 'btn btn-primary') LogIn
-
-                div(id= 'error')
-
-              div(class= 'modal-footer')
-                button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-  // END LOGIN MODAL
-
-  // BEGIN SIGN-UP MODAL
-  div(class= 'modal fade', id= 'sign_up_modal', tabindex= '-1', role= 'dialog', aria-labelledby= 'myModalLabel', aria-hidden= 'true')
-    div(class= 'modal-dialog')
-      div(class= 'modal-content')
-        div(class= 'modal-header')
-          button(type= 'button', class= 'close', data-dismiss= 'modal', aria-hidden= 'true')&times
-          h4(class= 'modal-title') Become a SprkUser!
-        div(class= 'modal-body')
-          form(class= 'form-horizontal', role= 'form', method= 'POST', action= '/auth/register')
-            
-            div(class= 'form-group')
-              label(for= 'email', class= 'col-sm-2 control-label') Email:
-              div(class= 'col-sm-10')
-                input(type= 'email', class= 'form-control', id= 'email', name= 'email', placeholder= 'you@awesome.com')
-            
-            div(class= 'form-group')
-              label(for= 'password', class= 'col-sm-2 control-label') Password:
-              div(class= 'col-sm-10')
-                input(type= 'password', class= 'form-control', id= 'password', name= 'password', placeholder= '********')
-
-            div(class= 'form-group')
-              label(for= 'password_again', class= 'col-sm-2 control-label') Verify Password: 
-              div(class= 'col-sm-10')
-                input(type= 'password', class= 'form-control', id= 'password_again', name= 'password_again', placeholder= 'Enter Again')
-
-            div(id= 'match_or_not')
-
-            div(class= 'modal-footer')
-              button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-              button(type= 'submit', class= 'btn btn-primary') Sign-Up
-  // END SIGN-UP MODAL
+        script(src='/lib/jquery/jquery.js')
+        script(src='/lib/javascripts/knockout-3.1.0.js', type="text/javascript")
+        script(src='/lib/bootstrap/js/bootstrap.min.js')
+        // BLOCK FOR ADDING SCRIPTS AT THE END OF THE BODY
+        // NOTE: is better to include scripts here for rendering performance reasons
+        block scripts
