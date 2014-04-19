@@ -22,7 +22,9 @@ var constructor = function() {
             } else {
                 response.hasErrors = false;
                 response.messages.push('Account successfully created');
-                req.session.userId = rowsData[0].UserId;
+                req.session.regenerate(function(){
+                        req.session.userId = rowsData[0].UserId;
+                });
             }
 
             res.json(response);

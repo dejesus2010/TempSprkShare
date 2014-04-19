@@ -38,7 +38,7 @@ function update() {
     console.log("Delete bad Posts");
 
     setTimeout(update, 86400000);
-};
+}
 update();
 
 // sync the database models
