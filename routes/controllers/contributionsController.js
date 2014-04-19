@@ -60,7 +60,7 @@ var constructor = function(){
                 } else {
                     //console.log("Post Rows Data: ");
                     // console.log(postRowsData);
-                    res.render('viewpost', {contributionsRowsData: contributionsRowsData, postRowsData : postRowsData});
+                    res.render('ViewPost/viewpost', {contributionsRowsData: contributionsRowsData, postRowsData : postRowsData});
                 }
             });
 
