@@ -69,8 +69,15 @@ $(function(){
                 type: "POST",
                 url: "/api/auth/register",
                 data: { email : self.email(), password: self.password },
-                success: function() {
-                            window.location = '/userpage';
+                success: function(data) {
+                                if(!data.hasErrors) {
+                                    window.location = '/userpage';
+                                } else {
+                                    self.hasErrors(true);
+                                    for(var i =0; i < data.messages.length; i++) {
+                                        self.errors.push(data.messages[i]);
+                                    }
+                                }
                         }
             });
         }
