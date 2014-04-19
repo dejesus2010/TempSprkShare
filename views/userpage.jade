@@ -35,12 +35,13 @@ block mainContent
           div(class= 'tab-pane active', id= 'posts')
             div(id ='left', class= 'container')
               p
-                a(href= '#right', data-bind= 'value: getAllUserPosts') View All </br>
-                a(href= '#right', data-bind= 'value: getUserTempPosts') Temporary Posts </br>
-                a(href= '#right', data-bind= 'value: getUserPermPosts') Permanent Posts </br>
+                button(href= '#right', data-bind= 'click: getAllUserPosts') View All </br>
+                button(href= '#right', data-bind= 'click: getUserTempPosts') Temporary Posts </br>
+                button(href= '#right', data-bind= 'click: getUserPermPosts') Permanent Posts </br>
 
             div(id= 'right', class= 'container')
-              p(style= 'white-space: pre')
+              each row in
+              // TODO: Loop that pulls query results based on button click.
 
 
               

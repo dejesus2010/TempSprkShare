@@ -82,11 +82,12 @@ var constructor = function() {
     };
 
     // QUERY ALL THE USER'S POSTS
-    userDAInstance.getUserAllPosts = function(userData, sendData) {
-        var preparedStatement = 'SELECT * FROM posts WHERE postUserID = $1';
-        var inserts = [ userData.userId ];
+    userDAInstance.getAllUserPosts = function(userId, sendData) {
+        var preparedStatement = 'SELECT * FROM posts WHERE postuserId = $1';
+        var inserts = [ userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            console.log(err);
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
 
@@ -102,8 +103,8 @@ var constructor = function() {
 
     // QUERY USER'S TEMPORARY POSTS
     userDAInstance.getUserTempPosts = function(userData, sendData) {
-        var preparedStatement = 'SELECT * FROM posts WHERE postUserID = $1 AND NOT EXISTS' +
-                                 '(SELECT permPostUserId FROM permanentPosts)';
+        var preparedStatement = 'SELECT * FROM posts WHERE postuserId = $1 AND NOT EXISTS' +
+                                 '(SELECT permPostuserId FROM permanentPosts)';
         var inserts = [ userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -123,7 +124,7 @@ var constructor = function() {
     // QUERY USERS
     userDAInstance.getUserPermPosts = function(userData, sendData) {
         var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUderId = $1';
-        var inserts = [ userData.userID ];
+        var inserts = [ userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -142,7 +143,7 @@ var constructor = function() {
     // UPDATE THE USER'S PICTUREURL IN THE DATABASE
     userDAInstance.updateAvatar = function(userData, sendData) {
 
-        var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userid = $2 RETURNING userpicurl';
+        var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userId = $2 RETURNING userpicurl';
         var inserts = [ userData.imgURL, userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
