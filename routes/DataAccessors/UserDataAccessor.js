@@ -39,14 +39,12 @@ var constructor = function() {
     userDAInstance.login = function(data, sendData) {
 
 
-        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1 AND userpassword = $2';
-        var inserts = [data.email, data.password];
+        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1';
+        var inserts = [data.email];
 
         // apply the same algorithm to the POSTed password, applying
         // the hash against the pass / salt, if there is a match we
         // found the user
-
-
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();

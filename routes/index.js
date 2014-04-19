@@ -9,12 +9,9 @@ module.exports = function(app) {
         res.render('index', { title: 'SprkShare - Sprk an Idea' });
     });
 
-    app.get('/viewposttest', function(req,res){
-       res.sendfile('../testingViewPost.html')
-    });
 
-
-    app.post('/viewpost', contributionController.renderPage);
+    // render the page for an specific post based on the post id passed in
+    app.get('/view/post/:postId', contributionController.renderPostPage);
 
 
     app.get('/create_post', function(req,res){
@@ -37,10 +34,8 @@ module.exports = function(app) {
     // returns { hasErrors: false, messages: [] };
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
-
-    // expects { imgURL: self.imgURL() }
-    // returns { hasErrors: false, messages: [] }
-    app.post('/api/update/user/avatar', userController.updateAvatar);
+	// app.post('/api/auth/post', postController.validate);
+	app.post('/api/update/user/avatar', userController.updateAvatar);
 };
 
 // TODO: Get user's name and attach to title.
