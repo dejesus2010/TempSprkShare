@@ -33,8 +33,5 @@ a {
  background-color: rgba(149, 165, 166,0.5);
 }
 
-nav ul{height:200px; width:30%;}
-nav ul{overflow:hidden; overflow-y:scroll;}
-
 html,body {height:100%;}
-.special,.special .jumbotron {height:100%;}
+.special,.special .jumbotron {height:620px;}
