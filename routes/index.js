@@ -12,6 +12,10 @@ module.exports = function(app) {
     app.get('/viewpost', function(req,res){
         res.render('viewpost', {title: 'View Post'});
     });
+	
+	app.get('/create_post', function(req,res){
+        res.render('create_post', {title: 'Create Post'});
+    });
     
     // render SprkUser page
     app.get('/userpage', function (req, res) {
