@@ -4,8 +4,11 @@ include avatarOrSignupMixin
 extends layout
 
 block navBarContent
-    +avatarOrSignupMixin(true)
+    +avatarOrSignupMixin(false)
 
 block mainContent
     +loginModal()
     +signupModel()
+
+block scripts
+    script(src='/javascripts/signupVM.js')

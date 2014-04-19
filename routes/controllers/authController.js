@@ -4,23 +4,28 @@ var constructor = function() {
     var userDA = require('../dataAccessors/UserDataAccessor');
 
     authControllerInstance.registration = function(req, res) {
-
+        var response = { hasErrors: false, messages: [] };
         var data = req.body;
 
         console.log(data);
 
         userDA.registration(data, function(err, rowsData){
-            console.log(err);
-            if(err) {
-                if(err.code === 23505){
-                    res.send('there a an account for ' + req.body.email + ' already.');
+                if(err) {
+                if(err.code === "23505"){
+                    response.hasErrors = true;
+                    response.messages.push('there a an account for ' + req.body.email + ' already.');
                 }
                 else {
-                    res.send('There was problem creating your account. Please try again.');
+                    response.hasErrors = true;
+                    response.messages.push('There was problem creating your account. Please try again.');
                 }
             } else {
-                res.send(rowsData);
+                response.hasErrors = false;
+                response.messages.push('Account successfully created');
+                req.session.userId = rowsData[0].UserId;
             }
+
+            res.json(response);
         });
     };
 

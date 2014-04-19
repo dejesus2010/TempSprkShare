@@ -1,9 +1,8 @@
 module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
-    	userController = require('./controllers/userController');
-
-    var contributionController = require('./controllers/contributionsController');
+    	userController = require('./controllers/userController'),
+        contributionController = require('./controllers/contributionsController');
 
     // render home page
     app.get('/', function(req, res) {
@@ -15,6 +14,10 @@ module.exports = function(app) {
     app.post('/viewpost', contributionController.getContributions);
 
 
+    app.get('/create_post', function(req,res){
+        res.render('create_post', {title: 'Create Post'});
+    });
+   
     // render SprkUser page
     app.get('/userpage', function (req, res) {
     	res.render('userpage', { title: 'SprkUser Pge '});
@@ -26,6 +29,9 @@ module.exports = function(app) {
     // -----------------------------------------------------------------------------------------------------------------
     // Registration and Login for API requests
     // -----------------------------------------------------------------------------------------------------------------
+
+    // expects { email: "m@gmail.com", password: "password" }
+    // returns { }
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
 };
