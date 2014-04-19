@@ -30,9 +30,13 @@ module.exports = function(app) {
     // -----------------------------------------------------------------------------------------------------------------
 
     // expects { email: "m@gmail.com", password: "password" }
-    // returns { }
+    // returns { hasErrors: false, messages: [] };
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
+
+    // expects { imgURL: self.imgURL() }
+    // returns { hasErrors: false, messages: [] }
+    app.post('/api/update/user/avatar', userController.updateAvatar);
 };
 
 // TODO: Get user's name and attach to title.
