@@ -1,11 +1,11 @@
 var constructor = function(){
 
     var contributionsControllerInstance = {};
-    //console.log("requiring dataAccessor");
-    var contributionsDA = require('../DataAccessors/ContributionsDataAccessor');
-    //console.log("got dataAccessor");
 
-    //console.log("defining getContributions");
+    var contributionsDA = require('../DataAccessors/ContributionsDataAccessor');
+
+
+
     contributionsControllerInstance.getContributions = function(req, res){
 
         console.log("get here");
