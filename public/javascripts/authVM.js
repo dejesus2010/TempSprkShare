@@ -1,8 +1,4 @@
-/**
- * Created by jorgep on 4/18/14.
- */
 $(function(){
-
     function signupVM() {
         var self = this;
 
@@ -14,10 +10,17 @@ $(function(){
         self.errors = ko.observableArray([]);
 
         // jquery variables
-        self.$emailInput = $('#emailControl');
-        self.$passwordInput = $('#passwordControl');
+        self.$emailInputLogin = $('#emailControlLogin');
+        self.$passwordInputLogin = $('#passwordControlLogin');
+        self.$emailInputSignup = $('#emailControlSignup');
+        self.$passwordInputSignup = $('#passwordControlSignup');
         self.$passwordRetypeInput = $('#passwordRetypeControl');
-        self.fields = [ self.$emailInput, self.$passwordInput, self.$passwordRetypeInput ];
+        self.fields = [
+            self.$emailInputLogin,
+            self.$passwordInputLogin,
+            self.$emailInputSignup,
+            self.$passwordInputSignup,
+            self.$passwordRetypeInput ];
         self.errorClass = 'has-error';
     };
 
@@ -33,39 +36,53 @@ $(function(){
 
 
 
-    signupVM.prototype.createAccount = function(){
+    signupVM.prototype.submit = function(){
         var self = this;
         self.removeAlerts();
+        var isLogingIn = $('#login_modal').hasClass('in');
+        var url = isLogingIn ?  "/api/auth/login" : "/api/auth/register";
+
 
         if(!self.email()) {
             self.hasErrors(true);
             self.errors.push( "email is required");
-            self.$emailInput.addClass(self.errorClass );
+
+
+            if(isLogingIn){
+                self.$emailInputLogin.addClass(self.errorClass );
+            } else {
+                self.$emailInputSignup.addClass(self.errorClass );
+            }
         }
 
         if(!self.password()) {
             self.hasErrors(true);
             self.errors.push("password is required");
-            self.$passwordInput.addClass(self.errorClass );
+
+            if(isLogingIn){
+                self.$passwordInputLogin.addClass(self.errorClass );
+            } else {
+                self.$passwordInputSignup.addClass(self.errorClass );
+            }
         }
 
-        if(!self.passwordRetype()) {
+        if(!self.passwordRetype()  && !isLogingIn) {
             self.hasErrors(true);
             self.errors.push("gotta double check your password");
             self.$passwordRetypeInput.addClass(self.errorClass );
         }
 
-        if(self.passwordRetype() !== self.password()) {
+        if(self.passwordRetype() !== self.password() && !isLogingIn) {
             self.hasErrors(true);
             self.errors.push( "password and retype don't match");
-            self.$passwordInput.addClass(self.errorClass );
+            self.$passwordInputSingup.addClass(self.errorClass );
             self.$passwordRetypeInput.addClass(self.errorClass );
         }
 
         if(!self.hasErrors()) {
             $.ajax({
                 type: "POST",
-                url: "/api/auth/register",
+                url: url,
                 data: { email : self.email(), password: self.password },
                 success: function(data) {
                                 if(!data.hasErrors) {

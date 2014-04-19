@@ -7,7 +7,6 @@ module.exports = function(app) {
     // render home page
     app.get('/', function(req, res) {
         res.render('index', { title: 'SprkShare - Sprk an Idea' });
-        console.log(authController);
     });
 
 

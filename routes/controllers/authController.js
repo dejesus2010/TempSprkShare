@@ -11,18 +11,20 @@ var constructor = function() {
 
         userDA.registration(data, function(err, rowsData){
                 if(err) {
-                if(err.code === "23505"){
-                    response.hasErrors = true;
-                    response.messages.push('there a an account for ' + req.body.email + ' already.');
-                }
-                else {
-                    response.hasErrors = true;
-                    response.messages.push('There was problem creating your account. Please try again.');
-                }
+                    if(err.code === "23505"){
+                        response.hasErrors = true;
+                        response.messages.push('there a an account for ' + req.body.email + ' already.');
+                    }
+                    else {
+                        response.hasErrors = true;
+                        response.messages.push('There was problem creating your account. Please try again.');
+                    }
             } else {
                 response.hasErrors = false;
                 response.messages.push('Account successfully created');
-                req.session.userId = rowsData[0].UserId;
+                req.session.regenerate(function(){
+                        req.session.userId = rowsData[0].UserId;
+                });
             }
 
             res.json(response);
