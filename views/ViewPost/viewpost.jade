@@ -1,4 +1,6 @@
 include viewpostHeaderMixin
+include viewpostContributionsMixin
+
 extends ../layout
 
 block head
@@ -12,26 +14,10 @@ block mainContent
        block PostHeader
 
     // Actual content of the post, includes contribution
-    div#postContentBlock
-       div.container
-            div.row
-                div.col-md-1#leftCol
-                    ul.nav.nav-stacked#sidebar
-                         li
-                            div.btn-group
-                                div.add.btn.btn-primary(data-toggle='modal', href='#createcontribution')
-                                    span
-                                        |  | Contribute
+    +viewpostContributions(postRowsData, contributionsRowsData)
 
 
-                div.col-md-11#rightCol
 
-                   div.postContent
-                       =postRowsData[0].postcontent
-
-                   each contribution in contributionsRowsData
-                        div.postContribution
-                            =contribution.contribcontent
 
 
 

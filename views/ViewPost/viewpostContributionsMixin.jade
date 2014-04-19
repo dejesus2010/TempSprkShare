@@ -1,0 +1,17 @@
+mixin viewpostContributions(postRowsData, contributionsRowsData)
+    div#postContentBlock.container
+        div.row
+            div.col-md-1#leftCol
+                ul.nav.nav-stacked#sidebar
+                    li
+                        div.btn-group
+                            div.add.btn.btn-primary
+                                span
+                                    |  | Contribute
+
+            div.col-md-11#rightCol
+
+
+                each contribution in contributionsRowsData
+                    div.postContribution
+                        =contribution.contribcontent
