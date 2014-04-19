@@ -1,3 +1,4 @@
+// check out https://github.com/visionmedia/node-pwd
 var crypto = require('crypto');
 
 /**

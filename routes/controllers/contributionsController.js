@@ -37,11 +37,46 @@ var constructor = function(){
 
     };
 
+
+
     contributionsControllerInstance.renderPage = function(req, res){
 
-        contributionsDA.getContributions(req, function(err, rowsData){
-            console.log("error: " + err);
+        contributionsDA.getPostInfo(req, function(err, postRowsData){
+            //console.log(postRowsData);
 
+
+            contributionsDA.getContributions(req, function(err, contributionsRowsData){
+               console.log(contributionsRowsData);
+
+                if(err){
+
+                    if(err.code == 23505 ){
+                        // check this.....
+                        res.send( 'Idk what to do with this err.code');
+                    }
+                    else{
+                        // check this....
+                        res.send( 'I guess another different response here lol?')
+                    }
+
+                }else{
+                    //console.log("Post Rows Data: ");
+                    console.log(postRowsData);
+                    res.render('viewpost', {contributionsRowsData: contributionsRowsData, postRowsData : postRowsData});
+                    console.log("rendered page");
+                }
+
+            });
+
+        });
+
+    };
+
+    // not used in production. just used for testing....
+    contributionsControllerInstance.getPostInfo = function(req, res){
+        console.log(req.body.postid);
+
+        contributionsDA.getPostInfo(req, function( err, postRowsData){
             if(err){
 
                 if(err.code == 23505 ){
@@ -54,14 +89,10 @@ var constructor = function(){
                 }
 
             }else{
-                console.log("rendering page");
-                res.render('viewpost', {rowsData: rowsData});
+                res.send( postRowsData);
                 console.log("rendered page");
             }
         });
-
-
-
     };
 
     return contributionsControllerInstance;

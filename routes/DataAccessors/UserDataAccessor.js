@@ -39,14 +39,12 @@ var constructor = function() {
     userDAInstance.login = function(data, sendData) {
 
 
-        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1 AND userpassword = $2';
-        var inserts = [data.email, data.password];
+        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1';
+        var inserts = [data.email];
 
         // apply the same algorithm to the POSTed password, applying
         // the hash against the pass / salt, if there is a match we
         // found the user
-
-
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
@@ -85,8 +83,6 @@ var constructor = function() {
 
     // QUERY USER'S TEMPORARY POSTS
     userDAInstance.getUserTempPosts = function(userData, sendData) {
-
-        var self = this;
         // TODO: FIx query to give only the temporary posts.
         var preparedStatement = 'SELECT * FROM posts WHERE postUserID = $1';
         var inserts = [ this.userID ];
@@ -107,10 +103,8 @@ var constructor = function() {
 
     // QUERY USERS
     userDAInstance.getUserPermPosts = function(userData, sendData) {
-
-        var self = this;
         var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserID = $1';
-        var insert = [ self.userID ];
+        var inserts = [ userData.userID ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -128,10 +122,8 @@ var constructor = function() {
 
     // UPDATE THE USER'S PICTUREURL IN THE DATABASE
     userDAInstance.updateAvatar = function(userData, sendData) {
-
-        var self = this;
-        var preparedStatement = 'UPDATE sparkUsers SET UserPicURL = $1 WHERE userID = $2';
-        var inserts = [ userData.pictureURL, self.userID ];
+        var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userid = $2 RETURNING userpicurl';
+        var inserts = [ userData.imgURL, userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -139,6 +131,8 @@ var constructor = function() {
 
                 if (err) {
                     sendData(err);
+                } else {
+                    sendData(err, result.rows[0].userpicurl);
                 }
             });
         });
