@@ -8,16 +8,17 @@ mixin updateAvatarModal()
 
                     div(class= 'modal-body')
                         // TOOD: Perform database update on Submit without redirecting.
-                        form(class= 'form-horizontal', role= 'form', onclick= '')
+                        div(class= 'form-horizontal', role= 'form', onclick= '')
                             div(class= 'form-group')
                                 label(for= 'picturl_log', class= 'control-label') Picture URL:
-                                input(type= 'picturl', class= 'form-control', id= 'picturl_log', placeholder= 'http://www.awesome.com/cool.png', name= 'picturl')
+                                input(type= 'picturl', class= 'form-control', id= 'picturl_log', placeholder= 'http://www.awesome.com/cool.png', name= 'picturl', data-bind='value: imgURL')
 
-                            button(type= 'submit', class= 'btn btn-primary') Submit
+
 
                             // TODO: Catch invalid URL error.
                             div(id= 'error')
 
                         div(class= 'modal-footer')
                             button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Cancel
+                            button(type= 'submit', class= 'btn btn-primary', data-bind='click: submitImage') Submit
 

@@ -106,7 +106,11 @@ var constructor = function() {
     // QUERY USERS
     userDAInstance.getUserPermPosts = function(userData, sendData) {
         var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserID = $1';
+<<<<<<< HEAD
         var insert = [ userData.userId ];
+=======
+        var inserts = [ userData.userID ];
+>>>>>>> 8a8ce6cf87ae3e61c48bba0bc320da76cbaaddbb
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -124,8 +128,13 @@ var constructor = function() {
 
     // UPDATE THE USER'S PICTUREURL IN THE DATABASE
     userDAInstance.updateAvatar = function(userData, sendData) {
+<<<<<<< HEAD
         var preparedStatement = 'UPDATE sparkUsers SET UserPicURL = $1 WHERE userID = $2';
         var inserts = [ userData.pictureURL, userData.userId ];
+=======
+        var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userid = $2 RETURNING userpicurl';
+        var inserts = [ userData.imgURL, userData.userId ];
+>>>>>>> 8a8ce6cf87ae3e61c48bba0bc320da76cbaaddbb
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {

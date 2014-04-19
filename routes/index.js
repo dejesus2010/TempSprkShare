@@ -9,6 +9,10 @@ module.exports = function(app) {
         res.render('index', { title: 'SprkShare - Sprk an Idea' });
     });
 
+    app.get('/viewposttest', function(req,res){
+       res.sendfile('../testingViewPost.html')
+    });
+
 
     app.post('/viewpost', contributionController.renderPage);
 
@@ -30,9 +34,13 @@ module.exports = function(app) {
     // -----------------------------------------------------------------------------------------------------------------
 
     // expects { email: "m@gmail.com", password: "password" }
-    // returns { }
+    // returns { hasErrors: false, messages: [] };
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
+
+    // expects { imgURL: self.imgURL() }
+    // returns { hasErrors: false, messages: [] }
+    app.post('/api/update/user/avatar', userController.updateAvatar);
 };
 
 // TODO: Get user's name and attach to title.
