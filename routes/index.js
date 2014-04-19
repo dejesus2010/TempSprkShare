@@ -13,8 +13,8 @@ module.exports = function(app) {
        res.sendfile('../testingViewPost.html')
     });
 
-
-    app.post('/viewpost', contributionController.renderPage);
+    // render the page for an specific post based on the post id passed in
+    app.get('/view/post/:postId', contributionController.renderPostPage);
 
 
     app.get('/create_post', function(req,res){
