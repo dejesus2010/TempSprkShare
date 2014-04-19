@@ -1,0 +1,20 @@
+extends layout
+block head
+
+	link(rel= 'stylesheet', href= '/stylesheets/create_post.css')
+	
+	
+block mainContent
+	div.jumbotron
+		div.size
+			form(method='post')
+				h1.margin_top Create a Post
+				label.margin_top.font(for='title') Title
+				input.form-control.font(id='title',type='text',name='title')
+				input.margin_top(id='optional_pic',name='optional_pic' type='file')
+				label.margin_top.font(for='message') Message
+				textarea.form-control.height.font(id='message',name='message')
+				button.btn.btn-primary.margin_top.full Submit
+		
+		
+	
