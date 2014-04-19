@@ -9,6 +9,10 @@ module.exports = function(app) {
         res.render('index', { title: 'SprkShare - Sprk an Idea' });
     });
 
+    app.get('/viewposttest', function(req,res){
+       res.sendfile('../testingViewPost.html')
+    });
+
 
     app.post('/viewpost', contributionController.renderPage);
 
