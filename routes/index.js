@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 
     // render the page for an specific post based on the post id passed in
-    app.get('/view/post/:postId', contributionController.renderPostPage);
+    app.get('/viewpost/:postId', contributionController.renderPostPage);
 
 
     app.get('/create_post', function(req,res){
@@ -23,6 +23,16 @@ module.exports = function(app) {
     	res.render('userpage', { title: 'SprkUser Pge '});
     	console.log(userController);
     });
+	
+	app.get('/groups', function (req, res){
+		res.render('groups', { title: 'SprkGroups Pge'});
+		console.log(userController);
+	});
+	
+	app.get('/landing', function (req, res){
+		res.render('landing', { title: 'SprkLanding Pge'});
+		console.log(userController);
+	});
 
     app.post('/auth/user', userController.posts);
 

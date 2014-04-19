@@ -5,16 +5,15 @@
 
 }
 
+#postHeader{
+    margin-top: 7px;
+}
 
 #postHeader h1{
     padding-top: 20px;
     position: relative;
 }
 
-#postHeaderContainer{
-    margin-top: 70px;
-
-}
 
 #postContentBlock{
     position: relative;
