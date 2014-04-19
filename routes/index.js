@@ -28,6 +28,9 @@ module.exports = function(app) {
     // -----------------------------------------------------------------------------------------------------------------
     // Registration and Login for API requests
     // -----------------------------------------------------------------------------------------------------------------
+
+    // expects { email: "m@gmail.com", password: "password" }
+    // returns { }
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
 };
