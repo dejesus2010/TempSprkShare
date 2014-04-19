@@ -29,6 +29,33 @@ var constructor = function(){
 
     };
 
+    // used for testing purposes....
+    contributionsDAInstance.getPostInfo = function(req, getData){
+        var data = req.body;
+        var preparedStatement = 'select * from posts where postid =  $1';
+        var inserts = [data.postid];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done){
+           client.query(preparedStatement,inserts, function(err, result){
+               done();
+
+
+
+               if(err){
+                   getData(err);
+               }
+               else{
+                   console.log(result.rows);
+                   getData(err, result.rows);
+               }
+
+           });
+
+        });
+
+
+    };
+
     return contributionsDAInstance;
 
 };
