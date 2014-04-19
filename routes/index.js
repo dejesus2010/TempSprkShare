@@ -1,21 +1,22 @@
 module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
-    	userController = require('./controllers/userController');
+    	userController = require('./controllers/userController'),
+        contributionController = require('./controllers/contributionsController');
 
     // render home page
     app.get('/', function(req, res) {
         res.render('index', { title: 'SprkShare - Sprk an Idea' });
     });
 
-    app.get('/viewpost', function(req,res){
-        res.render('viewpost', {title: 'View Post'});
-    });
-	
-	app.get('/create_post', function(req,res){
+
+    app.post('/viewpost', contributionController.getContributions);
+
+
+    app.get('/create_post', function(req,res){
         res.render('create_post', {title: 'Create Post'});
     });
-    
+   
     // render SprkUser page
     app.get('/userpage', function (req, res) {
     	res.render('userpage', { title: 'SprkUser Pge '});

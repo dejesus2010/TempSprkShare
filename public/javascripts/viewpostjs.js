@@ -1,7 +1,12 @@
 
+function Contribution(){
+    this.contribid = ko.observable(1);
+    this.contribuserid = ko.observable(1);
+}
+
 function AppViewModel(){
-    this.firstName = "Bert";
-    this.lastName = "Bertington";
+    this.contributions = [];
+    this.lastName = ko.observable("Bertington");
 }
 
 console.log("Applying Binding");

@@ -14,7 +14,7 @@ var constructor = function() {
                 done();
 
                 if(err) {
-                    sendData(err)
+                    sendData(err);
                 }
                 else {
                     sendData(err, result.rows);
