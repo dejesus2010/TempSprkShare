@@ -33,6 +33,7 @@ module.exports = function(app) {
     // returns { }
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
+	app.post('/api/auth/post', postController.validate);
 };
 
 // TODO: Get user's name and attach to title.
