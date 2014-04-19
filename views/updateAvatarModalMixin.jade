@@ -7,8 +7,7 @@ mixin updateAvatarModal()
                     h4(class= 'modal-title') Change Avatar
 
                     div(class= 'modal-body')
-                        // TOOD: Perform database update on Submit without redirecting.
-                        div(class= 'form-horizontal', role= 'form', onclick= '')
+                        div(class= 'form-horizontal', role= 'form')
                             div(class= 'form-group')
                                 label(for= 'picturl_log', class= 'control-label') Picture URL:
                                 input(type= 'picturl', class= 'form-control', id= 'picturl_log', placeholder= 'http://www.awesome.com/cool.png', name= 'picturl', data-bind='value: imgURL')

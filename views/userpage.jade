@@ -32,33 +32,20 @@ block mainContent
             a(href= '#followers', data-toggle= 'tab') Followers
 
         div.tab-content
-          div(class= 'tab-pane active', id= 'posts', data-bind= 'foreach: ')
-            div(id ='left')
-              p(style= 'white-space: pre')
-                a(href= '#right') View All
-                a(href= '#right') Temporary Posts
-                a(href= '#right') Permanent Posts
+          div(class= 'tab-pane active', id= 'posts')
+            div(id ='left', class= 'container')
+              p
+                a(href= '#right', data-bind= 'value: getAllUserPosts') View All </br>
+                a(href= '#right', data-bind= 'value: getUserTempPosts') Temporary Posts </br>
+                a(href= '#right', data-bind= 'value: getUserPermPosts') Permanent Posts </br>
 
-            div(id= 'right')
+            div(id= 'right', class= 'container')
               p(style= 'white-space: pre')
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
+
 
               
           div(class= 'tab-pane', id= 'friends')
-            div(id ='left')
+            div(id ='left', class= 'container')
               p(style= 'white-space: pre')
                 | Friend
                 | Friend
@@ -79,7 +66,7 @@ block mainContent
                 | Friend
 
 
-            div(id= 'right')
+            div(id= 'right', class= 'container')
               p(style= 'white-space: pre')
                 | Post.
                 | Post.
@@ -97,7 +84,7 @@ block mainContent
                 | Post.
         
           div(class= 'tab-pane', id= 'groups')
-            div(id= 'left')
+            div(id= 'left', class= 'container')
               p(style= 'white-space: pre')
                 | Group
                 | Group
@@ -113,7 +100,7 @@ block mainContent
                 | Group
                 | Group
 
-            div(id= 'right')
+            div(id= 'right', class= 'container')
               p(style= 'white-space: pre')
                 | Post.
                 | Post.
@@ -131,7 +118,7 @@ block mainContent
                 | Post.
         
           div(class= 'tab-pane', id= 'followers')
-            div(id ='left')
+            div(id ='left', class= 'container')
               p(style= 'white-space: pre')
                 | Follower
                 | Follower
@@ -151,7 +138,7 @@ block mainContent
                 | Follower
 
 
-            div(id= 'right')
+            div(id= 'right', class= 'container')
               p(style= 'white-space: pre')
                 | Post.
                 | Post.
@@ -168,14 +155,9 @@ block mainContent
                 | Post.
                 | Post.
 
-<<<<<<< HEAD
-
-    script(src= '/javascripts/changeAvatar.js')
     +updateAvatarModal()
-    block scripts
-=======
-    +updateAvatarModal(this)
 
     block scripts
         script(src= '/javascripts/changeAvatar.js')
->>>>>>> 8a8ce6cf87ae3e61c48bba0bc320da76cbaaddbb
+        script(src= '/javascripts/updateUserPosts.js')
+
