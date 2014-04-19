@@ -1,14 +1,14 @@
 extends layout
 
-block style
+block head
     link( rel='stylesheet', href='/stylesheets/viewpoststyle.css')
-
 
 block scripts
     script(src='javascripts/viewpostjs.js', type="text/javascript")
 
 
 block mainContent
+    // MastHead. Has title and description
     div#postHeader
        div.container#postHeaderContainer
             div.row
@@ -29,7 +29,7 @@ block mainContent
                                     | User Name
                                     | Can even add an about me section...?
        block PostHeader
-
+    // Actual content of the post, includes contribution
     div#postContentBlock
        div.container
             div.row
@@ -43,15 +43,15 @@ block mainContent
 
 
                 div.col-md-11#rightCol
-
-                    p First Name:
-                        strong(data-bind="text: firstName")
-                    p Last Name:
-                        strong( data-bind="text: lastName")
-                    p First Name:
-                        input(data-bind="value: firstName")
-                    p Last Name:
-                        input(data-bind="value: lastName")
+                    //This code is just to test knockout...
+                        p First Name:
+                            strong(data-bind="text: firstName")
+                        p Last Name:
+                            strong( data-bind="text: lastName")
+                        p First Name:
+                            input(data-bind="value: firstName")
+                        p Last Name:
+                            input(data-bind="value: lastName")
                     //
 
                         table.table

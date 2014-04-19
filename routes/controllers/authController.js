@@ -2,6 +2,7 @@ var constructor = function() {
 
     var authControllerInstance = {};
     var userDA = require('../dataAccessors/UserDataAccessor');
+
     authControllerInstance.registration = function(req, res) {
 
         var data = req.body;
