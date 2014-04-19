@@ -15,7 +15,26 @@ var constructor = function () {
 			}
 		});
 	};
-	
+
+    userControllerInstance.updateAvatar = function(req, res) {
+        var response = { hasErrors: false, messages: [] };
+        var data = req.body;
+        data.userId = req.session.userId;
+
+        userDA.updateAvatar(data, function(err, newAvatarURL) {
+            if(err) {
+                response.hasErrors = true;
+                response.messages.push('Something went wrong');
+            } else {
+                response.hasErrors = false;
+                response.messages.push('Updated avatar to ' + newAvatarURL);
+                // TODO update picture in the req.session.userpicurl = newAvatarURL
+                response.newAvatarURL = newAvatarURL;
+            }
+
+            res.json(response);
+        });
+    }
 
 	return userControllerInstance;
 };

@@ -1,5 +1,5 @@
 $(function(){
-    function signupVM() {
+    function SignupVM() {
         var self = this;
 
         // could also be te user's email
@@ -24,7 +24,7 @@ $(function(){
         self.errorClass = 'has-error';
     };
 
-    signupVM.prototype.removeAlerts = function() {
+    SignupVM.prototype.removeAlerts = function() {
         var self = this;
         self.hasErrors(false);
         self.errors([]);
@@ -36,7 +36,7 @@ $(function(){
 
 
 
-    signupVM.prototype.submit = function(){
+    SignupVM.prototype.submit = function(){
         var self = this;
         self.removeAlerts();
         var isLogingIn = $('#login_modal').hasClass('in');
@@ -83,7 +83,7 @@ $(function(){
             $.ajax({
                 type: "POST",
                 url: url,
-                data: { email : self.email(), password: self.password },
+                data: { email : self.email(), password: self.password() },
                 success: function(data) {
                                 if(!data.hasErrors) {
                                     window.location = '/userpage';
@@ -98,5 +98,5 @@ $(function(){
         }
     };
 
-    ko.applyBindings(new signupVM());
+    ko.applyBindings(new SignupVM());
 });

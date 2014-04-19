@@ -20,11 +20,12 @@ var constructor = function() {
             } else {
                 response.hasErrors = false;
                 response.messages.push('logged in successfully');
-                req.session.regenerate(function(){
-                    req.session.userId = userData.UserId;
-                    delete userData.UserId;
-                    req.session.userData = userData;
-                });
+
+                // put data in the session
+                req.session.userId = userData.userid;
+                delete userData.userid;
+                req.session.userData = userData;
+                console.log(req.session);
             }
 
             res.json(response);
@@ -49,11 +50,11 @@ var constructor = function() {
             } else {
                 response.hasErrors = false;
                 response.messages.push('logged in successfully');
-                req.session.regenerate(function(){
-                    req.session.userId = userData.UserId;
-                    delete userData.UserId;
-                    req.session.userData = userData;
-                });
+
+                // put data in the session
+                req.session.userId = userData.userid;
+                delete userData.userid;
+                req.session.userData = userData;
             }
 
             res.json(response);
