@@ -2,26 +2,29 @@ var constructor = function() {
 
     var authControllerInstance = {};
     var userDA = require('../dataAccessors/UserDataAccessor');
+
     authControllerInstance.registration = function(req, res) {
         var response = { hasErrors: false, messages: [] };
         var data = req.body;
 
-        console.log(data);
-
-        userDA.registration(data, function(err, rowsData){
+        userDA.registration(data, function(err, userData){
                 if(err) {
-                if(err.code === "23505"){
-                    response.hasErrors = true;
-                    response.messages.push('there a an account for ' + req.body.email + ' already.');
-                }
-                else {
-                    response.hasErrors = true;
-                    response.messages.push('There was problem creating your account. Please try again.');
-                }
+                    if(err.code === "23505"){
+                        response.hasErrors = true;
+                        response.messages.push('there a an account for ' + req.body.email + ' already.');
+                    }
+                    else {
+                        response.hasErrors = true;
+                        response.messages.push('There was problem creating your account. Please try again.');
+                    }
             } else {
                 response.hasErrors = false;
-                response.messages.push('Account successfully created');
-                req.session.userId = rowsData[0].UserId;
+                response.messages.push('logged in successfully');
+                req.session.regenerate(function(){
+                    req.session.userId = userData.UserId;
+                    delete userData.UserId;
+                    req.session.userData = userData;
+                });
             }
 
             res.json(response);
@@ -46,7 +49,11 @@ var constructor = function() {
             } else {
                 response.hasErrors = false;
                 response.messages.push('logged in successfully');
-                response.userData = userData;
+                req.session.regenerate(function(){
+                    req.session.userId = userData.UserId;
+                    delete userData.UserId;
+                    req.session.userData = userData;
+                });
             }
 
             res.json(response);
