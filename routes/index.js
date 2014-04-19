@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 
     // render the page for an specific post based on the post id passed in
-    app.get('/view/post/:postId', contributionController.renderPostPage);
+    app.get('/viewpost/:postId', contributionController.renderPostPage);
 
 
     app.get('/create_post', function(req,res){
