@@ -23,8 +23,12 @@ mixin signupModel()
                             div(class= 'col-sm-10')
                                 input(type= 'password', class= 'form-control', id='passwordRetype', name= 'password_again', placeholder= 'Enter Again', data-bind='value: passwordRetype')
 
+                        .alert.alert-danger(data-bind='visible: hasErrors')
+                            ul(data-bind='foreach: errors')
+                                li
+                                    span(data-bind='text: $data')
 
                         div(class= 'modal-footer')
-                            button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal', data-bind='') Close
+                            button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
                             button(class= 'btn btn-primary', data-bind='click: createAccount') Sign-Up
 
