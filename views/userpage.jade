@@ -1,17 +1,26 @@
+include avatarOrSignupMixin
+include updateAvatarModalMixin
 extends layout
 
 head
-  title= tile  
+  title= tirle
+
+block navBarContent
+  +avatarOrSignupMixin(true)
 
 block mainContent
   div(class= 'container special')
     header#overview.jumbotron
       h2 User Overview
+      div.btn-group
+        a.btn.btn-primary.fron_button(data-toggle='modal', href= '#update_avatar_modal')
+          span
+            | Change Avatar
       div.tabbable.tabs-below
         div.tab-content
           div.tab-pane.active
 
-      div.tabbable
+      div.tabbable.tabbable
         ul.nav.nav-tabs
           li.active
             a(href= '#posts', data-toggle= 'tab', onclick= 'showOnlyPosts') Posts
@@ -158,8 +167,8 @@ block mainContent
                 | Post.
                 | Post.
                 | Post.
-        
-    block table
 
-script(src= '/bootstrap/js/showHide.js')
-block scripts
+
+    script(src= '/javascripts/changeAvatar.js')
+    +updateAvatarModal(this)
+    block scripts

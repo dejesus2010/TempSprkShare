@@ -7,7 +7,7 @@ var constructor = function () {
 		var data = req.body;
 
 		userDA.posts(data, function(err, rowsData) {
-			if (err.code = 23505) {
+			if (err.code === 23505) {
 				res.send('Something went wrong.');
 			}
 			else {
@@ -15,8 +15,6 @@ var constructor = function () {
 			}
 		});
 	};
-
-	// TODO: Other User's Tabs
 	
 
 	return userControllerInstance;

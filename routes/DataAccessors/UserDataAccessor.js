@@ -18,14 +18,13 @@ var constructor = function() {
                 }
                 else {
                     sendData(err, result.rows);
-
                 }
             });
         });
     };
 
     userDAInstance.login = function(data, sendData) {
-        // TODO: Add this.userID to query.
+
         var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1 AND userpassword = $2';
         var inserts = [data.email, data.password];
 
@@ -47,20 +46,62 @@ var constructor = function() {
         });
     };
 
-    userDAInstance.posts = function(req, res) {
-        // TODO: Add this.userID to query.
-        var preparedStatement = 'SELECT * FROM posts, sparkUsers WHERE postUserId = userId';
-        var inserts = [];
+    // QUERY USER'S TEMPORARY POSTS
+    userDAInstance.getUserTempPosts = function(userData, sendData) {
+
+        var self = this;
+        // TODO: FIx query to give only the temporary posts.
+        var preparedStatement = 'SELECT * FROM posts WHERE postUserID = $1';
+        var inserts = [ this.userID ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
 
                 if (err) {
-                    sendData(err)
+                    sendData(err);
                 }
                 else {
                     sendData(err, result.rows);
+                }
+            });
+        });
+    };
+
+    // QUERY USERS
+    userDAInstance.getUserPermPosts = function(userData, sendData) {
+
+        var self = this;
+        var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserID = $1';
+        var insert = [ self.userID ];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query(preparedStatement, inserts, function(err, result) {
+                done();
+
+                if (err) {
+                    sendData(err);
+                }
+                else {
+                    sendData(err, result.rows);
+                }
+            });
+        });
+    };
+
+    // UPDATE THE USER'S PICTUREURL IN THE DATABASE
+    userDAInstance.updateAvatar = function(userData, sendData) {
+
+        var self = this;
+        var preparedStatement = 'UPDATE sparkUsers SET UserPicURL = $1 WHERE userID = $2';
+        var inserts = [ userData.pictureURL, self.userID ];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query(preparedStatement, inserts, function(err, result) {
+                done();
+
+                if (err) {
+                    sendData(err);
                 }
             });
         });

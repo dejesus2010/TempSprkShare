@@ -28,7 +28,7 @@ html
                         // NAV BUTTONS
                         .navbar-collapse.collapse
                             ul.nav.navbar-nav
-                                - var obj = { '/': 'Home', '/post': 'Post' }
+                                - var obj = { '/': 'Home', '/create_post': 'Post' }
                                 each val, key in obj
                                     li
                                         a(href= '#{key}') #{val}
