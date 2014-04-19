@@ -83,7 +83,7 @@ $(function(){
             $.ajax({
                 type: "POST",
                 url: url,
-                data: { email : self.email(), password: self.password },
+                data: { email : self.email(), password: self.password() },
                 success: function(data) {
                                 if(!data.hasErrors) {
                                     window.location = '/userpage';
