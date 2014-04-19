@@ -20,15 +20,6 @@ var constructor = function() {
                     client.query(preparedStatement, inserts, function(err, result) {
                         done();
 
-<<<<<<< HEAD
-                if(err) {
-                    sendData(err)
-                }
-                else {
-                    sendData(err, result.rows);
-                }
-            });
-=======
                         if(err) {
                             sendData(err);
                         }
@@ -42,25 +33,19 @@ var constructor = function() {
                     });
                 });
             }
->>>>>>> a816187727ed8a66fe69899c85587d3779c9e2df
         });
     };
 
     userDAInstance.login = function(data, sendData) {
 
-<<<<<<< HEAD
+
         var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1 AND userpassword = $2';
         var inserts = [data.email, data.password];
-=======
+
         // apply the same algorithm to the POSTed password, applying
         // the hash against the pass / salt, if there is a match we
         // found the user
 
-
-        // TODO: Add this.userID to query.
-        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1';
-        var inserts = [data.email];
->>>>>>> a816187727ed8a66fe69899c85587d3779c9e2df
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
