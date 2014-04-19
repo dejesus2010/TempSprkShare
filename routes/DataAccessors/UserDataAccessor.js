@@ -85,11 +85,9 @@ var constructor = function() {
 
     // QUERY USER'S TEMPORARY POSTS
     userDAInstance.getUserTempPosts = function(userData, sendData) {
-
-        var self = this;
         // TODO: FIx query to give only the temporary posts.
         var preparedStatement = 'SELECT * FROM posts WHERE postUserID = $1';
-        var inserts = [ this.userID ];
+        var inserts = [ userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -107,10 +105,8 @@ var constructor = function() {
 
     // QUERY USERS
     userDAInstance.getUserPermPosts = function(userData, sendData) {
-
-        var self = this;
         var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserID = $1';
-        var insert = [ self.userID ];
+        var insert = [ userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -128,10 +124,8 @@ var constructor = function() {
 
     // UPDATE THE USER'S PICTUREURL IN THE DATABASE
     userDAInstance.updateAvatar = function(userData, sendData) {
-
-        var self = this;
         var preparedStatement = 'UPDATE sparkUsers SET UserPicURL = $1 WHERE userID = $2';
-        var inserts = [ userData.pictureURL, self.userID ];
+        var inserts = [ userData.pictureURL, userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -139,6 +133,8 @@ var constructor = function() {
 
                 if (err) {
                     sendData(err);
+                } else {
+                    sendData(err, result.rows[0].userpicurl);
                 }
             });
         });
