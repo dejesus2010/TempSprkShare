@@ -6,7 +6,7 @@ module.exports = function(app) {
 
     // render home page
     app.get('/', function(req, res) {
-        res.render('index', { title: 'SprkShare - Sprk an Idea' });
+        res.render('landing', { title: 'SprkLanding Pge'});
     });
 
 
@@ -21,18 +21,12 @@ module.exports = function(app) {
     // render SprkUser page
     app.get('/userpage', function (req, res) {
     	res.render('userpage', { title: 'SprkUser Pge '});
-    	console.log(userController);
     });
 	
 	app.get('/groups', function (req, res){
 		res.render('groups', { title: 'SprkGroups Pge'});
-		console.log(userController);
 	});
-	
-	app.get('/landing', function (req, res){
-		res.render('landing', { title: 'SprkLanding Pge'});
-		console.log(userController);
-	});
+
 
     app.post('/auth/user', userController.posts);
 
