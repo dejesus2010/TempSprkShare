@@ -8,12 +8,12 @@ mixin signupModel()
                 div(class= 'modal-body')
                     div(class= 'form-horizontal')
 
-                        div(class= 'form-group', id='emailControl')
+                        div(class= 'form-group', id='emailControlSignup')
                             label(for= 'emailInput', class= 'col-sm-2 control-label') Email:
                             div(class= 'col-sm-10')
                                 input(type= 'email', class= 'form-control', id= 'emailInput', name= 'email', placeholder= 'you@awesome.com', data-bind='value: email')
 
-                        div(class= 'form-group', id='passwordControl')
+                        div(class= 'form-group', id='passwordControlSignup')
                             label(for= 'passwordInput', class= 'col-sm-2 control-label') Password:
                             div(class= 'col-sm-10')
                                 input(type= 'password', class= 'form-control', id= 'passwordInput', name= 'password', placeholder= '********', data-bind='value: password')
@@ -30,5 +30,5 @@ mixin signupModel()
 
                         div(class= 'modal-footer')
                             button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Close
-                            button(class= 'btn btn-primary', data-bind='click: createAccount') Sign-Up
+                            button(class= 'btn btn-primary', data-bind='click: submit') Sign-Up
 
