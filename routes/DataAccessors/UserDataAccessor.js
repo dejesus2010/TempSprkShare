@@ -11,7 +11,8 @@ var constructor = function() {
             if (err) {
                 sendData(err);
             } else {
-                var preparedStatement = 'INSERT INTO sparkUsers( username, useremail, userpassword, usersalt) VALUES ($1, $2, $3, $4) RETURNING UserId';
+                var preparedStatement = 'INSERT INTO sparkUsers( username, useremail, userpassword, usersalt) VALUES ($1, $2, $3, $4)' +
+                                         'RETURNING *';
                 var inserts = [ data.username, data.email, hash.toString(), salt];
 
                 // for local dev change to process.env.DATABASE_URL
@@ -23,8 +24,11 @@ var constructor = function() {
                             sendData(err);
                         }
                         else {
-                            sendData(err, result.rows);
+                            var userData = result.rows[0]
+                            delete userData.userpassword;
+                            delete userData.usersalt;
 
+                            sendData(err, userData);
                         }
                     });
                 });
@@ -34,14 +38,14 @@ var constructor = function() {
 
     userDAInstance.login = function(data, sendData) {
 
+
+        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1 AND userpassword = $2';
+        var inserts = [data.email, data.password];
+
         // apply the same algorithm to the POSTed password, applying
         // the hash against the pass / salt, if there is a match we
         // found the user
 
-
-        // TODO: Add this.userID to query.
-        var preparedStatement = 'SELECT * FROM sparkUsers WHERE useremail = $1';
-        var inserts = [data.email];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -64,7 +68,10 @@ var constructor = function() {
                         } else {
                             // after hashed compare the db hash with the hash of the submitted password
                             if (hash.toString() == userData.userpassword) {
-                                sendData(err);
+                                delete userData.userpassword;
+                                delete userData.usersalt;
+
+                                sendData(err, userData);
                             } else {
                                 // invalid credentials because of the password
                                 sendData( { code: 19 } );
@@ -76,20 +83,62 @@ var constructor = function() {
         });
     };
 
-    userDAInstance.posts = function(req, res) {
-        // TODO: Add this.userID to query.
-        var preparedStatement = 'SELECT * FROM posts, sparkUsers WHERE postUserId = userId';
-        var inserts = [];
+    // QUERY USER'S TEMPORARY POSTS
+    userDAInstance.getUserTempPosts = function(userData, sendData) {
+
+        var self = this;
+        // TODO: FIx query to give only the temporary posts.
+        var preparedStatement = 'SELECT * FROM posts WHERE postUserID = $1';
+        var inserts = [ this.userID ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
 
                 if (err) {
-                    sendData(err)
+                    sendData(err);
                 }
                 else {
                     sendData(err, result.rows);
+                }
+            });
+        });
+    };
+
+    // QUERY USERS
+    userDAInstance.getUserPermPosts = function(userData, sendData) {
+
+        var self = this;
+        var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserID = $1';
+        var insert = [ self.userID ];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query(preparedStatement, inserts, function(err, result) {
+                done();
+
+                if (err) {
+                    sendData(err);
+                }
+                else {
+                    sendData(err, result.rows);
+                }
+            });
+        });
+    };
+
+    // UPDATE THE USER'S PICTUREURL IN THE DATABASE
+    userDAInstance.updateAvatar = function(userData, sendData) {
+
+        var self = this;
+        var preparedStatement = 'UPDATE sparkUsers SET UserPicURL = $1 WHERE userID = $2';
+        var inserts = [ userData.pictureURL, self.userID ];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query(preparedStatement, inserts, function(err, result) {
+                done();
+
+                if (err) {
+                    sendData(err);
                 }
             });
         });

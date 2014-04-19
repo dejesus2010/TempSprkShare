@@ -28,7 +28,7 @@ html
                         // NAV BUTTONS
                         .navbar-collapse.collapse
                             ul.nav.navbar-nav
-                                - var obj = { '/': 'Home', '/post': 'Post' }
+                                - var obj = { '/': 'Home', '/create_post': 'Post' }
                                 each val, key in obj
                                     li
                                         a(href= '#{key}') #{val}
@@ -42,8 +42,7 @@ html
 
         div.navbar.navbar-default.navbar-static-bottom
                 .container
-                    p.navbar-text
-                        &copy;Sprkshar 2014
+                    p.navbar-text &copy; Sprkshar 2014
                     block footer
 
         script(src='/lib/jquery/jquery.js')

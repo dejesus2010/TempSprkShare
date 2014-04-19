@@ -1,0 +1,23 @@
+mixin updateAvatarModal(sprkUser)
+    div(class= 'modal fade', id= 'update_avatar_modal', tabindex= '-1',role= 'dialog', aria-labelledby=  'myModalLabel', aria-hidden= 'true')
+        div(class= 'modal-dialog')
+            div(class= 'modal-content')
+                div(class= 'modal-header')
+                    button(type= 'button', class= 'close', data-dismiss= 'modal', aria-hidden = 'true') &times
+                    h4(class= 'modal-title') Change Avatar
+
+                    div(class= 'modal-body')
+                        // TOOD: Perform database update on Submit without redirecting.
+                        form(class= 'form-horizontal', role= 'form', onclick= '')
+                            div(class= 'form-group')
+                                label(for= 'picturl_log', class= 'control-label') Picture URL:
+                                input(type= 'picturl', class= 'form-control', id= 'picturl_log', placeholder= 'http://www.awesome.com/cool.png', name= 'picturl')
+
+                            button(type= 'submit', class= 'btn btn-primary') Submit
+
+                            // TODO: Catch invalid URL error.
+                            div(id= 'error')
+
+                        div(class= 'modal-footer')
+                            button(type= 'button', class= 'btn btn-default', data-dismiss= 'modal') Cancel
+
