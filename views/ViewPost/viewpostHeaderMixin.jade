@@ -2,9 +2,11 @@ mixin viewpostHeader(postRowsData)
     div#postHeader.container
 
         div.row
-            div.col-md-7.text-center
+            div.col-md-7.text-center.container
                 div#postTitle
                     h1=postRowsData[0].posttitle
+                div#postContent
+                    =postRowsData[0].postcontent
             div.col-md-5
                 div.well.well-sm
                     div.row
