@@ -9,70 +9,66 @@ $(function(){
         self.email = ko.observable("");
         self.password = ko.observable("");
         self.passwordRetype = ko.observable("");
-        self.formHasErrors = ko.observable(false);
+        self.hasErrors = ko.observable(false);
         self.errors = ko.observableArray([]);
 
         // jquery variables
-        self.$emailInput = $('#email');
-        self.$password = $('#password');
-        self.passwordRetypeInput = $('#password_again');
-        self.fiels = [ self.$emailInput, self.$emailInput, self.$emailInput ];
+        self.$emailInput = $('#emailControl');
+        self.$passwordInput = $('#passwordControl');
+        self.$passwordRetypeInput = $('#passwordRetypeControl');
+        self.fiels = [ self.$emailInput, self.$passwordInput, self.$passwordRetypeInput ];
+        self.errorClass = 'has-error';
     };
 
     signupVM.prototype.removeAlerts = function() {
-        var thereAreErrors = false;
+        var self = this;
+        self.hasErrors(false);
         self.errors([]);
 
         for(var i = 0; i < self.fiels.length; i++){
-            self.fiels[i].removeClass( '' );
+            self.fiels[i].removeClass(self.errorClass );
         }
     }
 
     signupVM.prototype.createAccount = function(){
         var self = this;
-
         self.removeAlerts();
 
-        if(!self.email())
-        {
-            thereAreErrors = true;
+        if(!self.email()) {
+            self.hasErrors(true);
             self.errors().push("email is required");
-            return;
+            self.$emailInput.addClass(self.errorClass );
         }
 
-        if(!self.password())
-        {
-            thereAreErrors = true;
+        if(!self.password()) {
+            self.hasErrors(true);
             self.errors().push("password is required");
-            return;
+            self.$passwordInput.addClass(self.errorClass );
         }
 
-        if(!self.passwordRetype())
-        {
-            thereAreErrors = true;
-            self.errors().push("gotta double check your password");
-            return;
+        if(!self.passwordRetype()) {
+            self.hasErrors(true);
+            self.errors().push("gotta double check your password")
+            self.$passwordRetypeInput.addClass(self.errorClass );
         }
 
-        if(self.passwordRetype() !== self.password())
-        {
-            thereAreErrors = true;
+        if(self.passwordRetype() !== self.password()) {
+            self.hasErrors(true);
             self.errors().push("password and retype don't match");
-            return;
+            self.$passwordInput.addClass(self.errorClass );
+            self.$passwordRetypeInput.addClass(self.errorClass );
         }
 
-        if(!thereAreErrors){
+        if(!self.hasErrors()) {
             $.ajax({
                 type: "POST",
                 url: "/api/auth/register",
                 data: { email : self.email(), password: self.password },
                 success: function() {
-                            alert("account created");
+                            window.location = '/userpage';
                         }
             });
         }
-
-        self.formHasErrors(thereAreErrors);
     };
 
     ko.applyBindings(new signupVM());
