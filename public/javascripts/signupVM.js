@@ -2,6 +2,11 @@
  * Created by jorgep on 4/18/14.
  */
 $(function(){
+    function MessageVM(m){
+        var self = this;
+        self.message = m;
+    }
+
     function signupVM() {
         var self = this;
 
@@ -36,25 +41,25 @@ $(function(){
 
         if(!self.email()) {
             self.hasErrors(true);
-            self.errors().push("email is required");
+            self.errors().push( new MessageVM("email is required"));
             self.$emailInput.addClass(self.errorClass );
         }
 
         if(!self.password()) {
             self.hasErrors(true);
-            self.errors().push("password is required");
+            self.errors().push( new MessageVM("password is required"));
             self.$passwordInput.addClass(self.errorClass );
         }
 
         if(!self.passwordRetype()) {
             self.hasErrors(true);
-            self.errors().push("gotta double check your password")
+            self.errors().push( new MessageVM("gotta double check your password"));
             self.$passwordRetypeInput.addClass(self.errorClass );
         }
 
         if(self.passwordRetype() !== self.password()) {
             self.hasErrors(true);
-            self.errors().push("password and retype don't match");
+            self.errors().push( new MessageVM("password and retype don't match"));
             self.$passwordInput.addClass(self.errorClass );
             self.$passwordRetypeInput.addClass(self.errorClass );
         }
