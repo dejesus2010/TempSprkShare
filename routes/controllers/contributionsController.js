@@ -8,12 +8,7 @@ var constructor = function(){
 
     contributionsControllerInstance.getContributions = function(req, res){
 
-        console.log("get here");
-        var data = req.body;//req.params.postid;
-        console.log("Data: " + data);
-
-
-        contributionsDA.getContributions( data, function(err, rowsData){
+        contributionsDA.getContributions( req, function(err, rowsData){
            console.log("error: " +err);
 
             if(err){
@@ -28,9 +23,12 @@ var constructor = function(){
                 }
 
             }else{
-                console.log("Got here");
+                console.log("Completed query and got results...");
                 res.send(rowsData);
-                console.log("after sending");
+                //res.send("Completed query");
+                //var rowsResult = rowsData;
+                //return rowsResult;
+                //console.log("after sending");
                 //console.log("Rows data: " + rowsData);
 
                // return rowsData;
@@ -40,13 +38,29 @@ var constructor = function(){
     };
 
     contributionsControllerInstance.renderPage = function(req, res){
-        var contributions = contributionsControllerInstance.getContributions(req, res);
 
-        //console.log( contributions );
+        contributionsDA.getContributions(req, function(err, rowsData){
+            console.log("error: " + err);
 
-        res.send(contributions);
+            if(err){
 
-        //res.render('viewpost', contributions);
+                if(err.code == 23505 ){
+                    // check this.....
+                    res.send( 'Idk what to do with this err.code');
+                }
+                else{
+                    // check this....
+                    res.send( 'I guess another different response here lol?')
+                }
+
+            }else{
+                console.log("rendering page");
+                res.render('viewpost', {rowsData: rowsData});
+                console.log("rendered page");
+            }
+        });
+
+
 
     };
 

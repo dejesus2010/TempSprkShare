@@ -4,9 +4,10 @@ var constructor = function(){
 
     // Grab all contributions with the same post id as the desired post clicked on
 
-    contributionsDAInstance.getContributions = function( data, getData ){
+    contributionsDAInstance.getContributions = function( req, getData ){
         // Joins Posts and Contributions where postid and contributionsid match. giving us all the content to display for the post
 
+        var data = req.body;
         var preparedStatement = 'select contr.contribid, contr.contribpostid, contr.contribuserid, contr.contribcontent, contr.contribhasmedia, contr.contributeddate from contributions as contr, posts where contr.contribpostid = $1 and posts.postid = contr.contribpostid';
         var inserts = [data.contribpostid];//[ data.contribpostid, data.postid ];
 
