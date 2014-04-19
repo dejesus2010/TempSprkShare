@@ -20,7 +20,7 @@ module.exports = function(app) {
    
     // render SprkUser page
     app.get('/userpage', function (req, res) {
-    	res.render('userpage', { title: 'SprkUser Pge '});
+    	res.render('user/page/:user', { title: 'SprkUser Pge '});
     	console.log(userController);
     });
 
