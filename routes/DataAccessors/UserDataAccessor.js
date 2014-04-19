@@ -11,7 +11,8 @@ var constructor = function() {
             if (err) {
                 sendData(err);
             } else {
-                var preparedStatement = 'INSERT INTO sparkUsers( username, useremail, userpassword, usersalt) VALUES ($1, $2, $3, $4) RETURNING UserId';
+                var preparedStatement = 'INSERT INTO sparkUsers( username, useremail, userpassword, usersalt) VALUES ($1, $2, $3, $4)' +
+                                         'RETURNING *';
                 var inserts = [ data.username, data.email, hash.toString(), salt];
 
                 // for local dev change to process.env.DATABASE_URL
@@ -23,8 +24,11 @@ var constructor = function() {
                             sendData(err);
                         }
                         else {
-                            sendData(err, result.rows);
+                            var userData = result.rows[0]
+                            delete userData.userpassword;
+                            delete userData.usersalt;
 
+                            sendData(err, userData);
                         }
                     });
                 });
@@ -64,7 +68,10 @@ var constructor = function() {
                         } else {
                             // after hashed compare the db hash with the hash of the submitted password
                             if (hash.toString() == userData.userpassword) {
-                                sendData(err);
+                                delete userData.userpassword;
+                                delete userData.usersalt;
+
+                                sendData(err, userData);
                             } else {
                                 // invalid credentials because of the password
                                 sendData( { code: 19 } );
