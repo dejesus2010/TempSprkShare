@@ -9,9 +9,6 @@ module.exports = function(app) {
         res.render('index', { title: 'SprkShare - Sprk an Idea' });
     });
 
-    app.get('/viewposttest', function(req,res){
-       res.sendfile('../testingViewPost.html')
-    });
 
     // render the page for an specific post based on the post id passed in
     app.get('/view/post/:postId', contributionController.renderPostPage);

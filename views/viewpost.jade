@@ -1,3 +1,4 @@
+include viewpostHeaderMixin
 extends layout
 
 block head
@@ -6,27 +7,10 @@ block head
 
 block mainContent
     // MastHead. Has title and description
-    div#postHeader
-       div.container#postHeaderContainer
-            div.row
-                div.col-md-7.text-center
-                    div#postTitle
-                        h1=postRowsData[0].posttitle
-                    //
-                      div#postDescription
-                        h3 Post description
+    +viewpostHeader(postRowsData)
 
-                div.col-md-5
-                    div.well.well-sm
-                        div.row
-                            div.col-sm-6
-                                a(href='userpage')
-                                    img.img-circle.img-responsive#userImg(src='images/default_avatar.png')
-                            div.col-sm-6
-                                p.
-                                    | User Name
-                                    | Can even add an about me section...?
        block PostHeader
+
     // Actual content of the post, includes contribution
     div#postContentBlock
        div.container
