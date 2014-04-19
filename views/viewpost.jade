@@ -3,8 +3,13 @@ extends layout
 block head
     link( rel='stylesheet', href='/stylesheets/viewpoststyle.css')
 
+
 block scripts
     script(src='javascripts/viewpostjs.js', type="text/javascript")
+  //
+    script(type='text/javascript').
+        var rowsData = !{rowsData}
+
 
 
 block mainContent
@@ -43,32 +48,6 @@ block mainContent
 
 
                 div.col-md-11#rightCol
-                    //This code is just to test knockout...
-                        p First Name:
-                            strong(data-bind="text: firstName")
-                        p Last Name:
-                            strong( data-bind="text: lastName")
-                        p First Name:
-                            input(data-bind="value: firstName")
-                        p Last Name:
-                            input(data-bind="value: lastName")
-                    //
-
-                        table.table
-                        thead
-
-                        tbody(data-bind="foreach: contributions")
-                            tr
-                                td.postContribution
-                                  //
-                                   a( data-bind='href : userpage')
-                                        img( data-bind="src : userImage", height='30', width='30')
-                                 div( data-bind="text: contributionText" )
-
-
-
-
-                //
                     div.postContent
                         | Post Content.
                     div.postContribution
@@ -77,7 +56,7 @@ block mainContent
                         a(href='userpagepage')
                             | User 1
                         div.postContributionContent
-                            | 1st contribution
+                            h1=rowsData[0].contribcontent
                     div.postContribution
                         a(href='userpage')
                             img( src= '/images/default_avatar.png', height= '30', width= '30' )
@@ -93,3 +72,19 @@ block mainContent
                             | User 2
                         span
                             | 3rd contribution
+
+                   //
+                    table
+                        tbody(data-bind="foreach: rowsData")
+                            tr
+                                td.postContribution
+
+                                   a( data-bind='href : userpage')
+                                        img( data-bind="src : userImage", height='30', width='30')
+                                    div( data-bind="text: contributionText" )
+
+
+
+
+
+

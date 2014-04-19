@@ -10,7 +10,7 @@ module.exports = function(app) {
     });
 
 
-    app.post('/viewpost', contributionController.getContributions);
+    app.post('/viewpost', contributionController.renderPage);
 
 
     app.get('/create_post', function(req,res){
