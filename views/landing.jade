@@ -19,32 +19,22 @@ html
                         | an idea that has potential, while stopping others from following
                         | other ideas that do not. Start using SprkShare and see your ideal
                         | sparks be shared. We are SprkShare.
-              
-                div.col-md-offset-1.col-md-3.well.full
+                .col-md-1
+                div.col-md-3.well
                     a(data-toggle= 'modal', href= '#login_modal')
-                        .btn.btn-primary#center LogIn
+                        .btn.btn-default#center LogIn
                     div(style='padding:5px')
                         h4(align="center") OR
                     a(data-toggle= 'modal', href= '#sign_up_modal')
-                        .btn.btn-primary#center Sign-Up
+                        .btn.btn-default#center Sign-Up
 
             .row
-                .col-md-6.well.margin
+                .col-md-5
                     .panel.panel-default
                         .panel-heading Top 3 Posts
                         .panel-body
                             table
                                 tbody
-<<<<<<< HEAD
-                                    tr
-                                        td Your post
-                                    tr
-                                        td Your post
-                                    tr
-                                        td Your post
-               
-                .col-md-6.well.margin.left
-=======
                                     each topPost in topPostsData
                                         tr
                                             td
@@ -55,27 +45,11 @@ html
                                                 =topPost.PostShareCount
                 .col-md-2
                 .col-md-5
->>>>>>> Landing page queries
                     .panel.panel-default
                         .panel-heading Most recent posts
                         .panel-body
                             table
                                 tbody
-<<<<<<< HEAD
-                                    tr
-                                        td Your post
-                                        td My post
-                                        td this many
-                                    tr
-                                        td Your post
-                                        td My post
-                                        td this many
-                                    tr
-                                        td Your post
-                                        td My post
-                                        td this many
-            
-=======
                                     each recentPost in recentPostsData
                                         tr
                                             td
@@ -89,7 +63,6 @@ html
                 div.container
                     p.navbar-text
                         | &copy; SprkShare 2014
->>>>>>> Landing page queries
 
     +loginModal()
     +signupModel()
@@ -97,5 +70,4 @@ html
     script(src='/lib/jquery/jquery.js')
     script(src='/lib/knockout/knockout-3.1.0.js', type="text/javascript")
     script(src='/lib/bootstrap/js/bootstrap.min.js')
-    script(src='/javascripts/signupVM.js')
     script(src='/javascripts/authVM.js')
