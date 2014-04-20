@@ -12,9 +12,11 @@ module.exports = function(app) {
     });
 
 
-    // render the page for an specific post based on the post id passed in
+    // -----------------------------------------------------------------------------------------------------------
+    // Viewpost Page
+    // -----------------------------------------------------------------------------------------------------------
     app.get('/viewpost/:postId', contributionController.renderPostPage);
-
+    app.post('/api/update/contributions', contributionController.sendAddContribution);
 
     app.get('/create_post', function(req,res){
         res.render('create_post', {title: 'Create Post'});
