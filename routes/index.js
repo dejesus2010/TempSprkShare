@@ -1,9 +1,10 @@
 module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
-    	userController = require('./controllers/userController'),
+    	userpageController = require('./controllers/userpageController'),
         contributionController = require('./controllers/contributionsController'),
 		postController=require('./controllers/postController');
+
 
     // render home page
     app.get('/', function(req, res) {
@@ -20,6 +21,7 @@ module.exports = function(app) {
     });
    
     // render SprkUser page
+
     app.get('/userpage', function (req, res) {
     	res.render('userpage', { title: 'SprkUser Pge '});
     });
@@ -29,7 +31,14 @@ module.exports = function(app) {
 	});
 
 
-    app.post('/auth/user', userController.posts);
+    // -----------------------------------------------------------------------------------------------------------------
+    // Update Requests for API requests - UserPage
+    // -----------------------------------------------------------------------------------------------------------------
+
+    app.get('/api/update/user/getUserAllPosts', userpageController.getUserAllPosts);
+    app.get('/api/update/user/getUserTempPosts', userpageController.getUserTempPosts);
+    app.get('/api/update/user/getUserPermPosts', userpageController.getUserPermPosts);
+
 
     // -----------------------------------------------------------------------------------------------------------------
     // Registration and Login for API requests
@@ -40,10 +49,6 @@ module.exports = function(app) {
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
 	app.post('/api/auth/post', postController.validate);
-	app.post('/api/update/user/avatar', userController.updateAvatar);
-};
+	app.post('/api/update/user/avatar', userpageController.updateAvatar);
 
-// TODO: Get user's name and attach to title.
-// exports.userpage = function(req, res) {
-// 	res.render('userpage', { title: 'SprkUser Pge' });
-// };
+};

@@ -26,149 +26,47 @@ block mainContent
             a(href= '#posts', data-toggle= 'tab') Posts
           li
             a(href= '#friends', data-toggle= 'tab') Friends
-          li
-            a(href= '#groups', data-toggle= 'tab') Groups
-          li 
-            a(href= '#followers', data-toggle= 'tab') Followers
 
         div.tab-content
           div(class= 'tab-pane active', id= 'posts')
-            div(id ='left')
-              p(style= 'white-space: pre')
-                | View All
-                | Temporary Posts
-                | Permanent Posts
+            div(id ='left', class= 'container')
+              p
+                a(href= '#right', id= '#getUserAllPosts', data-bind= 'click: getPosts') View All </br>
+                a(href= '#right', id= '#getUserTempPosts', data-bind= 'click: getPosts') Temporary Posts </br>
+                a(href= '#right', id ='#getUserPermPosts', data-bind= 'click: getPosts') Permanent Posts </br>
 
-            div(id= 'right')
-              p(style= 'white-space: pre')
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
+            div(id= 'right', class= 'container')
+              p
 
-              
+
           div(class= 'tab-pane', id= 'friends')
-            div(id ='left')
-              p(style= 'white-space: pre')
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
-                | Friend
+            div(id ='left', class= 'container')
+              p
 
 
-            div(id= 'right')
-              p(style= 'white-space: pre')
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-        
-          div(class= 'tab-pane', id= 'groups')
-            div(id= 'left')
-              p(style= 'white-space: pre')
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
-                | Group
+            div(id= 'right', class= 'container')
+              p
 
-            div(id= 'right')
-              p(style= 'white-space: pre')
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-        
-          div(class= 'tab-pane', id= 'followers')
-            div(id ='left')
-              p(style= 'white-space: pre')
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
-                | Follower
+           //div(class= 'tab-pane', id= 'groups')
+          //  div(id= 'left', class= 'container')
+          //    p(style= 'white-space: pre')
+          //      | Group
+          //  div(id= 'right', class= 'container')
+          //    p(style= 'white-space: pre')
+          //      | Post.
+          //
+          //div(class= 'tab-pane', id= 'followers')
+          //  div(id ='left', class= 'container')
+          //    p(style= 'white-space: pre')
+          //      | Follower
+          //
+          //  div(id= 'right', class= 'container')
+          //    p(style= 'white-space: pre')
+          //      | Post.
 
-
-            div(id= 'right')
-              p(style= 'white-space: pre')
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-                | Post.
-
-    +updateAvatarModal(this)
+    +updateAvatarModal()
 
     block scripts
         script(src= '/javascripts/changeAvatar.js')
+        script(src= '/javascripts/updateUserPosts.js')
+
