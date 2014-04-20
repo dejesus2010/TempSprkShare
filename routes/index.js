@@ -2,7 +2,8 @@ module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
     	userController = require('./controllers/userController'),
-        contributionController = require('./controllers/contributionsController');
+        contributionController = require('./controllers/contributionsController'),
+		postController=require('./controllers/postController');
 
     // render home page
     app.get('/', function(req, res) {
@@ -38,7 +39,7 @@ module.exports = function(app) {
     // returns { hasErrors: false, messages: [] };
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
-	// app.post('/api/auth/post', postController.validate);
+	app.post('/api/auth/post', postController.validate);
 	app.post('/api/update/user/avatar', userController.updateAvatar);
 };
 
