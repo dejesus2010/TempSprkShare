@@ -2,7 +2,8 @@ module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
     	userController = require('./controllers/userController'),
-        contributionController = require('./controllers/contributionsController');
+        contributionController = require('./controllers/contributionsController'),
+		postController=require('./controllers/postController');
 
     // render home page
     app.get('/', function(req, res) {

@@ -75,7 +75,7 @@ $(function(){
         if(self.passwordRetype() !== self.password() && !isLogingIn) {
             self.hasErrors(true);
             self.errors.push( "password and retype don't match");
-            self.$passwordInputSingup.addClass(self.errorClass );
+            self.$passwordInputSignup.addClass(self.errorClass );
             self.$passwordRetypeInput.addClass(self.errorClass );
         }
 
