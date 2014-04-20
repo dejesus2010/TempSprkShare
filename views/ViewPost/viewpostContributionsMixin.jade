@@ -11,9 +11,11 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
 
                 each contribution in contributionsRowsData
                     div.postContribution
-                        div
-                             a(href='/userpage')
-                                img.img-circle.img-responsive#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                        span
+                            a(href='/userpage')
+                                img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                                span
+                                    =contribution.username
                         div
                             =contribution.contribcontent
 
