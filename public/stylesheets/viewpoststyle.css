@@ -73,6 +73,17 @@
     border-radius: 2px;
 }
 
+#inputContribution{
+    visibility: hidden;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    /*
+    border: solid 1px #b3b3b3;
+    border-radius: 2px;
+    display: block;
+    */
+}
+
 .postContribution:hover{
     background-color: #adadad;
 }
@@ -123,5 +134,4 @@
 .postContribution > a:first-child:hover{
     background-color: #b92c28;
 }
-
 
