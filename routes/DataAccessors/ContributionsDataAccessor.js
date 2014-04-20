@@ -50,16 +50,16 @@ var constructor = function(){
 
     };
 
-    contributionsDAInstance.sendAddContribution = function(sendData, sendData){
+    contributionsDAInstance.sendAddContribution = function(contributionData, sendData){
 
-        var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) VALUES ( $1, $2, $3, false, current_date )';
-        var inserts = [sendData.postId, 1, sendData.contributionToAdd];
+        var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) VALUES ( $1, $2, $3, false, current_date );';
+        var inserts = [contributionData.postId, 1, contributionData.contributionToAdd];
 
+        console.log(inserts);
         pg.connect(process.env.DATABASE_URL, function(err, client, done){
             client.query(preparedStatement, inserts, function(err, result){
                 done();
 
-                console.log("Addition of contribution was a success");
 
                 if( err ){
                     sendData(err);

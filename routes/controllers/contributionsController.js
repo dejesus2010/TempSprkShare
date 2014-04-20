@@ -94,12 +94,20 @@ var constructor = function(){
         });
     };
 
+    // ---------------------------------------------------------------------
+    // /api/update/contributions ... Add contribution to post
+    // ---------------------------------------------------------------------
+
     contributionsControllerInstance.sendAddContribution = function(req, res){
+
         var sendData = req.body;
+
         var response = {hasErrors: false, messages: []};
 
         contributionsDA.sendAddContribution(sendData, function(err, rowsData){
-
+            if(err){
+                console.log(err);
+            }
         });
 
     };

@@ -1,15 +1,6 @@
 mixin viewpostContributions(postRowsData, contributionsRowsData)
     div#postContentBlock.container
         div.row
-            //
-             div.col-md-1#leftCol
-                ul.nav.nav-stacked#sidebar
-                    li
-                        div.btn-group
-                            div.add.btn.btn-primary#addContributionButton
-                                span
-                                    |  | Contribute
-
 
             div.col-md-12#rightCol
 
@@ -24,7 +15,7 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
 
                 div#newContribution(data-bind="value: newContribution")
 
-                div#inputContribution(data-bind="visibility: inputContribution")
+                formn#inputContribution(data-bind="visibility: inputContribution")
                     textarea#inputContributionContent.form-control( type='text', data-bind="value: contributionToAdd")
                     div.add.btn.btn-primary#submitContribution(data-bind="click: submitContribution")
 
