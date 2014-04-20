@@ -17,16 +17,16 @@ var constructor = function() {
                         response.hasErrors = true;
                         response.messages.push('There was problem creating your account. Please try again.');
                     }
-            } else {
-                response.hasErrors = false;
-                response.messages.push('logged in successfully');
+				} else {
+					response.hasErrors = false;
+					response.messages.push('logged in successfully');
 
-                // put data in the session
-                req.session.userId = userData.userid;
-                delete userData.userid;
-                req.session.userData = userData;
-                console.log(req.session);
-            }
+					// put data in the session
+					req.session.userId = userData.userid;
+					delete userData.userid;
+					req.session.userData = userData;
+					console.log(req.session);
+				}
 
             res.json(response);
         });
