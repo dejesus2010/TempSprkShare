@@ -45,6 +45,7 @@ var constructor = function(){
 
 
         contributionsDA.getPostInfo(postId, function(err, postRowsData){
+
             contributionsDA.getContributions(postId, function(err, contributionsRowsData){
 
                 if(err){
@@ -91,6 +92,24 @@ var constructor = function(){
                 console.log("rendered page");
             }
         });
+    };
+
+    // ---------------------------------------------------------------------
+    // /api/update/contributions ... Add contribution to post
+    // ---------------------------------------------------------------------
+
+    contributionsControllerInstance.sendAddContribution = function(req, res){
+
+        var sendData = req.body;
+
+        var response = {hasErrors: false, messages: []};
+
+        contributionsDA.sendAddContribution(sendData, function(err, rowsData){
+            if(err){
+                console.log(err);
+            }
+        });
+
     };
 
     return contributionsControllerInstance;

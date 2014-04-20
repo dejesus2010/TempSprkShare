@@ -32,15 +32,6 @@ app.configure(function() {
 // setup the routes
 require('./routes/index.js')(app);
 
-// template for delete and promote posts base on the shares count
-function update() {
-
-    console.log("Delete bad Posts");
-
-    setTimeout(update, 86400000);
-}
-update();
-
 // sync the database models
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Listening on port " + app.get('port'));

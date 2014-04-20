@@ -1,9 +1,9 @@
 module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
-    	userpageController = require('./controllers/userpageController'),
+    	userPageController = require('./controllers/userpageController'),
         contributionController = require('./controllers/contributionsController'),
-		postController=require('./controllers/postController');
+		postController = require('./controllers/postController');
 
 
     // render home page
@@ -12,10 +12,15 @@ module.exports = function(app) {
     });
 
 
-    // render the page for an specific post based on the post id passed in
+    // -----------------------------------------------------------------------------------------------------------
+    // Viewpost Page
+    // -----------------------------------------------------------------------------------------------------------
     app.get('/viewpost/:postId', contributionController.renderPostPage);
 
     // render page to create a post.
+    app.post('/api/update/contributions', contributionController.sendAddContribution);
+
+
     app.get('/create_post', function(req,res){
         res.render('create_post', {title: 'Create Post'});
     });
@@ -35,10 +40,11 @@ module.exports = function(app) {
     // Update Requests for API requests - UserPage
     // -----------------------------------------------------------------------------------------------------------------
 
-    app.get('/api/update/user/getUserAllPosts', userpageController.getUserAllPosts);
-    app.get('/api/update/user/getUserTempPosts', userpageController.getUserTempPosts);
-    app.get('/api/update/user/getUserPermPosts', userpageController.getUserPermPosts);
-    app.get('/api/update/user/getUserFollowees', userpageController.getUserFollowees);
+    app.get('/api/update/user/getUserAllPosts', userPageController.getUserAllPosts);
+    app.get('/api/update/user/getUserTempPosts', userPageController.getUserTempPosts);
+    app.get('/api/update/user/getUserPermPosts', userPageController.getUserPermPosts);
+    app.get('/api/update/user/getUserFollowees', userPageController.getUserFollowees);
+
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -50,6 +56,14 @@ module.exports = function(app) {
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
 	app.post('/api/auth/post', postController.validate);
-	app.post('/api/update/user/avatar', userpageController.updateAvatar);
+	app.post('/api/update/user/avatar', userPageController.updateAvatar);
 
+    // template for delete and promote posts base on the shares count
+    function update() {
+
+        postController.deletePostsNotReachingQuota();
+
+        setTimeout(update, 86400000);
+    }
+    update();
 };
