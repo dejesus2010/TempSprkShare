@@ -87,10 +87,9 @@ var constructor = function() {
         var inserts = [ userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-            console.log(err);
+
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
-
                 if (err) {
                     sendData(err);
                 }
@@ -102,10 +101,10 @@ var constructor = function() {
     };
 
     // QUERY USER'S TEMPORARY POSTS
-    userDAInstance.getUserTempPosts = function(userData, sendData) {
+    userDAInstance.getUserTempPosts = function(userId, sendData) {
         var preparedStatement = 'SELECT * FROM posts WHERE postuserId = $1 AND NOT EXISTS' +
                                  '(SELECT permPostuserId FROM permanentPosts)';
-        var inserts = [ userData.userId ];
+        var inserts = [ userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -122,9 +121,9 @@ var constructor = function() {
     };
 
     // QUERY USERS
-    userDAInstance.getUserPermPosts = function(userData, sendData) {
-        var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUderId = $1';
-        var inserts = [ userData.userId ];
+    userDAInstance.getUserPermPosts = function(userId, sendData) {
+        var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserId = $1';
+        var inserts = [ userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {

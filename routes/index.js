@@ -20,26 +20,20 @@ module.exports = function(app) {
    
     // render SprkUser page
     // TODO: Edit to where it has username in URL.
-    // get('/userpage/:username', controller
-    app.get('/userpage', function (req, res) {
-    	res.render('userpage', { title: 'SprkUser Pge '});
-    	console.log(userpageController);
+    app.get('/userpage', function(req, res) {
+        res.render('userpage', { title: 'SprkUser Pge' });
     });
-	
-	app.get('/groups', function (req, res){
-		res.render('groups', { title: 'SprkGroups Pge'});
-		console.log(userController);
-	});
+
+    // TODO: Implement if have time.
+    //	app.get('/groups', function (req, res){
+    //		res.render('groups', { title: 'SprkGroups Pge'});
+    //		console.log(userController);
+    //	});
 	
 	app.get('/landing', function (req, res){
 		res.render('landing', { title: 'SprkLanding Pge'});
-		console.log(userController);
+		// console.log(userController);
 	});
-
-    //app.post('/auth/user', userpageController.posts);
-
-    // Testing userpageController.js
-    app.get('/testingUser/:userId', userpageController.getAllUserPosts);
 
     // -----------------------------------------------------------------------------------------------------------------
     // Registration and Login for API requests
@@ -52,8 +46,3 @@ module.exports = function(app) {
 	// app.post('/api/auth/post', postController.validate);
 	app.post('/api/update/user/avatar', userpageController.updateAvatar);
 };
-
-// TODO: Get user's name and attach to title.
-// exports.userpage = function(req, res) {
-// 	res.render('userpage', { title: 'SprkUser Pge' });
-// };
