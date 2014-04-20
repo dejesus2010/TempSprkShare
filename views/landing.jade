@@ -35,25 +35,30 @@ html
                         .panel-body
                             table
                                 tbody
-                                    tr
-                                        td Your post
-                                    tr
-                                        td Your post
-                                    tr
-                                        td Your post
+                                    each topPost in topPostsData
+                                        tr
+                                            td topPost.PostId
+                                            td topPost.PostTitle
+                                            td topPost.PostShareCount
                 .col-md-2
                 .col-md-5
                     .panel.panel-default
-                        .panel-heading Top 3 Groups
+                        .panel-heading Most recent posts
                         .panel-body
                             table
                                 tbody
                                     tr
                                         td Your post
+                                        td My post
+                                        td this many
                                     tr
                                         td Your post
+                                        td My post
+                                        td this many
                                     tr
                                         td Your post
+                                        td My post
+                                        td this many
             div.navbar.navbar-default.navbar-fixed-bottom
                 div.container
                     p.navbar-text
