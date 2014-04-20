@@ -43,6 +43,7 @@ var constructor = function(){
         var postId = req.params.postId;
         var response = { hasErrors: false, messages: [] };
 
+
         contributionsDA.getPostInfo(postId, function(err, postRowsData){
             contributionsDA.getContributions(postId, function(err, contributionsRowsData){
 

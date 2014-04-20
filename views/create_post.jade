@@ -7,14 +7,23 @@ block head
 block mainContent
 	div.jumbotron
 		div.size
+			.alert.alert-danger(data-bind='visible: hasErrors')
+				ul(data-bind='foreach: errors')
+					li
+						span(data-bind='text: $data')
 			form(method='post')
 				h1.margin_top Create a Post
-				label.margin_top.font(for='title') Title
-				input.form-control.font(id='title',type='text',name='title')
-				input.margin_top(id='optional_pic',name='optional_pic' type='file')
-				label.margin_top.font(for='message') Message
-				textarea.form-control.height.font(id='message',name='message')
-				button.btn.btn-primary.margin_top.full Submit
+				div.form-group(id='title_group')
+					label.margin_top.font(for='title') Title
+					input.form-control.font(id='title',type='text',name='title', data-bind='value: title')
+					input.margin_top(id='optional_pic',name='optional_pic' type='file')
+				div.form-group(id='message_group')
+					label.margin_top.font(for='message') Message
+					textarea.form-control.height.font(id='message',name='message', data-bind='value: message')
+					button.btn.btn-primary.margin_top.full(data-bind='click: submit') Submit
+				
+block scripts
+	script(src='/javascripts/postVM.js')
 		
 		
 	

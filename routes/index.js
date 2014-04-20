@@ -2,11 +2,13 @@ module.exports = function(app) {
 
     var authController = require('./controllers/authController'),
     	userpageController = require('./controllers/userpageController'),
-        contributionController = require('./controllers/contributionsController');
+        contributionController = require('./controllers/contributionsController'),
+		postController=require('./controllers/postController');
+
 
     // render home page
     app.get('/', function(req, res) {
-        res.render('index', { title: 'SprkShare - Sprk an Idea' });
+        res.render('landing', { title: 'SprkLanding Pge'});
     });
 
 
@@ -19,21 +21,24 @@ module.exports = function(app) {
     });
    
     // render SprkUser page
-    // TODO: Edit to where it has username in URL.
-    app.get('/userpage', function(req, res) {
-        res.render('userpage', { title: 'SprkUser Pge' });
-    });
 
-    // TODO: Implement if have time.
-    //	app.get('/groups', function (req, res){
-    //		res.render('groups', { title: 'SprkGroups Pge'});
-    //		console.log(userController);
-    //	});
+    app.get('/userpage', function (req, res) {
+    	res.render('userpage', { title: 'SprkUser Pge '});
+    });
 	
-	app.get('/landing', function (req, res){
-		res.render('landing', { title: 'SprkLanding Pge'});
-		// console.log(userController);
+	app.get('/groups', function (req, res){
+		res.render('groups', { title: 'SprkGroups Pge'});
 	});
+
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // Update Requests for API requests - UserPage
+    // -----------------------------------------------------------------------------------------------------------------
+
+    app.get('/api/update/user/getUserAllPosts', userpageController.getUserAllPosts);
+    app.get('/api/update/user/getUserTempPosts', userpageController.getUserTempPosts);
+    app.get('/api/update/user/getUserPermPosts', userpageController.getUserPermPosts);
+
 
     // -----------------------------------------------------------------------------------------------------------------
     // Registration and Login for API requests
@@ -43,6 +48,7 @@ module.exports = function(app) {
     // returns { hasErrors: false, messages: [] };
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
-	// app.post('/api/auth/post', postController.validate);
+	app.post('/api/auth/post', postController.validate);
 	app.post('/api/update/user/avatar', userpageController.updateAvatar);
+
 };
