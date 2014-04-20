@@ -69,6 +69,7 @@ $(function(){
                 data: { email : self.email(), password: self.password },
                 success: function(data) {
                                 if(!data.hasErrors) {
+                                    console.log('sign');                                   $(this).modal('hide');
                                     window.location = '/userpage';
                                 } else {
                                     self.hasErrors(true);

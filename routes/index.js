@@ -15,20 +15,20 @@ module.exports = function(app) {
     // render the page for an specific post based on the post id passed in
     app.get('/viewpost/:postId', contributionController.renderPostPage);
 
-
+    // render page to create a post.
     app.get('/create_post', function(req,res){
         res.render('create_post', {title: 'Create Post'});
     });
    
-    // render SprkUser page
-
+    // render SprkUser page.
     app.get('/userpage', function (req, res) {
     	res.render('userpage', { title: 'SprkUser Pge '});
     });
-	
-	app.get('/groups', function (req, res){
-		res.render('groups', { title: 'SprkGroups Pge'});
-	});
+
+    // TODO: Implement Groups page.
+    //	app.get('/groups', function (req, res){
+    //		res.render('groups', { title: 'SprkGroups Pge'});
+    //	});
 
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -38,6 +38,7 @@ module.exports = function(app) {
     app.get('/api/update/user/getUserAllPosts', userpageController.getUserAllPosts);
     app.get('/api/update/user/getUserTempPosts', userpageController.getUserTempPosts);
     app.get('/api/update/user/getUserPermPosts', userpageController.getUserPermPosts);
+    app.get('/api/update/user/getUserFollowees', userpageController.getUserFollowees);
 
 
     // -----------------------------------------------------------------------------------------------------------------
