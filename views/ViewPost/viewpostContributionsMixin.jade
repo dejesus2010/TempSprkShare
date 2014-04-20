@@ -11,11 +11,15 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
 
                 each contribution in contributionsRowsData
                     div.postContribution
-                        =contribution.contribcontent
+                        div
+                             a(href='/userpage')
+                                img.img-circle.img-responsive#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                        div
+                            =contribution.contribcontent
 
                 div#newContribution(data-bind="value: newContribution")
 
-                formn#inputContribution(data-bind="visibility: inputContribution")
+                form#inputContribution(data-bind="visibility: inputContribution")
                     textarea#inputContributionContent.form-control( type='text', data-bind="value: contributionToAdd")
                     div.add.btn.btn-primary#submitContribution(data-bind="click: submitContribution")
 
