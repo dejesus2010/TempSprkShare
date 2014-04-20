@@ -1,0 +1,19 @@
+mixin viewpostHeader(postRowsData)
+    div#postHeader.container
+
+        div.row
+            div.col-md-7.text-center.container
+                div#postTitle
+                    h1=postRowsData[0].posttitle
+                div#postContent
+                    =postRowsData[0].postcontent
+            div.col-md-5
+                div.well.well-sm
+                    div.row
+                        div.col-sm-6
+                            a(href='userpage')
+                                img.img-circle.img-responsive#userImg(src='/images/default_avatar.png')
+                        div.col-sm-6
+                            p.
+                                | User Name
+                                | Can even add an about me section...?

@@ -1,0 +1,27 @@
+include viewpostHeaderMixin
+include viewpostContributionsMixin
+
+extends ../layout
+
+block head
+    link( rel='stylesheet', href='/stylesheets/viewpoststyle.css')
+
+
+block mainContent
+    // MastHead. Has title and description
+    +viewpostHeader(postRowsData)
+
+       block PostHeader
+
+    // Actual content of the post, includes contribution
+    +viewpostContributions(postRowsData, contributionsRowsData)
+
+
+
+
+
+
+
+
+block scripts
+    script(src='javascripts/viewpostjs.js', type="text/javascript")

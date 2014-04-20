@@ -1,0 +1,68 @@
+include loginModalMixin
+include singupModalMixin
+
+doctype html
+html
+
+    meta(charset= 'UTF-8')
+    meta(name ='viewport', content= 'width=device-width, initial-scale=1')
+    link(rel= 'stylesheet', href= '/lib/bootstrap/css/bootstrap.min.css')
+    link(rel= 'stylesheet', href= '/stylesheets/landingstyle.css')
+
+    body
+        .container
+            a(href= '/')
+                img(src= '/images/SprkShareLanding.png', height='200', width='780')#center
+            .row
+                div.col-md-8.well
+                    h3 Here at SprkShare, we seek to motivate those entrepreneurs that have
+                        | an idea that has potential, while stopping others from following
+                        | other ideas that do not. Start using SprkShare and see your ideal
+                        | sparks be shared. We are SprkShare.
+                .col-md-1
+                div.col-md-3.well
+                    a(data-toggle= 'modal', href= '#login_modal')
+                        .btn.btn-default#center LogIn
+                    div(style='padding:5px')
+                        h4(align="center") OR
+                    a(data-toggle= 'modal', href= '#sign_up_modal')
+                        .btn.btn-default#center Sign-Up
+
+            .row
+                .col-md-5
+                    .panel.panel-default
+                        .panel-heading Top 3 Posts
+                        .panel-body
+                            table
+                                tbody
+                                    tr
+                                        td Your post
+                                    tr
+                                        td Your post
+                                    tr
+                                        td Your post
+                .col-md-2
+                .col-md-5
+                    .panel.panel-default
+                        .panel-heading Top 3 Groups
+                        .panel-body
+                            table
+                                tbody
+                                    tr
+                                        td Your post
+                                    tr
+                                        td Your post
+                                    tr
+                                        td Your post
+            div.navbar.navbar-default.navbar-fixed-bottom
+                div.container
+                    p.navbar-text
+                        | &copy; SprkShare 2014
+
+    +loginModal()
+    +signupModel()
+
+    script(src='/lib/jquery/jquery.js')
+    script(src='/lib/knockout/knockout-3.1.0.js', type="text/javascript")
+    script(src='/lib/bootstrap/js/bootstrap.min.js')
+    script(src='/javascripts/authVM.js')

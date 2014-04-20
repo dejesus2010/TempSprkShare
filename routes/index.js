@@ -7,15 +7,12 @@ module.exports = function(app) {
 
     // render home page
     app.get('/', function(req, res) {
-        res.render('index', { title: 'SprkShare - Sprk an Idea' });
-    });
-
-    app.get('/viewposttest', function(req,res){
-       res.sendfile('../testingViewPost.html')
+        res.render('landing', { title: 'SprkLanding Pge'});
     });
 
 
-    app.post('/viewpost', contributionController.renderPage);
+    // render the page for an specific post based on the post id passed in
+    app.get('/viewpost/:postId', contributionController.renderPostPage);
 
 
     app.get('/create_post', function(req,res){
@@ -25,8 +22,12 @@ module.exports = function(app) {
     // render SprkUser page
     app.get('/userpage', function (req, res) {
     	res.render('userpage', { title: 'SprkUser Pge '});
-    	console.log(userController);
     });
+	
+	app.get('/groups', function (req, res){
+		res.render('groups', { title: 'SprkGroups Pge'});
+	});
+
 
     app.post('/auth/user', userController.posts);
 
@@ -38,7 +39,7 @@ module.exports = function(app) {
     // returns { hasErrors: false, messages: [] };
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
-	app.post('/api/auth/post', postController.validate);
+	// app.post('/api/auth/post', postController.validate);
 	app.post('/api/update/user/avatar', userController.updateAvatar);
 };
 

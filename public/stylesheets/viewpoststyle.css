@@ -5,21 +5,29 @@
 
 }
 
+#postHeader{
+    margin-top: 7px;
+}
 
 #postHeader h1{
     padding-top: 20px;
     position: relative;
 }
 
-#postHeaderContainer{
-    margin-top: 70px;
+
+#postContent{
+    font-size: large;
 
 }
 
+
+/*
 #postContentBlock{
     position: relative;
 
 }
+*/
+
 
 .affix-top, .affix{
     position: static;
@@ -44,6 +52,9 @@
     border-right-width:4px;
 }
 
+#postTitle{
+    color: #f97704;
+}
 #postTitle .well{
     margin-top: 8%;
 }
@@ -66,15 +77,17 @@
     background-color: #adadad;
 }
 
-
+/*
 .postContent{
     padding: 5px;
     margin-top: 3px;
     border: solid 1px #b3b3b3;
     border-radius: 2px;
+    position: relative;
 }
+*/
 
-.postContributionContent{
+.postContributionBlock{
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
