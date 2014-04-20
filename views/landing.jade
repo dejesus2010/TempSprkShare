@@ -35,6 +35,7 @@ html
                         .panel-body
                             table
                                 tbody
+<<<<<<< HEAD
                                     tr
                                         td Your post
                                     tr
@@ -43,11 +44,24 @@ html
                                         td Your post
                
                 .col-md-6.well.margin.left
+=======
+                                    each topPost in topPostsData
+                                        tr
+                                            td
+                                                =topPost.PostId
+                                            td
+                                                =topPost.PostTitle
+                                            td
+                                                =topPost.PostShareCount
+                .col-md-2
+                .col-md-5
+>>>>>>> Landing page queries
                     .panel.panel-default
                         .panel-heading Most recent posts
                         .panel-body
                             table
                                 tbody
+<<<<<<< HEAD
                                     tr
                                         td Your post
                                         td My post
@@ -61,6 +75,21 @@ html
                                         td My post
                                         td this many
             
+=======
+                                    each recentPost in recentPostsData
+                                        tr
+                                            td
+                                                =recentPost.PostId
+                                            td
+                                                =recentPost.PostTitle
+                                            td
+                                                =recentPost.PostedDate
+
+            div.navbar.navbar-default.navbar-fixed-bottom
+                div.container
+                    p.navbar-text
+                        | &copy; SprkShare 2014
+>>>>>>> Landing page queries
 
     +loginModal()
     +signupModel()
