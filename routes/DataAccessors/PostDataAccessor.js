@@ -25,6 +25,25 @@ var constructor = function(){
 					});
 	
 	}
+
+    userPostInstance.deletePostsNotReachingQuota = function(sendData){
+
+        var query = 'DELETE FROM posts P ' +
+                        'USING sharequotas Q ' +
+                        'WHERE ' +
+                            'P.postsharequotaid = Q.sharequotaid AND ' +
+                            'P.postsharecount < Q.sharesrequired AND ' +
+                            'Q.QuotaDeadline <= now()::date';
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query(query, function(err, result) {
+                done();
+                sendData(err);
+            });
+        });
+
+    }
+
 	return userPostInstance;
 };
 module.exports = constructor();

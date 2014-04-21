@@ -18,6 +18,22 @@ var constructor = function(){
         });
     };
 
+    landingPostsInstance.getRecentPosts = function(sendData1){
+        var preparedStatement = 'SELECT PostId, PostTitle, PostedDate FROM Posts ORDER BY PostedDate DESC LIMIT 3';
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done){
+            client.query(preparedStatement, function(err,result){
+                done();
+                if(err){
+                    sendData1(err);
+                }
+                else{
+                    sendData1(err, result.rows);
+                }
+            });
+        });
+    };
+
     return landingPostsInstance;
 };
 

@@ -1,8 +1,8 @@
 var constructor = function(){
 
-   var post = {};
-   var postDataAccessor=require('../dataAccessors/PostDataAccessor');
-   post.validate = function(req , res){
+    var post = {};
+    var postDataAccessor=require('../dataAccessors/PostDataAccessor');
+    post.validate = function(req , res){
    
 					var data = req.body;
 					var response = { hasErrors: false, messages: [] , id: -1};
@@ -52,7 +52,21 @@ var constructor = function(){
 			
 			};
    
-		return post;
+
+
+
+    post.deletePostsNotReachingQuota = function(){
+        postDataAccessor.deletePostsNotReachingQuota(function(err){
+            if(err){
+                console.log('There was an error with daily deletion');
+            } else {
+                console.log('Daily deletion successfully executed');
+            }
+        });
+    }
+
+    return post;
+
 };
 
 module.exports = constructor();

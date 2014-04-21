@@ -38,16 +38,19 @@ var constructor = function () {
 	// GET ALL USER'S POSTS
 	userpageControllerInstance.getUserAllPosts = function(req, res) {
 		var userId = req.session.userId;
+        var response = { hasErrors: false, messages: [] };
 
-		userpageDA.getAllUserPosts(userId, function(err, userAllPostsRows) {
+		userpageDA.getAllUserPosts(userId, function(err, userPostData) {
 
 			if (err) {
                 // console.log("error: " + err);
-				res.send('Something went wrong.');
+                response.hasErrors = true;
+                response.messages.push('Failed to get All Posts.');
+				res.send(response);
 			}
 			else {
                 // console.log("Got all User Posts Successfully.")
-				res(err, userAllPostsRows.rows);
+				res.send(userPostData);
 			}
 		});
 	};
@@ -56,15 +59,15 @@ var constructor = function () {
         var userId = req.session.userId;
         var response = { hasErrors: false, messages: [] };
 
-        userpageDA.getUserTempPosts(userId, function(err, userTempPostsRows) {
+        userpageDA.getUserTempPosts(userId, function(err, userPostData) {
 
             if (err) {
                 response.hasErrors = true;
                 response.messages.push('Failed to query the database.');
 
-                res.json(response);
+                res.send(response);
             } else {
-                res.send(userTempPostsRows);
+                res.send(userPostData);
             }
         });
     };
@@ -73,15 +76,32 @@ var constructor = function () {
         var userId = req.session.userId;
         var response = { hasErrors: false, messages: [] };
 
-        userpageDA.getUserPermPosts(userId, function(err, userPermPostsRows) {
+        userpageDA.getUserPermPosts(userId, function(err, userPostData) {
 
             if (err) {
                 response.hasErrors = true;
                 response.messages.push('Failed to query the database.');
 
-                res.json(response);
+                res.send(response);
             } else {
-                res.send(userPermPostsRows);
+                res.send(userPostData);
+            }
+        });
+    };
+
+    userpageControllerInstance.getUserFollowees = function(req, res) {
+        var userId = req.session.userId;
+        var response = { hasErrors: false, messages: [] };
+
+        userpageDA.getUserFollowees(userId, function(err, userFollowees){
+
+            if (err) {
+                response.hasErrors = true;
+                response.messages.push('Failed to get User\'s Followees');
+
+                res.send(response);
+            } else {
+                res.send(userFollowees);
             }
         });
     };

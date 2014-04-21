@@ -1,15 +1,6 @@
 mixin viewpostContributions(postRowsData, contributionsRowsData)
     div#postContentBlock.container
         div.row
-            //
-             div.col-md-1#leftCol
-                ul.nav.nav-stacked#sidebar
-                    li
-                        div.btn-group
-                            div.add.btn.btn-primary#addContributionButton
-                                span
-                                    |  | Contribute
-
 
             div.col-md-12#rightCol
 
@@ -20,11 +11,17 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
 
                 each contribution in contributionsRowsData
                     div.postContribution
-                        =contribution.contribcontent
+                        span
+                            a(href='/userpage')
+                                img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                                span
+                                    =contribution.username
+                        div
+                            =contribution.contribcontent
 
-                div(data-bind="value: newContribution")
+                div#newContribution(data-bind="value: newContribution")
 
-                div#inputContribution(data-bind="visibility: inputContribution")
-                    textarea.form-control(type='text', data-bind="value: contributionToAdd")
-                    div.add.btn.btn-primary#submitContribution
+                form#inputContribution(data-bind="visibility: inputContribution")
+                    textarea#inputContributionContent.form-control( type='text', data-bind="value: contributionToAdd")
+                    div.add.btn.btn-primary#submitContribution(data-bind="click: submitContribution")
 

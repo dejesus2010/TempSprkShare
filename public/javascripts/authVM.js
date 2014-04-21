@@ -86,7 +86,6 @@ $(function(){
                 data: { email : self.email(), password: self.password() },
                 success: function(data) {
                                 if(!data.hasErrors) {
-									
                                     window.location = '/userpage';
                                 } else {
                                     self.hasErrors(true);

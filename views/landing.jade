@@ -19,48 +19,50 @@ html
                         | an idea that has potential, while stopping others from following
                         | other ideas that do not. Start using SprkShare and see your ideal
                         | sparks be shared. We are SprkShare.
-              
-                div.col-md-offset-1.col-md-3.well.full
+                .col-md-1
+                div.col-md-3.well
                     a(data-toggle= 'modal', href= '#login_modal')
-                        .btn.btn-primary#center LogIn
+                        .btn.btn-default#center LogIn
                     div(style='padding:5px')
                         h4(align="center") OR
                     a(data-toggle= 'modal', href= '#sign_up_modal')
-                        .btn.btn-primary#center Sign-Up
+                        .btn.btn-default#center Sign-Up
 
             .row
-                .col-md-6.well.margin
+                .col-md-5
                     .panel.panel-default
                         .panel-heading Top 3 Posts
                         .panel-body
                             table
                                 tbody
-                                    tr
-                                        td Your post
-                                    tr
-                                        td Your post
-                                    tr
-                                        td Your post
-               
-                .col-md-6.well.margin.left
+                                    each topPost in topPostsData
+                                        tr
+                                            td
+                                                =topPost.PostId
+                                            td
+                                                =topPost.PostTitle
+                                            td
+                                                =topPost.PostShareCount
+                .col-md-2
+                .col-md-5
                     .panel.panel-default
                         .panel-heading Most recent posts
                         .panel-body
                             table
                                 tbody
-                                    tr
-                                        td Your post
-                                        td My post
-                                        td this many
-                                    tr
-                                        td Your post
-                                        td My post
-                                        td this many
-                                    tr
-                                        td Your post
-                                        td My post
-                                        td this many
-            
+                                    each recentPost in recentPostsData
+                                        tr
+                                            td
+                                                =recentPost.PostId
+                                            td
+                                                =recentPost.PostTitle
+                                            td
+                                                =recentPost.PostedDate
+
+            div.navbar.navbar-default.navbar-fixed-bottom
+                div.container
+                    p.navbar-text
+                        | &copy; SprkShare 2014
 
     +loginModal()
     +signupModel()

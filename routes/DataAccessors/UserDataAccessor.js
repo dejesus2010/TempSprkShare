@@ -102,8 +102,8 @@ var constructor = function() {
 
     // QUERY USER'S TEMPORARY POSTS
     userDAInstance.getUserTempPosts = function(userId, sendData) {
-        var preparedStatement = 'SELECT * FROM posts WHERE postuserId = $1 AND NOT EXISTS' +
-                                 '(SELECT permPostuserId FROM permanentPosts)';
+        var preparedStatement = 'SELECT * FROM posts WHERE postUserId = $1 AND NOT EXISTS' +
+                                 '(SELECT permPostUserId FROM permanentPosts)';
         var inserts = [ userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -120,7 +120,7 @@ var constructor = function() {
         });
     };
 
-    // QUERY USERS
+    // QUERY USER'S PERMANENT POSTS
     userDAInstance.getUserPermPosts = function(userId, sendData) {
         var preparedStatement = 'SELECT * FROM permanentPosts WHERE permPostUserId = $1';
         var inserts = [ userId ];
@@ -133,6 +133,25 @@ var constructor = function() {
                     sendData(err);
                 }
                 else {
+                    sendData(err, result.rows);
+                }
+            });
+        });
+    };
+
+    // GET THE USERNAME'S OF THE USERS THAT this USER IS FOLLOWING
+    userDAInstance.getUserFollowees = function(userId, sendData) {
+
+        var preparedStatement = 'SELECT Username, FollowedID FROM sparkUsers, followers WHERE followerId = $1 AND followedUserId = userId';
+        var inserts = [ userId ];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+            client.query(preparedStatement, inserts, function(err, result) {
+                done();
+
+                if (err) {
+                    sendData(err);
+                } else {
                     sendData(err, result.rows);
                 }
             });
