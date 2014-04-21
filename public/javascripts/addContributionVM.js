@@ -39,6 +39,7 @@ $(function(){
                     if(!data.hasErrors){
                         var contributions = data.data;
 
+                        console.log(data);
 
                         for(var i = 0; i < contributions.length; i++){
                             self.contributions.push( new ContributionVM(contributions[i].username, contributions[i].contribcontent, contributions[i].userpicurl));
