@@ -37,7 +37,7 @@ var constructor = function () {
 
 	// GET ALL USER'S POSTS
 	userpageControllerInstance.getUserAllPosts = function(req, res) {
-		var userId = req.session.userId;
+		var userId = req.params.userId;
         var response = { hasErrors: false, messages: [] };
 
 		userpageDA.getAllUserPosts(userId, function(err, userPostData) {
@@ -56,7 +56,7 @@ var constructor = function () {
 	};
 
     userpageControllerInstance.getUserTempPosts = function(req, res) {
-        var userId = req.session.userId;
+        var userId = req.params.userId;
         var response = { hasErrors: false, messages: [] };
 
         userpageDA.getUserTempPosts(userId, function(err, userPostData) {
@@ -73,7 +73,7 @@ var constructor = function () {
     };
 
     userpageControllerInstance.getUserPermPosts = function(req, res) {
-        var userId = req.session.userId;
+        var userId = req.params.userId;
         var response = { hasErrors: false, messages: [] };
 
         userpageDA.getUserPermPosts(userId, function(err, userPostData) {
@@ -90,7 +90,7 @@ var constructor = function () {
     };
 
     userpageControllerInstance.getUserFollowees = function(req, res) {
-        var userId = req.session.userId;
+        var userId = req.params.userId;
         var response = { hasErrors: false, messages: [] };
 
         userpageDA.getUserFollowees(userId, function(err, userFollowees){

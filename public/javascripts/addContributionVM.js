@@ -11,6 +11,8 @@ $(document).ready(function(){
 $(function(){
 
 
+
+
         function AddContributionVM(){
 
             var self = this;
@@ -45,7 +47,7 @@ $(function(){
                 data: {contributionToAdd : self.contributionToAdd(), postId: self.postId},
                 success: function(data){
                     if(!data.hasErrors){
-                        console.log("Contribution add was successful");
+                        self.contributionToAdd();
                     }else{
                         self.hasErrors(true);
                         console.log("ERROR");
