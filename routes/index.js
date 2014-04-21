@@ -3,17 +3,12 @@ module.exports = function(app) {
     var authController = require('./controllers/authController'),
     	userPageController = require('./controllers/userpageController'),
         contributionController = require('./controllers/contributionsController'),
-		postController = require('./controllers/postController');
+		postController = require('./controllers/postController'),
+        landingController = require('./controllers/landingController');
 
 
     // render home page
-    app.get('/', function(req, res) {
-        res.render('landing',
-            { title: 'SprkLanding Pge',
-              topPostsData: [ { PostId: '', PostTitle: '',  PostShareCount: '' } ],
-              recentPostsData: [ { PostId: '', PostTitle: '',  PostedDate: '' } ]
-            });
-    });
+    app.get('/', landingController.renderLandingPage);
 
 
     // -----------------------------------------------------------------------------------------------------------
@@ -23,6 +18,7 @@ module.exports = function(app) {
 
     // render page to create a post.
     app.post('/api/update/contributions', contributionController.sendAddContribution);
+    //app.post('/api/sharePost', contributionController.sharePost);
 
 
     app.get('/create_post', function(req,res){

@@ -61,6 +61,13 @@ $(function(){
 
         };
 
+        AddContributionVM.prototype.share = function(){
+
+            var self = this;
+            var URL = '/api/sharePost'
+
+        };
+
         ko.applyBindings(new AddContributionVM());
 
     }
