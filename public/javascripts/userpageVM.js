@@ -28,7 +28,7 @@ $(function() {
             url: URL,
             type: "GET",
             // TODO: Get actual userId from session.
-            data: { userId: self.userId() },
+            data: { userId: 1 },
             success: function (data) {
                 if (data.hasErrors) {
                     console.log('Error!');
@@ -47,7 +47,7 @@ $(function() {
             url: '/api/update/user/getUserFollowees',
             type: "GET",
             // TODO: Get actual userId from session.
-            data: { userId: self.userId() },
+            data: { userId: 1 },
             success: function (data) {
                 if (data.hasErrors) {
                     console.log('Failed to get Followees!');
@@ -65,7 +65,7 @@ $(function() {
             url: '/api/update/user/avatar',
             type: "POST",
             // TODO: Get userId() to work from session.
-            data: { imgURL: self.imgURL(), userId: self.uesrId() },
+            data: { imgURL: self.imgURL() },
             success: function(data) {
                 if(data.hasErrors) {
                     alert('something went wrong');

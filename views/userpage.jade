@@ -33,16 +33,21 @@ block mainContent
             div(id ='left', class= 'container')
               ul.nav.nav-stacked
                 li
-                  a(href= '#rightPosts', id= 'getUserAllPosts', data-bind= 'click: performUserRequest') View All
+                  a(href= '#posts', id= 'getUserAllPosts', data-bind= 'click: performUserRequest') View All
                 li
-                  a(href= '#rightPosts', id= 'getUserTempPosts', data-bind= 'click: performUserRequest') Temporary Posts
+                  a(href= '#posts', id= 'getUserTempPosts', data-bind= 'click: performUserRequest') Temporary Posts
                 li
-                  a(href= '#rightPosts', id= 'getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts
+                  a(href= '#posts', id= 'getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts
 
             div(id= 'right', class= 'container')
-              //each post in userPostData
-                div.postDisplay
-                  =post.postcontent
+             // each postData in userPostData
+                tr
+                  td
+                    a(href= '../viewpost/' + post.postId)
+                      =postData.postTitle
+                  td
+                    =postData.postShareCount
+
                 // TODO: Display the Posts depending on what attribute the user clicks
 
           div(class= 'tab-pane', id= 'followees')
