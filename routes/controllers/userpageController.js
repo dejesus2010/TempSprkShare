@@ -13,7 +13,7 @@ var constructor = function () {
 
 	// GET ALL USER'S POSTS
 	userpageControllerInstance.getUserAllPosts = function(req, res) {
-		var userId = req.params.userId;
+		var userId = req.body.userId;
         var response = { hasErrors: false, messages: [] };
 
 		userpageDA.getAllUserPosts(userId, function(err, userPostData) {
@@ -26,13 +26,14 @@ var constructor = function () {
 			}
 			else {
                 // console.log("Got all User Posts Successfully.")
+                console.log(userPostData);
 				res.send(userPostData);
 			}
 		});
 	};
 
     userpageControllerInstance.getUserTempPosts = function(req, res) {
-        var userId = req.params.userId;
+        var userId = req.body.userId;
         var response = { hasErrors: false, messages: [] };
 
         userpageDA.getUserTempPosts(userId, function(err, userPostData) {
@@ -49,7 +50,7 @@ var constructor = function () {
     };
 
     userpageControllerInstance.getUserPermPosts = function(req, res) {
-        var userId = req.params.userId;
+        var userId = req.body.userId;
         var response = { hasErrors: false, messages: [] };
 
         userpageDA.getUserPermPosts(userId, function(err, userPostData) {
@@ -66,7 +67,7 @@ var constructor = function () {
     };
 
     userpageControllerInstance.getUserFollowees = function(req, res) {
-        var userId = req.params.userId;
+        var userId = req.body.userId;
         var response = { hasErrors: false, messages: [] };
 
         userpageDA.getUserFollowees(userId, function(err, userFollowees){
@@ -82,10 +83,30 @@ var constructor = function () {
         });
     };
 
+    /*
+    userpageControllerInstance.putContent = function(req, res) {
+        var response = { hasErrors: false, messages: [] };
+        var data = req.body;
+        data.userId = req.params.userId;
+
+        userpageDA.putContent(data, function(err, rightPanelContent) {
+            if(err) {
+                response.hadErrors = true;
+                response.messages.push('Problem putting data.');
+            } else {
+                response.message.push('Data successful.');
+                response.data = rightPanelContent;
+            }
+
+            res.json(response);
+        });
+    };
+    */
+
     userpageControllerInstance.updateAvatar = function(req, res) {
         var response = { hasErrors: false, messages: [] };
         var data = req.body;
-        data.userId = req.session.userId;
+        data.userId = req.body.userId;
 
         userpageDA.updateAvatar(data, function(err, newAvatarURL) {
             if(err) {

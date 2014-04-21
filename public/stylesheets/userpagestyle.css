@@ -1,5 +1,9 @@
+.align {
+    right: 300px;
+}
+
 .float {
-    float:right;
+    float: right;
 }
 
 #left {
@@ -41,6 +45,15 @@
 #getUserPermPosts {
     border-bottom:1px solid black;
     font-weight: bold;
+}
+
+.postContent{
+    padding: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: solid 1px #b3b3b3;
+    border-radius: 2px;
+    background-color: white;
 }
 
 html,body {height:100%;}

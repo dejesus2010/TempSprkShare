@@ -40,11 +40,10 @@ module.exports = function(app) {
     // Update Requests for API requests - UserPage
     // -----------------------------------------------------------------------------------------------------------------
 
-    app.get('/api/update/user/getUserAllPosts', userPageController.getUserAllPosts);
-    app.get('/api/update/user/getUserTempPosts', userPageController.getUserTempPosts);
-    app.get('/api/update/user/getUserPermPosts', userPageController.getUserPermPosts);
-    app.get('/api/update/user/getUserFollowees', userPageController.getUserFollowees);
-
+    app.post('/api/update/user/getUserAllPosts', userPageController.getUserAllPosts);
+    app.post('/api/update/user/getUserTempPosts', userPageController.getUserTempPosts);
+    app.post('/api/update/user/getUserPermPosts', userPageController.getUserPermPosts);
+    app.post('/api/update/user/getUserFollowees', userPageController.getUserFollowees);
 
 
     // -----------------------------------------------------------------------------------------------------------------

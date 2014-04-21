@@ -7,6 +7,7 @@ $(function() {
         self.followees = ko.observable('');
         self.imgURL = ko.observable('');
         self.avatar = ko.observable('');
+        self.rightContent = ko.observableArray([]);
 
         self.$imgURL = $('#imgURL');
         self.$avatar = $('#avatar');
@@ -17,20 +18,36 @@ $(function() {
         //self.usedId = ko.observable('');
     };
 
+    function UserpageContentVM(title, content, userid, sharecount) {
+        var self = this;
+
+        self.posttitle = title;
+        self.postcontent = content;
+        self.postuserid = userid;
+        self.postsharecount = sharecount + ' share(s)';
+    };
+
     UserpageVM.prototype.performUserRequest = function(data, event) {
 
         var self = this;
         var URL = '/api/update/user/' + event.target.id;
 
+        console.log(self.userId);
         $.ajax({
             url: URL,
-            type: "GET",
+            type: "POST",
             data: { userId: self.userId },
             success: function (data) {
                 if (data.hasErrors) {
-                    console.log('Error!');
+                    self.hasErrors(true);
+                    console.log("Failed to Fetch Rows data!");
                 } else {
                     console.log(data);
+                    var content = data;
+
+                    for (var i = 0; i < content.length; i++) {
+                        self.rightContent.push( new UserpageContentVM(content[i].posttitle, content[i].postcontent, content[i].postuserid, content[i].postsharecount));
+                    }
                   }
                 }
             });
@@ -44,13 +61,21 @@ $(function() {
 
         $.ajax({
             url: URL,
-            type: "GET",
+            type: "POST",
             data: { userId: self.userId },
             success: function (data) {
                 if (data.hasErrors) {
-                    console.log('Failed to get Followees!');
+                    self.hasErrors(true);
+                    console.log("Failed to Fetch Followees!");
                 } else {
+                    /*
                     console.log(data);
+                    var content = data;
+
+                    for (var i = 0; i < content.length; i++) {
+                        self.rightContent.push( new UserpageVM(content[i].posttitle, content[i].postcontent, content[i].postuserid));
+                    }
+                    */
                 }
             }
         });

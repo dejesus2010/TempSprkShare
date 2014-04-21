@@ -86,8 +86,8 @@ var constructor = function() {
         var preparedStatement = 'SELECT * FROM posts WHERE postuserId = $1';
         var inserts = [ userId ];
 
-        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
                 done();
                 if (err) {
@@ -164,7 +164,7 @@ var constructor = function() {
 
         var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userId = $2 RETURNING userpicurl';
         // TODO: Get actual userId from session.
-        var inserts = [ userData.imgURL, 1 ];
+        var inserts = [ userData.imgURL, userData.userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {

@@ -25,7 +25,7 @@ block mainContent
         ul.nav.nav-tabs
           li.active
             a(href= '#posts', data-toggle= 'tab') Posts
-          li
+         // li
             a(href= '#followees', data-toggle= 'tab', data-bind= 'click: getUserFollowees') Followees
 
         div.tab-content
@@ -40,31 +40,34 @@ block mainContent
                   a(href= '#posts', id= 'getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts
 
             div(id= 'right', class= 'container')
-             // each postData in userPostData
-                tr
-                  td
-                    a(href= '../viewpost/' + post.postId)
-                      =postData.postTitle
-                  td
-                    =postData.postShareCount
-
+              table
+                tbody(data-bind= 'foreach: rightContent')
+                  tr
+                    td
+                      div.postContent
+                        span
+                          a(href= '/userpage')
+                            span(data-bind= 'text: posttitle')
+                          div(data-bind= 'text: postsharecount').float
+                          div
+                            span(data-bind= 'text: postcontent')
                 // TODO: Display the Posts depending on what attribute the user clicks
 
-          div(class= 'tab-pane', id= 'followees')
-            div(id ='left', class= 'container')
-              // each followee in userFollowees
-                div.followeeDisplay
-                  =followee.username
-                // TODO: Display the Followees of the User.
-
-
-            div(id= 'right', class= 'container')
-              p
-                // TODO: Get the Followees Posts to display.
-
-
-          // TODO: If have time.
-          // div(class= 'tab-pane', id= 'groups')
+          //div(class= 'tab-pane', id= 'followees')
+          //  div(id ='left', class= 'container')
+          //    // each followee in userFollowees
+          //      div.followeeDisplay
+          //        =followee.username
+          //      // TODO: Display the Followees of the User.
+          //
+          //
+          //  div(id= 'right', class= 'container')
+          //    p
+          //      // TODO: Get the Followees Posts to display.
+          //
+          //
+          //TODO: If have time.
+          //div(class= 'tab-pane', id= 'groups')
           //  div(id= 'left', class= 'container')
           //    p(style= 'white-space: pre')
           //      | Group
@@ -80,6 +83,7 @@ block mainContent
           //  div(id= 'right', class= 'container')
           //    p(style= 'white-space: pre')
           //      | Post.
+          //
 
     +updateAvatarModal()
 
