@@ -16,7 +16,7 @@ $(function(){
             self.username = user;
             self.content = cont;
             self.userpicurl = userpicurl;
-            self.userid = contruserid;
+            self.contruserid = '../userpage/' + contruserid;
         }
 
 
