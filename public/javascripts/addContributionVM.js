@@ -10,44 +10,57 @@ $(document).ready(function(){
 
 $(function(){
 
-
-
-
-        function AddContributionVM(){
-
+        function ContributionVM(user, cont) {
             var self = this;
 
+            self.username = user;
+            self.content = cont;
+        }
 
+        function AddContributionVM(){
+            var self = this;
 
-            self.newContribution = ko.observable("");
-            self.contributionToAdd = ko.observable(""); // inputed content for contribution to add
+            self.newContributionContent = ko.observable("");
             self.hasErrors = ko.observable(false);
-            self.errors = ko.observableArray([]);
+            self.contributions = ko.observableArray([]);
 
             self.postId = window.location.pathname.split('/')[2];
             self.$inputContributionContent = $('#inputContributionContent');
             self.$newContribution = $('#newContribution');
 
+            $.ajax({
+                type: "POST",
+                url: '/api/get/contributions',
+                data: {  postId: self.postId },
+                success: function(data){
+                    if(!data.hasErrors){
+                        var contributions = data.data;
 
-        };
+                        for(var i = 0; i < contributions.length; i++){
+                            self.contributions.push( new ContributionVM(contributions[0].username, contributions[0].contribcontent));
+                        }
+                    } else {
+                        self.hasErrors(true);
+                        console.log("ERROR");
+                    }
+
+                }
+
+            });
+
+        }
 
         AddContributionVM.prototype.submitContribution = function(){
-
-
-            //var postId = window.location.pathname.split('/')[2];
-
             var self = this;
-            var URL = '/api/update/contributions';
-
-            console.log(self);
+            var URL = '/api/get/contributions';
 
             $.ajax({
                 type: "POST",
                 url: URL,
-                data: {contributionToAdd : self.contributionToAdd(), postId: self.postId},
+                data: {contributionToAdd : self.newContributionContent(), postId: self.postId},
                 success: function(data){
                     if(!data.hasErrors){
-                        self.contributionToAdd();
+                        self.contributions.push( new ContributionVM('me', 'the shyt i posted'));
                     }else{
                         self.hasErrors(true);
                         console.log("ERROR");
@@ -57,9 +70,7 @@ $(function(){
                 }
 
             });
-
-
-        };
+        }
 
         ko.applyBindings(new AddContributionVM());
 

@@ -8,7 +8,9 @@ var constructor = function(){
 
     contributionsControllerInstance.getContributions = function(req, res){
 
-        contributionsDA.getContributions( req, function(err, rowsData){
+        var postId = req.body.postId;
+
+        contributionsDA.getContributions( postId, function(err, rowsData){
            console.log("error: " +err);
 
             if(err){
@@ -23,15 +25,7 @@ var constructor = function(){
                 }
 
             }else{
-                console.log("Completed query and got results...");
-                res.send(rowsData);
-                //res.send("Completed query");
-                //var rowsResult = rowsData;
-                //return rowsResult;
-                //console.log("after sending");
-                //console.log("Rows data: " + rowsData);
-
-               // return rowsData;
+                res.json(rowsData);
             }
         });
 
@@ -42,6 +36,8 @@ var constructor = function(){
         var postId = req.params.postId;
 
         contributionsDA.getPostInfo(postId, function(err, postRowsData){
+            console.log(postRowsData)
+
             if(err) {
                 res.render('ViewPost/viewpost', { postNotFound: true } );
             } else {
@@ -53,13 +49,14 @@ var constructor = function(){
     // get data to post id from the url in knockout
     contributionsControllerInstance.getPostContributions = function(req, res) {
         var response = { hasErrors: false, messages: [] };
+        var postId = req.body.postId;
 
         contributionsDA.getContributions(postId, function(err, contributionsRowsData){
             if(err) {
-                response.hasErrors = false;
+                response.hasErrors = true;
                 response.messages.push('Problem getting data');
             } else {
-                response.hasErrors = true;
+                response.hasErrors = false;
                 response.messages.push('data successfully retrieve');
                 response.data = contributionsRowsData;
             }
@@ -75,10 +72,10 @@ var constructor = function(){
 
         contributionsDA.saveContribution(data, function(err, contributionsRowsData){
             if(err) {
-                response.hasErrors = false;
+                response.hasErrors = true;
                 response.messages.push('Problem getting data');
             } else {
-                response.hasErrors = true;
+                response.hasErrors = false;
                 response.messages.push('data successfully retrieve');
                 response.data = contributionsRowsData;
             }
@@ -123,7 +120,7 @@ var constructor = function(){
         var postId = req.params.postId;
         var response = { hasErrors: false, messages: [] };
 
-        contributionsDA.getPostInfo(req, function( err, postRowsData){
+        contributionsDA.getPostInfo(postId, function( err, postRowsData){
             if(err){
 
                 if(err.code == 23505 ){

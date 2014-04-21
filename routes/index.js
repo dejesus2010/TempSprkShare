@@ -21,7 +21,7 @@ module.exports = function(app) {
     app.get('/viewpost/:postId', contributionController.renderPostPage);
 
     // render page to create a post.
-    app.get('/api/update/contributions', contributionController.getPostContributions);
+    app.post('/api/get/contributions', contributionController.getPostContributions);
 
     // render page to create a post.
     app.post('/api/put/contribution', contributionController.saveContribution);
