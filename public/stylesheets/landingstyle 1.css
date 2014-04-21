@@ -83,11 +83,6 @@ width:47%;
 margin-left:6%;
 
 }
-
-.panel-default>.panel-heading{
-background-color:#357ebd;
-color:white;
-font-size:20px;
-
-
+.float {
+float:right;
 }
