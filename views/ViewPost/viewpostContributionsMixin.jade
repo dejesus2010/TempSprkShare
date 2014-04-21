@@ -1,33 +1,24 @@
 mixin viewpostContributions(postRowsData, contributionsRowsData)
-    div#postContentBlock.container
-        div.row
-
-            div.col-md-12#rightCol
-
-                div.btn-group
-                    a.btn.add.btn-primary#addContributionButton(href="#inputContribution")
-                        span
-                            |  | Contribute
+    #postContentBlock.container
+        .row
+            .col-md-12#rightCol
+                .btn-group
+                    a.btn.add.btn-primary#addContributionButton(href='#inputContribution')
+                        span Contribute
 
                 table
-                    tbody(data-bind='contributions')
+                    tbody(data-bind='foreach: contributions')
                         tr
                             td
                                 div.postContribution
                                     span
-                                        a(href='/userpage' + contribution.contribuserid)
+                                        a(href='/userpage')
                                             img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
-                                            span
-                                                =contribution.username
+                                            span(data-bind='text: username')
                                     div
-                                        =contribution.contribcontent
+                                        span(data-bind='text: content')
 
-                each contribution in contributionsRowsData
-
-
-                div#newContribution(data-bind="value: newContribution")
-
-                form#inputContribution(data-bind="visibility: inputContribution")
-                    textarea#inputContributionContent.form-control( type='text', data-bind="value: contributionToAdd")
-                    div.add.btn.btn-primary#submitContribution(data-bind="click: submitContribution")
-
+                #newContribution
+                    form#inputContribution
+                        textarea#inputContributionContent.form-control(type='text', data-bind='value: newContributionContent')
+                        .add.btn.btn-primary#submitContribution(data-bind='click: submitContribution')

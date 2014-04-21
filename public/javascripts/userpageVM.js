@@ -3,7 +3,7 @@ $(function() {
         var self = this;
 
         // TODO: Get actual userId from session.
-        self.userId = ko.observable('');
+        self.userId = window.location.pathname.split('/')[2];
         self.followees = ko.observable('');
         self.imgURL = ko.observable('');
         self.avatar = ko.observable('');
@@ -22,13 +22,10 @@ $(function() {
         var self = this;
         var URL = '/api/update/user/' + event.target.id;
 
-        console.log(URL);
-
         $.ajax({
             url: URL,
             type: "GET",
-            // TODO: Get actual userId from session.
-            data: { userId: self.userId() },
+            data: { userId: self.userId },
             success: function (data) {
                 if (data.hasErrors) {
                     console.log('Error!');
@@ -42,12 +39,13 @@ $(function() {
 
 
     UserpageVM.prototype.getUserFollowees = function() {
+        var self = this;
+        var URL = '/api/update/user/getUserFollowees';
 
         $.ajax({
-            url: '/api/update/user/getUserFollowees',
+            url: URL,
             type: "GET",
-            // TODO: Get actual userId from session.
-            data: { userId: self.userId() },
+            data: { userId: self.userId },
             success: function (data) {
                 if (data.hasErrors) {
                     console.log('Failed to get Followees!');
@@ -60,12 +58,12 @@ $(function() {
 
     UserpageVM.prototype.submitImage = function() {
         var self = this;
+        var URL = '/api/update/user/avatar';
 
         $.ajax({
-            url: '/api/update/user/avatar',
+            url: URL,
             type: "POST",
-            // TODO: Get userId() to work from session.
-            data: { imgURL: self.imgURL(), userId: self.uesrId() },
+            data: { imgURL: self.imgURL(), userId: self.userId },
             success: function(data) {
                 if(data.hasErrors) {
                     alert('something went wrong');

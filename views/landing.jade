@@ -38,11 +38,10 @@ html
                                     each topPost in topPostsData
                                         tr
                                             td
-                                                =topPost.PostId
+                                                a(href= '../viewpost/' + topPost.postid)
+                                                    =topPost.posttitle
                                             td
-                                                =topPost.PostTitle
-                                            td
-                                                =topPost.PostShareCount
+                                                =topPost.postsharecount
                 .col-md-2
                 .col-md-5.well.margin
                     .panel.panel-default
@@ -53,16 +52,10 @@ html
                                     each recentPost in recentPostsData
                                         tr
                                             td
-                                                =recentPost.PostId
+                                                a(href= '../viewpost/' + recentPost.postid)
+                                                    =recentPost.posttitle
                                             td
-                                                =recentPost.PostTitle
-                                            td
-                                                =recentPost.PostedDate
-
-            div.navbar.navbar-default.navbar-fixed-bottom
-                div.container
-                    p.navbar-text
-                        | &copy; SprkShare 2014
+                                                =recentPost.posteddate
 
     +loginModal()
     +signupModel()

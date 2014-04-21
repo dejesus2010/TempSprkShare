@@ -10,77 +10,75 @@ $(document).ready(function(){
 
 $(function(){
 
+        function ContributionVM(user, cont) {
+            var self = this;
 
+            self.username = user;
+            self.content = cont;
+        }
 
 
         function AddContributionVM(){
 
             var self = this;
 
-
-
-            self.newContribution = ko.observable("");
-            self.contributionToAdd = ko.observable(""); // inputed content for contribution to add
+            self.newContributionContent = ko.observable("");
             self.hasErrors = ko.observable(false);
-            self.errors = ko.observableArray([]);
+            self.contributions = ko.observableArray([]);
 
             self.postId = window.location.pathname.split('/')[2];
             self.$inputContributionContent = $('#inputContributionContent');
             self.$newContribution = $('#newContribution');
 
-
-        };
-
-        AddContributionVM.prototype.submitContribution = function(){
-
-
-            //var postId = window.location.pathname.split('/')[2];
-
-            var self = this;
-            var URL = '/api/update/contributions';
-
-            //console.log(self);
-
             $.ajax({
                 type: "POST",
-                url: URL,
-                data: {contributionToAdd : self.contributionToAdd(), postId: self.postId},
+                url: '/api/get/contributions',
+                data: {  postId: self.postId },
                 success: function(data){
                     if(!data.hasErrors){
-                        self.contributionToAdd();
-                    }else{
+                        var contributions = data.data;
+
+                        for(var i = 0; i < contributions.length; i++){
+                            self.contributions.push( new ContributionVM(contributions[0].username, contributions[0].contribcontent));
+                        }
+                    } else {
                         self.hasErrors(true);
                         console.log("ERROR");
                     }
-
 
                 }
 
             });
 
+        }
 
-        };
+        AddContributionVM.prototype.submitContribution = function(){
+            var self = this;
+            var URL = '/api/put/contribution';
+
+            console.log(self);
+
+            $.ajax({
+                type: "POST",
+                url: URL,
+                data: { content : self.newContributionContent(), postId: self.postId },
+                success: function(data){
+                    if(!data.hasErrors){
+                        console.log(data);
+                        self.contributions.push( new ContributionVM(data, data.contribcontent));
+                    }else{
+                        self.hasErrors(true);
+                        console.log("ERROR");
+                    }
+                }
+
+            });
+        }
 
         AddContributionVM.prototype.share = function(){
 
             var self = this;
-            var URL = '/api/sharePost';
-
-            $.ajax({
-                type: "POST",
-                url: URL,
-                data: {postId: self.postId},
-                success: function(data){
-                    if(!data.hasErrors){
-                        self.contributionToAdd();
-                    }else{
-                        self.hasErrors(true);
-                        console.log("ERROR");
-                    }
-
-
-                }
-            });
+            var URL = '/api/sharePost'
 
         };
 

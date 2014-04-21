@@ -2,38 +2,14 @@ var constructor = function () {
 	var userpageControllerInstance = {};
 	var userpageDA = require('../DataAccessors/UserDataAccessor');
 
-    /*
     userpageControllerInstance.renderUserPage= function(req, res) {
         var userId = req.params.userId;
         var response = { hasErrors: false, messages: [] };
 
-        userpageDA.getAllUserPosts(userId, function(err, userAllPostsRows) {
-            userpageDA.getUserTempPosts(userId, function(err, userTempPostsRows) {
-                userpageDA.getUserPermPosts(userId, function(err, userPermPostsRows) {
+        var URL = 'userpage';
 
-                    if (err) {
-                        if (err) {
-                            if (err) {
-                                response.hasErrors = true;
-                                response.messages.push('Something went wrong1, bro.');
-                            } else {
-                                response.hasErrors = true;
-                                response.messages.push('Something went wrong2, bro.');
-                            }
-                        } else {
-                            response.hasErrors = true;
-                            response.messages.push('Something went wrong3, bro.');
-                        }
-                        res.json(response);
-                    } else {
-                        console.log('Success!');
-                        res.render('UserPage/userpage', { userAllPostsRows: userAllPostsRows, userTempPostsRows: userTempPostsRows, userPermPostsRows: userPermPostsRows })
-                    }
-                });
-            });
-        });
+        res.render(URL, {userId: userId});
     };
-    */
 
 	// GET ALL USER'S POSTS
 	userpageControllerInstance.getUserAllPosts = function(req, res) {

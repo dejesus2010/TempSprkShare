@@ -114,6 +114,7 @@ var constructor = function() {
                     sendData(err);
                 }
                 else {
+                    console.log(result);
                     sendData(err, result.rows);
                 }
             });
@@ -163,7 +164,7 @@ var constructor = function() {
 
         var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userId = $2 RETURNING userpicurl';
         // TODO: Get actual userId from session.
-        var inserts = [ userData.imgURL, userData.userId ];
+        var inserts = [ userData.imgURL, 1 ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
