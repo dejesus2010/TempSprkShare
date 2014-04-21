@@ -54,12 +54,14 @@ var constructor = function(){
 
         var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) ' +
             'VALUES ($1, $2, $3, false, current_date )' +
-            'RETURNING *, (SELECT username FROM sparkusers WHERE sparkusers.userid = contribuserid)';
+            'RETURNING *, (SELECT username FROM sparkusers WHERE sparkusers.userid = contribuserid), (SELECT userpicurl FROM sparkusers WHERE sparkusers.userid = contribuserid)';
         var inserts = [contributionData.postId, contributionData.userId, contributionData.content];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done){
             client.query(preparedStatement, inserts, function(err, result){
                 done();
+
+                console.log(result.rows[0]);
 
                 // TODO finish implementation
                 if( err ){
