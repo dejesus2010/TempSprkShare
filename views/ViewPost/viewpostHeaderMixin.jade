@@ -17,7 +17,7 @@ mixin viewpostHeader(postRowsData)
                     div.row
                         div.col-sm-6
                             // TODO: Fix href in Ryan's code before pushing.
-                            a(href='/userpage')
+                            a(href='../userpage/' + postRowsData[0].postuserid)
                                 img.img-responsive#userImg(src=postRowsData[0].userpicurl)
                         div.col-sm-6
                             p.text-center#postUserName= postRowsData[0].username
