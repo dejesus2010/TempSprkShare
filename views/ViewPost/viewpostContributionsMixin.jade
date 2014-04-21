@@ -12,8 +12,11 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
                             td
                                 div.postContribution
                                     span
+                                        //
+                                        //a(data-bind='href: ')
                                         a(href='/userpage')
-                                            img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                                            //img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                                            img.img-circle#contributorsPic(data-bind='attr: {src: userpicurl}')
                                             span(data-bind='text: username')
                                     div
                                         span(data-bind='text: content')

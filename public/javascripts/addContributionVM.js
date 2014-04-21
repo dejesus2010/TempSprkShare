@@ -10,11 +10,12 @@ $(document).ready(function(){
 
 $(function(){
 
-        function ContributionVM(user, cont) {
+        function ContributionVM(user, cont, userpicurl) {
             var self = this;
 
             self.username = user;
             self.content = cont;
+            self.userpicurl = userpicurl;
         }
 
 
@@ -38,8 +39,9 @@ $(function(){
                     if(!data.hasErrors){
                         var contributions = data.data;
 
+
                         for(var i = 0; i < contributions.length; i++){
-                            self.contributions.push( new ContributionVM(contributions[0].username, contributions[0].contribcontent));
+                            self.contributions.push( new ContributionVM(contributions[i].username, contributions[i].contribcontent, contributions[i].userpicurl));
                         }
                     } else {
                         self.hasErrors(true);
@@ -66,7 +68,7 @@ $(function(){
                     if(!data.hasErrors){
                         console.log(data);
                         var newContrib = data.data;
-                        self.contributions.push( new ContributionVM(newContrib.username, newContrib.contribcontent));
+                        self.contributions.push( new ContributionVM(newContrib.username, newContrib.contribcontent, newContrib.userpicurl));
                     }else{
                         self.hasErrors(true);
                         console.log("ERROR");
