@@ -44,13 +44,11 @@ var constructor = function(){
 								console.log("after"+response.id);
 							}
 						
-						
-						
+							res.json(response);
 						});
-					
-					
+					} else {
+						res.json(response);
 					}
-			res.json(response);
 			
 			};
    
