@@ -1,3 +1,6 @@
 mixin userAvatarMixin(user)
+    script(src= '/lib/jquery/jquery.js')
+    script(src= '/javascripts/logoutAjax.js')
+    button.btn.btn-primary#logoutButton LogOut
     button.dropdown-toggle.btn.btn-default(data-toggle='dropdown')
         img(src= '/images/default_avatar.png', id= 'avatar', height= '35', width= '40')

@@ -63,6 +63,14 @@ var constructor = function() {
         });
     };
 
+    authControllerInstance.logout = function(req, res) {
+        delete req.session.userId;
+        delete req.session.userData;
+
+        console.log('Success!');
+        res.json({ hasErrors: false, messages: [ 'Logged out successfully'] });
+    };
+
     return authControllerInstance;
 };
 

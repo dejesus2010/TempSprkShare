@@ -57,6 +57,7 @@ module.exports = function(app) {
     app.post('/api/auth/register', authController.registration);
     app.post('/api/auth/login', authController.login);
 	app.post('/api/auth/post', postController.validate);
+    app.post('/api/auth/logout', authController.logout);
 	app.post('/api/update/user/avatar', userPageController.updateAvatar);
 
     // template for delete and promote posts base on the shares count
