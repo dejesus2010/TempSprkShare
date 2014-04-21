@@ -10,17 +10,20 @@ module.exports = function(app) {
     // render home page
     app.get('/', landingController.renderLandingPage);
 
-
     // -----------------------------------------------------------------------------------------------------------
     // Viewpost Page
     // -----------------------------------------------------------------------------------------------------------
     app.get('/viewpost/:postId', contributionController.renderPostPage);
 
     // render page to create a post.
-    app.post('/api/update/contributions', contributionController.sendAddContribution);
-    //app.post('/api/sharePost', contributionController.sharePost);
+    app.post('/api/get/contributions', contributionController.getPostContributions);
 
+    // render page to create a post.
+    app.post('/api/put/contribution', contributionController.saveContribution);
 
+    // -----------------------------------------------------------------------------------------------------------
+    // Create Post page
+    // -----------------------------------------------------------------------------------------------------------
     app.get('/create_post', function(req,res){
         res.render('create_post', {title: 'Create Post'});
     });
@@ -32,7 +35,6 @@ module.exports = function(app) {
     //	app.get('/groups', function (req, res){
     //		res.render('groups', { title: 'SprkGroups Pge'});
     //	});
-
 
     // -----------------------------------------------------------------------------------------------------------------
     // Update Requests for API requests - UserPage

@@ -50,19 +50,23 @@ var constructor = function(){
 
     };
 
-    contributionsDAInstance.sendAddContribution = function(contributionData, sendData){
+    contributionsDAInstance.saveContribution = function(contributionData, sendData){
 
-        var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) VALUES ( $1, $2, $3, false, current_date );';
-        var inserts = [contributionData.postId, 1, contributionData.contributionToAdd];
+        var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) ' +
+            'VALUES ($1, $2, $3, false, current_date )' +
+            'RETURNING *;';
+        var inserts = [contributionData.postId, contributionData.userId, contributionData.content];
 
         console.log(inserts);
         pg.connect(process.env.DATABASE_URL, function(err, client, done){
             client.query(preparedStatement, inserts, function(err, result){
                 done();
 
-
+                // TODO finish implementation
                 if( err ){
                     sendData(err);
+                } else {
+                    sendData(err, result.rows[0])
                 }
 
             });
