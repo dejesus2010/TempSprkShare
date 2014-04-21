@@ -86,7 +86,7 @@ $(function(){
                 data: { email : self.email(), password: self.password() },
                 success: function(data) {
                                 if(!data.hasErrors) {
-                                    window.location = '/userpage';
+                                    window.location = '/userpage/' + data.userId;
                                 } else {
                                     self.hasErrors(true);
                                     for(var i =0; i < data.messages.length; i++) {
