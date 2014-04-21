@@ -84,6 +84,18 @@ $(function(){
             var self = this;
             var URL = '/api/sharePost'
 
+
+            $.ajax({
+                type: "POST",
+                url: URL,
+                data: {postId: self.postId},
+                success: function(data){
+                    if(!data.hasErrors){
+                        console.log(data);
+                    }
+                }
+            });
+
         };
 
         ko.applyBindings(new AddContributionVM());

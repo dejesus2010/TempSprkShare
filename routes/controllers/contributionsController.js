@@ -134,6 +134,7 @@ var constructor = function(){
 
         var postId = req.body.postId;
 
+        console.log(postId);
 
         contributionsDA.sharePost(postId, function(err){
             if(err){

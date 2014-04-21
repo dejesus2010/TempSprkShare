@@ -14,6 +14,14 @@
     position: relative;
 }
 
+.colorShare{
+    background-color: #b92c28;
+
+}
+
+.colorShare:hover{
+    background-color: #a94442;
+}
 
 #postContent{
     font-size: large;

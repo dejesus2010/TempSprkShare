@@ -4,7 +4,9 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
             .col-md-12#rightCol
                 .btn-group
                     a.btn.add.btn-primary#addContributionButton(href='#inputContribution')
-                        span Contribute
+                        span |  Contribute
+                    div.btn.add.btn-primary.colorShare#share(data-bind='click: share')
+                        span |  Spark
 
                 table
                     tbody(data-bind='foreach: contributions')

@@ -86,6 +86,8 @@ var constructor = function(){
             client.query(preparedStatement, inserts, function(err){
                 done();
 
+                console.log('insert successful');
+
                 if(err){
                     sendError(err);
                 }
