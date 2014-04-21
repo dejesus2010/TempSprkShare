@@ -65,7 +65,8 @@ $(function(){
                 success: function(data){
                     if(!data.hasErrors){
                         console.log(data);
-                        self.contributions.push( new ContributionVM(data, data.contribcontent));
+                        var newContrib = data.data;
+                        self.contributions.push( new ContributionVM(newContrib.username, newContrib.contribcontent));
                     }else{
                         self.hasErrors(true);
                         console.log("ERROR");
