@@ -84,37 +84,6 @@ var constructor = function(){
         });
     };
 
-//    contributionsControllerInstance.getPostContributions = function(req, res){
-//        var postId = req.params.postId;
-//        var response = { hasErrors: false, messages: [] };
-//
-//
-//        contributionsDA.getPostInfo(postId, function(err, postRowsData){
-//
-//            contributionsDA.getContributions(postId, function(err, contributionsRowsData){
-//
-//                if(err){
-//                    if(err.code === "23505" ){
-//                        response.hasErrors = true;
-//                        response.messages.push( 'Idk what to do with this err.code' );
-//                    }
-//                    else{
-//                        response.hasErrors = true;
-//                        response.messages.push( 'I guess another different response here lol?');
-//                    }
-//
-//                    res.json(response);
-//                } else {
-//                    //console.log("Post Rows Data: ");
-//                    // console.log(postRowsData);
-//                    res.render('ViewPost/viewpost', {contributionsRowsData: contributionsRowsData, postRowsData : postRowsData});
-//                }
-//            });
-//
-//        });
-//
-//    };
-
     // not used in production. just used for testing....
     contributionsControllerInstance.getPostInfo = function(req, res){
         var postId = req.params.postId;

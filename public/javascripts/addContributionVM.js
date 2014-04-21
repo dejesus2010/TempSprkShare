@@ -52,21 +52,20 @@ $(function(){
 
         AddContributionVM.prototype.submitContribution = function(){
             var self = this;
-            var URL = '/api/get/contributions';
+            var URL = '/api/put/contribution';
 
             $.ajax({
                 type: "POST",
                 url: URL,
-                data: {contributionToAdd : self.newContributionContent(), postId: self.postId},
+                data: { content : self.newContributionContent(), postId: self.postId },
                 success: function(data){
                     if(!data.hasErrors){
-                        self.contributions.push( new ContributionVM('me', 'the shyt i posted'));
+                        console.log(data);
+                        self.contributions.push( new ContributionVM(data, data.contribcontent));
                     }else{
                         self.hasErrors(true);
                         console.log("ERROR");
                     }
-
-
                 }
 
             });
