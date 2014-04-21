@@ -17,7 +17,9 @@ $(function(){
             self.content = cont;
         }
 
+
         function AddContributionVM(){
+
             var self = this;
 
             self.newContributionContent = ko.observable("");
@@ -54,6 +56,8 @@ $(function(){
             var self = this;
             var URL = '/api/put/contribution';
 
+            console.log(self);
+
             $.ajax({
                 type: "POST",
                 url: URL,
@@ -61,7 +65,8 @@ $(function(){
                 success: function(data){
                     if(!data.hasErrors){
                         console.log(data);
-                        self.contributions.push( new ContributionVM(data, data.contribcontent));
+                        var newContrib = data.data;
+                        self.contributions.push( new ContributionVM(newContrib.username, newContrib.contribcontent));
                     }else{
                         self.hasErrors(true);
                         console.log("ERROR");

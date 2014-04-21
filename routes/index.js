@@ -17,7 +17,8 @@ module.exports = function(app) {
 
     // render page to create a post.
     app.post('/api/get/contributions', contributionController.getPostContributions);
-
+    app.post('/api/sharePost', contributionController.sharePost);
+    
     // render page to create a post.
     app.post('/api/put/contribution', contributionController.saveContribution);
 
@@ -35,6 +36,7 @@ module.exports = function(app) {
     //	app.get('/groups', function (req, res){
     //		res.render('groups', { title: 'SprkGroups Pge'});
     //	});
+
 
     // -----------------------------------------------------------------------------------------------------------------
     // Update Requests for API requests - UserPage

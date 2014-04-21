@@ -19,7 +19,8 @@ var constructor = function() {
                     }
 				} else {
 					response.hasErrors = false;
-					response.messages.push('logged in successfully');
+					response.messages.push('registered in successfully');
+                    response.userId = userData.userid;
 
 					// put data in the session
 					req.session.userId = userData.userid;
@@ -50,6 +51,7 @@ var constructor = function() {
             } else {
                 response.hasErrors = false;
                 response.messages.push('logged in successfully');
+                response.userId = userData.userid;
 
                 // put data in the session
                 req.session.userId = userData.userid;

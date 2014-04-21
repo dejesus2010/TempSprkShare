@@ -54,10 +54,9 @@ var constructor = function(){
 
         var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) ' +
             'VALUES ($1, $2, $3, false, current_date )' +
-            'RETURNING *;';
+            'RETURNING *, (SELECT username FROM sparkusers WHERE sparkusers.userid = contribuserid)';
         var inserts = [contributionData.postId, contributionData.userId, contributionData.content];
 
-        console.log(inserts);
         pg.connect(process.env.DATABASE_URL, function(err, client, done){
             client.query(preparedStatement, inserts, function(err, result){
                 done();
@@ -73,6 +72,24 @@ var constructor = function(){
 
         });
 
+
+    };
+
+    contributionsDAInstance.sharePost = function(postId, sendError){
+
+        var preparedStatement = 'UPDATE posts SET postsharecount = postsharecount + 1 where postid = $1';
+        var inserts = [postId];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done){
+            client.query(preparedStatement, inserts, function(err){
+                done();
+
+                if(err){
+                    sendError(err);
+                }
+
+            });
+        });
 
     };
 
