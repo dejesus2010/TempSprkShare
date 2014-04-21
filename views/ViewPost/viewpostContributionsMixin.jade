@@ -15,7 +15,7 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
                             td
                                 div.postContribution
                                     span
-                                        a(href='/userpage')
+                                        a(href='/userpage' + contribution.contribuserid)
                                             img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
                                             span
                                                 =contribution.username

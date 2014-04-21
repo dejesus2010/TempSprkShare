@@ -39,7 +39,7 @@ $(function(){
             var self = this;
             var URL = '/api/update/contributions';
 
-            console.log(self);
+            //console.log(self);
 
             $.ajax({
                 type: "POST",
@@ -64,7 +64,23 @@ $(function(){
         AddContributionVM.prototype.share = function(){
 
             var self = this;
-            var URL = '/api/sharePost'
+            var URL = '/api/sharePost';
+
+            $.ajax({
+                type: "POST",
+                url: URL,
+                data: {postId: self.postId},
+                success: function(data){
+                    if(!data.hasErrors){
+                        self.contributionToAdd();
+                    }else{
+                        self.hasErrors(true);
+                        console.log("ERROR");
+                    }
+
+
+                }
+            });
 
         };
 

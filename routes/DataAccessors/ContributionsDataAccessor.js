@@ -50,6 +50,8 @@ var constructor = function(){
 
     };
 
+
+    // User entered a new contribution
     contributionsDAInstance.sendAddContribution = function(contributionData, sendData){
 
         var preparedStatement = 'INSERT INTO contributions(contribpostid, contribuserid, contribcontent, contribhasmedia, contributeddate ) VALUES ( $1, $2, $3, false, current_date );';
@@ -69,6 +71,26 @@ var constructor = function(){
 
         });
 
+
+    };
+
+
+    // User shared post
+    contributionsDAInstance.sharePost = function(postId, sendError){
+
+        var preparedStatement = 'UPDATE posts SET postsharecount = postsharecount + 1 where postid = $1';
+        var inserts = [postId];
+
+        pg.connect(process.env.DATABASE_URL, function(err, client, done){
+            client.query(preparedStatement, inserts, function(err){
+                done();
+
+                if(err){
+                    sendError(err);
+                }
+
+            });
+        });
 
     };
 

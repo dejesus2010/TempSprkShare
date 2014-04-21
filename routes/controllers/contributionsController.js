@@ -112,6 +112,23 @@ var constructor = function(){
 
     };
 
+    // -----------------------------------------------------------------------
+    // /api/sharePost
+    // -----------------------------------------------------------------------
+
+    contributionsControllerInstance.sharePost = function(req, res){
+
+        var postId = req.body.postId;
+
+
+        contributionsDA.sharePost(postId, function(err){
+            if(err){
+                console.log(err);
+            };
+        });
+
+    };
+
     return contributionsControllerInstance;
 };
 

@@ -18,7 +18,7 @@ module.exports = function(app) {
 
     // render page to create a post.
     app.post('/api/update/contributions', contributionController.sendAddContribution);
-    //app.post('/api/sharePost', contributionController.sharePost);
+    app.post('/api/sharePost', contributionController.sharePost);
 
 
     app.get('/create_post', function(req,res){
