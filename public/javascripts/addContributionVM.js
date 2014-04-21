@@ -8,6 +8,8 @@ $(document).ready(function(){
 
 
 
+
+
 $(function(){
 
         function ContributionVM(user, cont, userpicurl,contruserid) {

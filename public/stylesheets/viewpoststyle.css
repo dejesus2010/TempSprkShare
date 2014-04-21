@@ -23,6 +23,10 @@
     background-color: #a94442;
 }
 
+table{
+    width: 100%;
+}
+
 #postContent{
     font-size: large;
 
