@@ -10,12 +10,13 @@ $(document).ready(function(){
 
 $(function(){
 
-        function ContributionVM(user, cont, userpicurl) {
+        function ContributionVM(user, cont, userpicurl,contruserid) {
             var self = this;
 
             self.username = user;
             self.content = cont;
             self.userpicurl = userpicurl;
+            self.userid = contruserid;
         }
 
 
@@ -42,7 +43,7 @@ $(function(){
                         console.log(data);
 
                         for(var i = 0; i < contributions.length; i++){
-                            self.contributions.push( new ContributionVM(contributions[i].username, contributions[i].contribcontent, contributions[i].userpicurl));
+                            self.contributions.push( new ContributionVM(contributions[i].username, contributions[i].contribcontent, contributions[i].userpicurl, contributions[i].contribuserid));
                         }
                     } else {
                         self.hasErrors(true);
