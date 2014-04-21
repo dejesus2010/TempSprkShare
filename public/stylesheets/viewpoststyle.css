@@ -33,6 +33,16 @@
     width: 30px;
 }
 
+#postShareSprks{
+    font-size: 20px;
+    font-weight: bold;
+    color: #b92c28;
+}
+
+#postShareAmount{
+    font-size: 20px;
+}
+
 
 /*
 #postContentBlock{
