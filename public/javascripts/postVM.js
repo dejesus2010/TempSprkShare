@@ -46,7 +46,7 @@
 												if(!data.hasErrors) {
 													console.log(data.id);
 													console.log('in success function without errors');
-													//window.location = '/viewpost/'+data.id;
+													window.location = '/viewpost/'+data.id;
 												} else {
 													self.hasErrors(true);
 													for(var i =0; i < data.messages.length; i++) {
@@ -65,9 +65,6 @@
 									
 									
 									});
-				
-					
-			
 			}
 		
 	ko.applyBindings(new postVM());		 
