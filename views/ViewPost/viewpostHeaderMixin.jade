@@ -6,6 +6,12 @@ mixin viewpostHeader(postRowsData)
                     h1=postRowsData[0].posttitle
                 div#postContent
                     =postRowsData[0].postcontent
+                div#postShareInfo
+                    span#postShareSprks
+                         | Sprks:
+                    span#postShareAmount
+                        =postRowsData[0].postsharecount
+
             div.col-md-5
                 div.well.well-sm
                     div.row
