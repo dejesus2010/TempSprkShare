@@ -33,11 +33,11 @@ block mainContent
             div(id ='left', class= 'container')
               ul.nav.nav-stacked
                 li
-                  div.add.btn.btn-primary(href= '#rightPosts', id= 'getUserAllPosts', data-bind= 'click: performUserRequest') View All
+                  a(href= '#rightPosts', id= 'getUserAllPosts', data-bind= 'click: performUserRequest') View All
                 li
-                  div.add.btn.btn-primary(href= '#rightPosts', id= 'getUserTempPosts', data-bind= 'click: performUserRequest') Temporary Posts
+                  a(href= '#rightPosts', id= 'getUserTempPosts', data-bind= 'click: performUserRequest') Temporary Posts
                 li
-                  div.add.btn.btn-primary(href= '#rightPosts', id= 'getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts
+                  a(href= '#rightPosts', id= 'getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts
 
             div(id= 'right', class= 'container')
               //each post in userPostData
