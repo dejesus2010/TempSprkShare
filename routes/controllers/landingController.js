@@ -20,8 +20,6 @@ var constructor = function(){
                     res.json(response);
                 }
                 else {
-                    console.log(topPostsData);
-                    console.log(recentPostsData);
                     res.render('landing', {topPostsData: topPostsData, recentPostsData: recentPostsData});
                 }
             });
