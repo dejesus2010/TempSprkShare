@@ -26,9 +26,7 @@ module.exports = function(app) {
     });
    
     // render SprkUser page.
-    app.get('/userpage', function (req, res) {
-    	res.render('userpage', { title: 'SprkUser Pge '});
-    });
+    app.get('/userpage/:userId', userPageController.renderUserPage);
 
     // TODO: Implement Groups page.
     //	app.get('/groups', function (req, res){
