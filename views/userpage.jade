@@ -12,10 +12,11 @@ block mainContent
   div(class= 'container special')
     header#overview.jumbotron
       h2 User Overview
-      div.btn-group
-        a.btn.btn-primary.fron_button(data-toggle='modal', href= '#update_avatar_modal')
-          span
-            | Change Avatar
+        div.btn-group.float
+          a.btn.btn-primary.fron_button(data-toggle='modal', href= '#update_avatar_modal')
+            span
+              | Change Avatar
+
       div.tabbable.tabs-below
         div.tab-content
           div.tab-pane.active
@@ -30,19 +31,22 @@ block mainContent
         div.tab-content
           div(class= 'tab-pane active', id= 'posts')
             div(id ='left', class= 'container')
-              p
-                a(href= '#right', id= '#getUserAllPosts', data-bind= 'click: performUserRequest') View All </br>
-                a(href= '#right', id= '#getUserTempPosts', data-bind= 'click: performUserRequest') Temporary Posts </br>
-                a(href= '#right', id= '#getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts </br>
+              ul.nav.nav-stacked
+                li
+                  div.add.btn.btn-primary(href= '#rightPosts', id= 'getUserAllPosts', data-bind= 'click: performUserRequest') View All
+                li
+                  div.add.btn.btn-primary(href= '#rightPosts', id= 'getUserTempPosts', data-bind= 'click: performUserRequest') Temporary Posts
+                li
+                  div.add.btn.btn-primary(href= '#rightPosts', id= 'getUserPermPosts', data-bind= 'click: performUserRequest') Permanent Posts
 
             div(id= 'right', class= 'container')
-              // each post in userPostData
+              //each post in userPostData
                 div.postDisplay
                   =post.postcontent
                 // TODO: Display the Posts depending on what attribute the user clicks
 
           div(class= 'tab-pane', id= 'followees')
-            div(id ='left', class= 'container', data-bind= 'click: getUserFollowee')
+            div(id ='left', class= 'container')
               // each followee in userFollowees
                 div.followeeDisplay
                   =followee.username
@@ -75,6 +79,6 @@ block mainContent
     +updateAvatarModal()
 
 block scripts
-    script(src= '/javascripts/changeAvatar.js')
+    link(rel= 'stylesheet', href= '/stylesheets/userpagestyle.css')
     script(src= '/javascripts/userpageVM.js')
 

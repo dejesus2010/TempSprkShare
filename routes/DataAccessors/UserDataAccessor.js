@@ -142,7 +142,7 @@ var constructor = function() {
     // GET THE USERNAME'S OF THE USERS THAT this USER IS FOLLOWING
     userDAInstance.getUserFollowees = function(userId, sendData) {
 
-        var preparedStatement = 'SELECT Username, FollowedID FROM sparkUsers, followers WHERE followerId = $1 AND followedUserId = userId';
+        var preparedStatement = 'SELECT Username, FollowerID FROM sparkUsers, followers WHERE followerId = $1 AND followedUserId = userId';
         var inserts = [ userId ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
@@ -162,7 +162,7 @@ var constructor = function() {
     userDAInstance.updateAvatar = function(userData, sendData) {
 
         var preparedStatement = 'UPDATE sparkusers SET userpicurl = $1 WHERE userId = $2 RETURNING userpicurl';
-        var inserts = [ userData.imgURL, userData.userId ];
+        var inserts = [ userData.imgURL, 1 ];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
             client.query(preparedStatement, inserts, function(err, result) {
@@ -171,6 +171,7 @@ var constructor = function() {
                 if (err) {
                     sendData(err);
                 } else {
+                    console.log(result);
                     sendData(err, result.rows[0].userpicurl);
                 }
             });
