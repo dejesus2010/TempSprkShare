@@ -46,7 +46,7 @@ block mainContent
                     td
                       div.postContent
                         span
-                          a(href= '/userpage')
+                          a(data-bind= 'attr:{ href: postidurl }')
                             span(data-bind= 'text: posttitle')
                           div(data-bind= 'text: postsharecount').float
                           div

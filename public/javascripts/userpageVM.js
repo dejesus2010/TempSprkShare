@@ -18,13 +18,14 @@ $(function() {
         //self.usedId = ko.observable('');
     };
 
-    function UserpageContentVM(title, content, userid, sharecount) {
+    function UserpageContentVM(title, content, userid, sharecount, pid) {
         var self = this;
 
         self.posttitle = title;
         self.postcontent = content;
         self.postuserid = userid;
         self.postsharecount = sharecount + ' share(s)';
+        self.postidurl = '../viewpost/' + pid;
     };
 
     UserpageVM.prototype.performUserRequest = function(data, event) {
@@ -46,7 +47,7 @@ $(function() {
                     var content = data;
 
                     for (var i = 0; i < content.length; i++) {
-                        self.rightContent.push( new UserpageContentVM(content[i].posttitle, content[i].postcontent, content[i].postuserid, content[i].postsharecount));
+                        self.rightContent.push( new UserpageContentVM(content[i].posttitle, content[i].postcontent, content[i].postuserid, content[i].postsharecount, content[i].postid));
                     }
                   }
                 }
