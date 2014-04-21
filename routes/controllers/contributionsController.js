@@ -37,38 +37,86 @@ var constructor = function(){
 
     };
 
-
-
-    contributionsControllerInstance.renderPostPage = function(req, res){
+    contributionsControllerInstance.renderPostPage = function(req, res) {
+        // get post data
         var postId = req.params.postId;
-        var response = { hasErrors: false, messages: [] };
-
 
         contributionsDA.getPostInfo(postId, function(err, postRowsData){
-
-            contributionsDA.getContributions(postId, function(err, contributionsRowsData){
-
-                if(err){
-                    if(err.code === "23505" ){
-                        response.hasErrors = true;
-                        response.messages.push( 'Idk what to do with this err.code' );
-                    }
-                    else{
-                        response.hasErrors = true;
-                        response.messages.push( 'I guess another different response here lol?');
-                    }
-
-                    res.json(response);
-                } else {
-                    //console.log("Post Rows Data: ");
-                    // console.log(postRowsData);
-                    res.render('ViewPost/viewpost', {contributionsRowsData: contributionsRowsData, postRowsData : postRowsData});
-                }
-            });
-
+            if(err) {
+                res.render('ViewPost/viewpost', { postNotFound: true } );
+            } else {
+                res.render('ViewPost/viewpost', { postRowsData: postRowsData } );
+            }
         });
-
     };
+
+    // get data to post id from the url in knockout
+    contributionsControllerInstance.getPostContributions = function(req, res) {
+        var response = { hasErrors: false, messages: [] };
+
+        contributionsDA.getContributions(postId, function(err, contributionsRowsData){
+            if(err) {
+                response.hasErrors = false;
+                response.messages.push('Problem getting data');
+            } else {
+                response.hasErrors = true;
+                response.messages.push('data successfully retrieve');
+                response.data = contributionsRowsData;
+            }
+
+            res.json(response);
+        });
+    };
+
+    contributionsControllerInstance.saveContribution = function(req, res){
+        var response = { hasErrors: false, messages: [] };
+        var data = req.body;
+        data.userId = req.session.userId;
+
+        contributionsDA.saveContribution(data, function(err, contributionsRowsData){
+            if(err) {
+                response.hasErrors = false;
+                response.messages.push('Problem getting data');
+            } else {
+                response.hasErrors = true;
+                response.messages.push('data successfully retrieve');
+                response.data = contributionsRowsData;
+            }
+
+            res.json(response);
+        });
+    };
+
+//    contributionsControllerInstance.getPostContributions = function(req, res){
+//        var postId = req.params.postId;
+//        var response = { hasErrors: false, messages: [] };
+//
+//
+//        contributionsDA.getPostInfo(postId, function(err, postRowsData){
+//
+//            contributionsDA.getContributions(postId, function(err, contributionsRowsData){
+//
+//                if(err){
+//                    if(err.code === "23505" ){
+//                        response.hasErrors = true;
+//                        response.messages.push( 'Idk what to do with this err.code' );
+//                    }
+//                    else{
+//                        response.hasErrors = true;
+//                        response.messages.push( 'I guess another different response here lol?');
+//                    }
+//
+//                    res.json(response);
+//                } else {
+//                    //console.log("Post Rows Data: ");
+//                    // console.log(postRowsData);
+//                    res.render('ViewPost/viewpost', {contributionsRowsData: contributionsRowsData, postRowsData : postRowsData});
+//                }
+//            });
+//
+//        });
+//
+//    };
 
     // not used in production. just used for testing....
     contributionsControllerInstance.getPostInfo = function(req, res){
