@@ -4,9 +4,8 @@ var constructor = function(){
 	var pg = require('pg');
 	userPostInstance.insert = function(data , sendData){
 		
-		var preparedStatement = 'INSERT INTO posts( PostTitle, PostContent) VALUES ($1, $2) RETURNING PostId';
-		var inserts = [ data.title, data.message];
-		
+		var preparedStatement = 'INSERT INTO posts( PostTitle, PostContent, PostHasMedia, PostShareCount, PostShareQuotaId, PostedDate) VALUES ($1, $2, $3, $4, $5, current_date) RETURNING PostId';
+		var inserts = [ data.title, data.message, data.hasPicture , 0, 1];
 		
 		 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 						console.log(process.env.DATABASE_URL);
@@ -25,6 +24,33 @@ var constructor = function(){
 					});
 	
 	}
+	
+	
+	
+	userPostInstance.insertPicture = function(data , sendData){
+		
+		var preparedStatement = 'INSERT INTO mediaElements( MediaPostId, MediaURL) VALUES ($1, $2)';
+		var inserts = [ data.id , data.picture];
+		
+		 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+						console.log(process.env.DATABASE_URL);
+						
+						client.query(preparedStatement, inserts, function(err, result) {
+							done();
+							console.log(result);
+							/*
+							if(err) {
+								sendData(err);
+							}else{
+								var id =result.rows[0].postid;
+								sendData(err , id );
+							}*/
+						});
+					});
+	
+	}
+	
+	
 
     userPostInstance.deletePostsNotReachingQuota = function(sendData){
 
