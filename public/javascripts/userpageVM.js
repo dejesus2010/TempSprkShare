@@ -2,6 +2,8 @@ $(function() {
     function UserpageVM() {
         var self = this;
 
+        // TODO: Get actual userId from session.
+        self.userId = ko.observable('');
         self.followees = ko.observable('');
         self.imgURL = ko.observable('');
         self.avatar = ko.observable('');
@@ -25,12 +27,13 @@ $(function() {
         $.ajax({
             url: URL,
             type: "GET",
-            data: { userId: 1 },
+            // TODO: Get actual userId from session.
+            data: { userId: self.userId() },
             success: function (data) {
                 if (data.hasErrors) {
                     console.log('Error!');
                 } else {
-                    console.log('Success!');
+                    console.log(data);
                   }
                 }
             });
@@ -43,7 +46,8 @@ $(function() {
         $.ajax({
             url: '/api/update/user/getUserFollowees',
             type: "GET",
-            data: { userId: 1 },
+            // TODO: Get actual userId from session.
+            data: { userId: self.userId() },
             success: function (data) {
                 if (data.hasErrors) {
                     console.log('Failed to get Followees!');
@@ -61,7 +65,7 @@ $(function() {
             url: '/api/update/user/avatar',
             type: "POST",
             // TODO: Get userId() to work from session.
-            data: { imgURL: self.imgURL() },
+            data: { imgURL: self.imgURL(), userId: self.uesrId() },
             success: function(data) {
                 if(data.hasErrors) {
                     alert('something went wrong');
