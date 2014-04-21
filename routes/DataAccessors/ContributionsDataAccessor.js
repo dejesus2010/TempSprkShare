@@ -28,7 +28,7 @@ var constructor = function(){
 
     // getting the user data from the database
     contributionsDAInstance.getPostInfo = function(postId, getData){
-        var preparedStatement = 'select * from posts where postid =  $1';
+        var preparedStatement = 'select posts.*, sparkusers.username, sparkusers.userpicurl, sparkusers.userdescription  from posts, sparkusers where posts.postid =  $1 and posts.postuserid = sparkusers.userid';
         var inserts = [postId];
 
         pg.connect(process.env.DATABASE_URL, function(err, client, done){

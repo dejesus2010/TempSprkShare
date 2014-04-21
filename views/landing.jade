@@ -19,17 +19,17 @@ html
                         | an idea that has potential, while stopping others from following
                         | other ideas that do not. Start using SprkShare and see your ideal
                         | sparks be shared. We are SprkShare.
-                .col-md-1
-                div.col-md-3.well
+              
+                div.col-md-offset-1.col-md-3.well.full
                     a(data-toggle= 'modal', href= '#login_modal')
-                        .btn.btn-default#center LogIn
+                        .btn.btn-primary#center LogIn
                     div(style='padding:5px')
                         h4(align="center") OR
                     a(data-toggle= 'modal', href= '#sign_up_modal')
-                        .btn.btn-default#center Sign-Up
+                        .btn.btn-primary#center Sign-Up
 
             .row
-                .col-md-5
+                .col-md-5.well.margin
                     .panel.panel-default
                         .panel-heading Top 3 Posts
                         .panel-body
@@ -44,7 +44,7 @@ html
                                             td
                                                 =topPost.PostShareCount
                 .col-md-2
-                .col-md-5
+                .col-md-5.well.margin
                     .panel.panel-default
                         .panel-heading Most recent posts
                         .panel-body

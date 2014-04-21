@@ -8,7 +8,11 @@ module.exports = function(app) {
 
     // render home page
     app.get('/', function(req, res) {
-        res.render('landing', { title: 'SprkLanding Pge'});
+        res.render('landing',
+            { title: 'SprkLanding Pge',
+              topPostsData: [ { PostId: '', PostTitle: '',  PostShareCount: '' } ],
+              recentPostsData: [ { PostId: '', PostTitle: '',  PostedDate: '' } ]
+            });
     });
 
 
