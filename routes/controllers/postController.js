@@ -5,7 +5,7 @@ var constructor = function(){
     post.validate = function(req , res){
    
 					var data = req.body;
-					var response = { hasErrors: false, messages: [] , id: -1 , hasMedia: false};
+					var response = { hasErrors: false, messages: [] , id: req.session.id , hasMedia: false};
 				
 					if(!(data.title) || (data.title.length == 0)){
 						
@@ -36,6 +36,8 @@ var constructor = function(){
 					
 					
 					if(!response.hasErrors){
+                        data.userId = req.session.userId;
+
 						postDataAccessor.insert(data , function(err , id){
 							console.log(data);
 							if(err){

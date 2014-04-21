@@ -46,7 +46,7 @@
 							 $.ajax({
 								type: "POST",
 								url: URL,
-								data: { title : self.title(), message: self.message() , picture: self.picture() , hasPicture : hasPicture , id : -1},
+								data: { title : self.title(), message: self.message() , picture: self.picture() , hasPicture : hasPicture , id : 2},
 								success: function(data) {
 												if(!data.hasErrors) {
 													console.log(data.id);
