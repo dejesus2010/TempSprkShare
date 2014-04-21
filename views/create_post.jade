@@ -16,7 +16,9 @@ block mainContent
 				div.form-group(id='title_group')
 					label.margin_top.font(for='title') Title
 					input.form-control.font(id='title',type='text',name='title', data-bind='value: title')
-					input.margin_top(id='optional_pic',name='optional_pic' type='file')
+				div.form-group(id='picture_group')
+					label.margin_top.font(for='picture') Picture URL
+					input.form-control.font(id='picture',type='text',name='picture', data-bind='value: picture')
 				div.form-group(id='message_group')
 					label.margin_top.font(for='message') Message
 					textarea.form-control.height.font(id='message',name='message', data-bind='value: message')

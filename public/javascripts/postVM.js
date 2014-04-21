@@ -10,13 +10,13 @@
 			self.message=ko.observable("");
 			self.hasErrors = ko.observable(false);
 			self.errors = ko.observableArray([]);
-			
+			self.picture=ko.observable("");
 			
 			
 			self.$title = $('#title_group');
 			self.$message = $('#message_group');
-			
-			self.fields = [ self.$title, self.$message ];
+			self.$picture=$('picture_group');
+			self.fields = [ self.$title, self.$message, self.$picture ];
 			self.errorClass = 'has-error';
 			
 			
@@ -37,11 +37,16 @@
 			var self = this;
 			var URL ='/api/auth/post';
 			self.removeAlerts();
+			var hasPicture=false;
+			if(self.picture() || self.picture().length!=0){
+				hasPicture=true;
+			
+			}
 			
 							 $.ajax({
 								type: "POST",
 								url: URL,
-								data: { title : self.title(), message: self.message() },
+								data: { title : self.title(), message: self.message() , picture: self.picture() , hasPicture : hasPicture , id : -1},
 								success: function(data) {
 												if(!data.hasErrors) {
 													console.log(data.id);

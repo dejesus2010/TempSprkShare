@@ -5,7 +5,7 @@ var constructor = function(){
     post.validate = function(req , res){
    
 					var data = req.body;
-					var response = { hasErrors: false, messages: [] , id: -1};
+					var response = { hasErrors: false, messages: [] , id: -1 , hasMedia: false};
 				
 					if(!(data.title) || (data.title.length == 0)){
 						
@@ -30,6 +30,10 @@ var constructor = function(){
 						}
 					}
 					
+					if(data.picture || (data.title.length != 0)){
+						response.hasMedia = true;
+					}
+					
 					
 					if(!response.hasErrors){
 						postDataAccessor.insert(data , function(err , id){
@@ -41,7 +45,11 @@ var constructor = function(){
 								console.log(id+' no errors');
 								console.log("before"+response.id);
 								response.id=id;
+								data.id=id;
+								postDataAccessor.insertPicture(data , function(){});
 								console.log("after"+response.id);
+								
+								
 							}
 						
 							res.json(response);
