@@ -1,6 +1,6 @@
-var construction = function(){
+var constructor = function(){
     var landingControllerInstance = {};
-    var landingAccesor = require('../DataAccessors/LandingDataAccessor.js');
+    var landingAccesor = require('../DataAccessors/LandingDataAccessor');
 
 
     landingControllerInstance.renderLandingPage = function(req, res) {
