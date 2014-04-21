@@ -1,4 +1,8 @@
-CREATE DATABASE sprkShare;
+-- Change ryandejesus to the name of the database that is defaulted to when connecting to psql -h localhost
+-- DROP DATABASE ryandejesus
+
+-- Change ryandejesus to the name of the database that is defaulted to when connecting to psql -h localhost
+-- CREATE DATABASE ryandejesus;
 
 -- Users data 
 CREATE TABLE sparkUsers (
@@ -9,6 +13,7 @@ CREATE TABLE sparkUsers (
 	UserPicURL VARCHAR(1000) DEFAULT 'imgs/defaultAvatar.PNG',
 	UserDescription VARCHAR(500),
 	UserRegistrationDate timestamp NOT NULL DEFAULT CURRENT_DATE,
+	Usersalt VARCHAR(500),
 	PRIMARY KEY (Userid)
 );
 
@@ -19,13 +24,6 @@ CREATE TABLE followers (
 	PRIMARY KEY (FollowershipId)
 );
 
--- Posts data
-CREATE TABLE mediaElements (
-	MediaId SERIAL,
-	MediaPostId integer REFERENCES Posts(PostId),
-	MediaURL VARCHAR(1000) NOT NULL,
-	PRIMARY KEY (MediaId)
-);
 
 CREATE TABLE shareQuotas (
 	ShareQuotaId SERIAL,
@@ -46,6 +44,15 @@ CREATE TABLE posts (
 	PostedDate date,
 	PRIMARY KEY (PostId)
 );
+
+-- Posts data
+CREATE TABLE mediaElements (
+	MediaId SERIAL,
+	MediaPostId integer REFERENCES Posts(PostId),
+	MediaURL VARCHAR(1000) NOT NULL,
+	PRIMARY KEY (MediaId)
+);
+
 
 CREATE TABLE contributions (
 	ConTribId SERIAL,

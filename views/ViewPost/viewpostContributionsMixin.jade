@@ -9,15 +9,21 @@ mixin viewpostContributions(postRowsData, contributionsRowsData)
                         span
                             |  | Contribute
 
+                table
+                    tbody(data-bind='contributions')
+                        tr
+                            td
+                                div.postContribution
+                                    span
+                                        a(href='/userpage')
+                                            img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
+                                            span
+                                                =contribution.username
+                                    div
+                                        =contribution.contribcontent
+
                 each contribution in contributionsRowsData
-                    div.postContribution
-                        span
-                            a(href='/userpage')
-                                img.img-circle#contributorsPic(src='/images/default_avatar.png',height,'30', width='30')
-                                span
-                                    =contribution.username
-                        div
-                            =contribution.contribcontent
+
 
                 div#newContribution(data-bind="value: newContribution")
 
