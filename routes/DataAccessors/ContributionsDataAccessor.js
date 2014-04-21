@@ -6,7 +6,7 @@ var constructor = function(){
     contributionsDAInstance.getContributions = function( postId, sendData ){
         // Joins Posts and Contributions where postid and contributionsid match. giving us all the content to display for the post
 
-        var preparedStatement = 'select contr.contribid, contr.contribpostid, contr.contribuserid, contr.contribcontent, contr.contribhasmedia, contr.contributeddate, sparkusers.username from contributions as contr, posts, sparkusers where sparkusers.userid = contr.contribuserid and posts.postid = $1 and posts.postid = contr.contribpostid';
+        var preparedStatement = 'select contr.contribid, contr.contribpostid, contr.contribuserid, contr.contribcontent, contr.contribhasmedia, contr.contributeddate, sparkusers.username, sparkusers.userpicurl from contributions as contr, posts, sparkusers where sparkusers.userid = contr.contribuserid and posts.postid = $1 and posts.postid = contr.contribpostid';
         var inserts = [postId];
 
         // for local dev change to process.env.DATABASE_URL
