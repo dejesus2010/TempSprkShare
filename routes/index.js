@@ -8,7 +8,10 @@ module.exports = function(app) {
 
 
     // render home page
-    app.get('/', landingController.renderLandingPage);
+    //app.get('/', landingController.renderLandingPage);
+    app.get('/', function(req, res){
+       res.send('Hello world');
+    });
 
     // -----------------------------------------------------------------------------------------------------------
     // Viewpost Page

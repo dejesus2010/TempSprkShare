@@ -183,5 +183,4 @@ var constructor = function() {
     return userDAInstance;
 };
 
-
 module.exports = constructor();
