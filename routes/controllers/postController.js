@@ -1,7 +1,7 @@
 var constructor = function(){
 
     var post = {};
-    var postDataAccessor=require('../dataAccessors/PostDataAccessor');
+    var postDataAccessor=require('../DataAccessors/PostDataAccessor');
     post.validate = function(req , res){
    
 					var data = req.body;
