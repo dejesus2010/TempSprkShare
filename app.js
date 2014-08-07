@@ -11,11 +11,13 @@ app.configure(function() {
     app.set('view engine', 'jade');
     app.set('view cache', false);
 
-    //app.use(express.favicon());
+    app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.cookieParser());
     app.use(express.urlencoded());
-    app.use(express.bodyParser());
+    //app.use(express.bodyParser());
+    app.use(express.json());
+    app.use(express.urlencoded());
     app.use(express.methodOverride());
     app.use(express.session({ secret: 'mahSecret' }));
     app.use(app.router);
