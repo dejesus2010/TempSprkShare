@@ -1,7 +1,7 @@
 var constructor = function() {
 
     var authControllerInstance = {};
-    var userDA = require('../dataAccessors/UserDataAccessor');
+    var userDA = require('../DataAccessors/UserDataAccessor');
 
     authControllerInstance.registration = function(req, res) {
         var response = { hasErrors: false, messages: [] };
