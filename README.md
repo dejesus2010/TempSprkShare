@@ -14,15 +14,6 @@ Prereqs:
       PSQL Windows: http://www.postgresql.org/download/windows/
 
 Running SprkShare Locally:
-  - In the root directory of the cloned SprkShare project, install all project dependencies by executing the following command:
-  
-    ```
-      $npm install
-    ```
-    
-    After doing so, a folder called "node_modules" should appear in the current directory. The
-    "node_modules" folder contains the packages outlined as dependencies in the package.json file.
-    "npm install" needs to be executed only when the project is cloned for the first time.
   - Start/Open PostgresSQL  
     - Copy and paste other/Tables/TableCreation-1.1.sql into postgres  
     - Copy and paste other/Tables/inserData.sql into postgres  
